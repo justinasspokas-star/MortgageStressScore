@@ -83,28 +83,14 @@ nav {
   height: 44px;
   width: auto;
 }
-.logo-img-hero {
-  display: block;
-  max-width: min(980px, 78vw);
-  width: 100%;
-  height: auto;
-  margin: 0 auto 18px;
-  filter: none;
-}
 .logo-img-footer {
   display: block;
   height: 28px;
   width: auto;
 }
-.hero-logo-wrap {
-  display: flex;
-  justify-content: center;
-  margin-bottom: 8px;
-}
 
 .nav-logo { display:flex; align-items:center; }
 .logo-img-nav { max-width: 250px; object-fit: contain; }
-.logo-img-hero { object-fit: contain; }
 .footer-logo { display:flex; align-items:center; }
 
 /* ─── HERO ─── */
@@ -493,8 +479,7 @@ footer a:hover { color: var(--ink); }
   .hero { padding: 60px 20px 56px; }
   .calc-section { padding: 56px 20px; }
   .logo-img-nav { height: 36px; }
-  .logo-img-hero { max-width: 100%; margin-bottom: 14px; }
-  .logo-img-footer { height: 24px; }
+    .logo-img-footer { height: 24px; }
   .guides-grid { grid-template-columns: 1fr; }
   .guide-card.featured { grid-column: span 1; }
   .guides-section { padding: 56px 20px; }
@@ -515,9 +500,6 @@ footer a:hover { color: var(--ink); }
 
 <!-- HERO -->
 <section class="hero">
-  <div class="hero-logo-wrap">
-    <img src="logo.png" alt="MortgageStressScore.com" class="logo-img-hero">
-  </div>
   <div class="hero-kicker">Free · Private · No lender calls</div>
   <h1>Your mortgage risk,<br><em>honestly assessed.</em></h1>
   <p class="hero-sub">Not a rate comparison. Not a lead form. A real score that tells you where you stand — and what to do next.</p>
