@@ -79,27 +79,32 @@ nav {
 
 .logo-img-nav {
   display: block;
-  height: 38px;
+  height: 44px;
   width: auto;
 }
 .logo-img-hero {
   display: block;
-  max-width: min(720px, 92%);
+  max-width: min(980px, 78vw);
   width: 100%;
   height: auto;
-  margin: 0 auto 28px;
-  filter: drop-shadow(0 8px 18px rgba(0,0,0,.06));
+  margin: 0 auto 18px;
+  filter: none;
 }
 .logo-img-footer {
   display: block;
-  height: 30px;
+  height: 28px;
   width: auto;
 }
 .hero-logo-wrap {
   display: flex;
   justify-content: center;
-  margin-bottom: 6px;
+  margin-bottom: 8px;
 }
+
+.nav-logo { display:flex; align-items:center; }
+.logo-img-nav { max-width: 250px; object-fit: contain; }
+.logo-img-hero { object-fit: contain; }
+.footer-logo { display:flex; align-items:center; }
 
 /* ─── HERO ─── */
 .hero {
@@ -434,8 +439,8 @@ footer a:hover { color: var(--ink); }
   nav { padding: 0 20px; }
   .hero { padding: 60px 20px 56px; }
   .calc-section { padding: 56px 20px; }
-  .logo-img-nav { height: 32px; }
-  .logo-img-hero { max-width: 100%; margin-bottom: 20px; }
+  .logo-img-nav { height: 36px; }
+  .logo-img-hero { max-width: 100%; margin-bottom: 14px; }
   .logo-img-footer { height: 24px; }
 }
 </style>
