@@ -77,6 +77,30 @@ nav {
 }
 .btn-nav:hover { opacity: .85; }
 
+.logo-img-nav {
+  display: block;
+  height: 38px;
+  width: auto;
+}
+.logo-img-hero {
+  display: block;
+  max-width: min(720px, 92%);
+  width: 100%;
+  height: auto;
+  margin: 0 auto 28px;
+  filter: drop-shadow(0 8px 18px rgba(0,0,0,.06));
+}
+.logo-img-footer {
+  display: block;
+  height: 30px;
+  width: auto;
+}
+.hero-logo-wrap {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 6px;
+}
+
 /* ─── HERO ─── */
 .hero {
   max-width: 820px;
@@ -410,6 +434,9 @@ footer a:hover { color: var(--ink); }
   nav { padding: 0 20px; }
   .hero { padding: 60px 20px 56px; }
   .calc-section { padding: 56px 20px; }
+  .logo-img-nav { height: 32px; }
+  .logo-img-hero { max-width: 100%; margin-bottom: 20px; }
+  .logo-img-footer { height: 24px; }
 }
 </style>
 </head>
@@ -417,7 +444,7 @@ footer a:hover { color: var(--ink); }
 
 <!-- NAV -->
 <nav>
-  <a href="#" class="nav-logo">Mortgage<span>Stress</span>Score</a>
+  <a href="#" class="nav-logo" aria-label="MortgageStressScore home"><img src="logo.png" alt="MortgageStressScore.com" class="logo-img-nav"></a>
   <div class="nav-right">
     <a href="#how" class="nav-link">How it works</a>
     <a href="#calc" class="btn-nav">Get my score</a>
@@ -426,6 +453,9 @@ footer a:hover { color: var(--ink); }
 
 <!-- HERO -->
 <section class="hero">
+  <div class="hero-logo-wrap">
+    <img src="logo.png" alt="MortgageStressScore.com" class="logo-img-hero">
+  </div>
   <div class="hero-kicker">Free · Private · No lender calls</div>
   <h1>Your mortgage risk,<br><em>honestly assessed.</em></h1>
   <p class="hero-sub">Not a rate comparison. Not a lead form. A real score that tells you where you stand — and what to do next.</p>
@@ -653,7 +683,7 @@ footer a:hover { color: var(--ink); }
 
 <!-- FOOTER -->
 <footer>
-  <div class="footer-logo">Mortgage<span>Stress</span>Score</div>
+  <div class="footer-logo"><img src="logo.png" alt="MortgageStressScore.com" class="logo-img-footer"></div>
   <div style="text-align:center;font-size:12px;color:var(--muted)">No surprise lender calls. No data sales. You stay in control.</div>
   <div><a href="#">Privacy</a> · <a href="#">About</a></div>
 </footer>
