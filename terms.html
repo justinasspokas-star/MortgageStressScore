@@ -1,13 +1,244 @@
 <!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"><style>
 :root{--ink:#0f0e0c;--paper:#f8f6f1;--rule:#e0ddd5;--muted:#6d6962;--green:#1a5c3a;}
 *{box-sizing:border-box} body{margin:0;font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:var(--paper);color:var(--ink);line-height:1.65;font-size:15px;-webkit-font-smoothing:antialiased} nav{height:64px;border-bottom:1px solid var(--rule);display:flex;align-items:center;justify-content:space-between;padding:0 28px} nav img{height:42px;width:auto;display:block} nav a{color:var(--ink);text-decoration:none}.wrap{max-width:840px;margin:0 auto;padding:72px 28px 96px}.eyebrow{font-size:12px;text-transform:uppercase;letter-spacing:.12em;color:var(--green);font-weight:600;margin-bottom:14px}h1{font-family:Georgia,"Times New Roman",serif;font-size:clamp(36px,5vw,56px);line-height:1.08;letter-spacing:-.04em;margin:0 0 24px}h2{font-size:20px;margin:38px 0 10px}p,li{color:#4f4b45}ul{padding-left:22px}.note{border:1px solid var(--rule);background:#fff;padding:18px 20px;border-radius:8px;margin:28px 0}.date{color:var(--muted);font-size:13px;margin-bottom:30px}.back{display:inline-block;margin-top:32px;padding:10px 18px;background:var(--ink);color:var(--paper);border-radius:4px;text-decoration:none;font-weight:600}footer{border-top:1px solid var(--rule);padding:28px;text-align:center;color:var(--muted);font-size:13px}@media(max-width:620px){nav{padding:0 18px}nav img{height:34px}.wrap{padding:48px 22px 72px}}
+
+
+/* ─── MOBILE-FIRST POLISH OVERRIDES ─── */
+@media (max-width: 760px) {
+  body {
+    font-size: 14px;
+    overflow-x: hidden;
+  }
+
+  nav {
+    height: auto;
+    min-height: 64px;
+    padding: 10px 14px;
+    gap: 10px;
+    align-items: center;
+  }
+
+  .nav-logo {
+    display: flex;
+    align-items: center;
+    min-width: 0;
+    flex: 1 1 auto;
+  }
+
+  .logo-img-nav {
+    width: 168px;
+    max-width: 52vw;
+    height: auto;
+    object-fit: contain;
+  }
+
+  .nav-right {
+    flex: 0 0 auto;
+    gap: 10px;
+  }
+
+  .nav-right .nav-link {
+    display: none;
+  }
+
+  .btn-nav {
+    padding: 10px 13px;
+    border-radius: 7px;
+    font-size: 12px;
+    line-height: 1;
+    white-space: nowrap;
+    min-width: auto;
+  }
+
+  .hero {
+    padding: 70px 22px 62px;
+    max-width: 100%;
+  }
+
+  .hero-kicker {
+    font-size: 10.5px;
+    letter-spacing: .08em;
+    padding: 5px 11px;
+    margin-bottom: 24px;
+  }
+
+  .hero h1 {
+    font-size: clamp(40px, 12vw, 52px);
+    line-height: 1.04;
+    letter-spacing: -.6px;
+    margin-bottom: 22px;
+  }
+
+  .hero-sub {
+    font-size: 16px;
+    line-height: 1.55;
+    max-width: 340px;
+    margin-bottom: 32px;
+  }
+
+  .btn-primary,
+  .btn-calc,
+  .result-cta,
+  .legal-cta {
+    width: 100%;
+    max-width: 280px;
+    text-align: center;
+    border-radius: 7px;
+  }
+
+  .hero-trust {
+    max-width: 310px;
+    margin: 18px auto 0;
+    align-items: flex-start;
+    line-height: 1.45;
+  }
+
+  .calc-section,
+  .guides-section,
+  .principles-section,
+  .options-section {
+    padding-left: 22px;
+    padding-right: 22px;
+  }
+
+  .calc-section {
+    padding-top: 58px;
+    padding-bottom: 58px;
+  }
+
+  .section-title {
+    font-size: 31px;
+    line-height: 1.08;
+    margin-bottom: 30px;
+  }
+
+  .form-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .field input,
+  .field select {
+    font-size: 16px;
+    padding: 12px 14px;
+    min-height: 46px;
+  }
+
+  .score-top {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+    padding: 24px;
+  }
+
+  .score-ring {
+    width: 76px;
+    height: 76px;
+  }
+
+  .score-meter {
+    margin: 0 24px;
+  }
+
+  .meter-labels {
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+
+  .factor {
+    padding: 14px 18px;
+    gap: 10px;
+  }
+
+  .factor-name {
+    flex: 1;
+  }
+
+  .factor-bar {
+    width: 72px;
+  }
+
+  .diff-section {
+    padding: 62px 22px;
+  }
+
+  .diff-grid,
+  .principles-grid,
+  .guides-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .guide-card {
+    padding: 22px;
+  }
+
+  .guide-card h3 {
+    font-size: 24px;
+  }
+
+  .options-row {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+  }
+
+  .option-card {
+    padding: 16px 10px;
+  }
+
+  footer {
+    padding: 32px 22px;
+    flex-direction: column;
+    justify-content: center;
+    gap: 14px;
+    text-align: center;
+  }
+
+  .logo-img-footer {
+    height: auto;
+    width: 170px;
+    max-width: 70vw;
+  }
+}
+
+@media (max-width: 390px) {
+  nav {
+    padding: 9px 12px;
+  }
+
+  .logo-img-nav {
+    width: 148px;
+    max-width: 48vw;
+  }
+
+  .btn-nav {
+    padding: 10px 11px;
+    font-size: 11px;
+  }
+
+  .hero {
+    padding-top: 62px;
+  }
+
+  .hero h1 {
+    font-size: clamp(37px, 11.5vw, 46px);
+  }
+
+  .hero-sub {
+    font-size: 15.5px;
+  }
+}
+
 </style><title>Terms of Use — MortgageStressScore.com</title><!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-TJTKS00LW6"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
-
   gtag('config', 'G-TJTKS00LW6');
+  function mssTrack(eventName, params) {
+    if (typeof gtag === 'function') {
+      gtag('event', eventName, params || {});
+    }
+  }
 </script>
 </head><body><nav><a href="index.html" aria-label="MortgageStressScore home"><img src="logo.png" alt="MortgageStressScore.com"></a><a href="index.html#calc">Get my score</a></nav><div class="wrap"><div class="eyebrow">Terms of Use</div><h1>Terms of Use</h1><p class="date">Last updated: May 25, 2026</p><h2>1. Acceptance of terms</h2><p>By using MortgageStressScore.com, you agree to these Terms of Use. If you do not agree, do not use the website.</p><h2>2. Educational website</h2><p>This website provides educational tools and general information. It does not provide mortgage, legal, financial, tax, credit, lending, foreclosure-prevention, or housing-counseling services.</p><h2>3. No client relationship</h2><p>Using this website does not create a lender-borrower, attorney-client, advisor-client, broker-client, or counselor-client relationship.</p><h2>4. User responsibility</h2><p>You are responsible for checking the accuracy of your inputs and for verifying any information before making financial or housing decisions.</p><h2>5. No misuse</h2><p>You agree not to misuse the website, interfere with its operation, copy it for unlawful purposes, or attempt to access systems or data you are not authorized to access.</p><h2>6. Third-party links</h2><p>The website may link to third-party or government resources. We do not control those sites and are not responsible for their content, services, or policies.</p><h2>7. Changes</h2><p>We may update these terms from time to time. Continued use of the website after changes means you accept the updated terms.</p><h2>8. Limitation of liability</h2><p>To the maximum extent allowed by law, MortgageStressScore.com and its owner are not liable for losses or damages arising from use of the website or reliance on its educational content.</p><a class="back" href="index.html">Back to Mortgage Stress Score</a></div><footer>MortgageStressScore.com · Educational tool only · Not legal, financial, lending, or foreclosure-prevention advice.</footer></body></html>
