@@ -61,6 +61,7 @@ nav {
 }
 .nav-logo span { font-style: italic; }
 .nav-right { display: flex; align-items: center; gap: 24px; }
+.nav-links { display: flex; align-items: center; gap: 24px; margin-left: auto; }
 .nav-link { font-size: 13px; color: var(--muted); text-decoration: none; }
 .nav-link:hover { color: var(--ink); }
 .btn-nav {
@@ -489,17 +490,23 @@ footer a:hover { color: var(--ink); }
 
   nav {
     height: auto;
-    min-height: 64px;
-    padding: 10px 14px;
-    gap: 10px;
+    min-height: 92px;
+    padding: 10px 14px 9px;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-areas:
+      "logo cta"
+      "links links";
+    row-gap: 8px;
+    column-gap: 10px;
     align-items: center;
   }
 
   .nav-logo {
+    grid-area: logo;
     display: flex;
     align-items: center;
     min-width: 0;
-    flex: 1 1 auto;
   }
 
   .logo-img-nav {
@@ -509,16 +516,32 @@ footer a:hover { color: var(--ink); }
     object-fit: contain;
   }
 
-  .nav-right {
-    flex: 0 0 auto;
-    gap: 10px;
+  .nav-links {
+    grid-area: links;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 18px;
+    width: 100%;
+    padding-top: 4px;
+    border-top: 1px solid rgba(15,14,12,.08);
   }
 
-  .nav-right .nav-link {
-    display: none;
+  .nav-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 32px;
+    padding: 4px 6px;
+    font-size: 12.5px;
+    line-height: 1;
+    white-space: nowrap;
+    color: #77746e;
   }
 
   .btn-nav {
+    grid-area: cta;
+    justify-self: end;
     padding: 10px 13px;
     border-radius: 7px;
     font-size: 12px;
@@ -679,7 +702,8 @@ footer a:hover { color: var(--ink); }
 
 @media (max-width: 390px) {
   nav {
-    padding: 9px 12px;
+    padding: 9px 12px 8px;
+    min-height: 88px;
   }
 
   .logo-img-nav {
@@ -688,8 +712,16 @@ footer a:hover { color: var(--ink); }
   }
 
   .btn-nav {
-    padding: 10px 11px;
+    padding: 9px 10px;
     font-size: 11px;
+  }
+
+  .nav-links {
+    gap: 14px;
+  }
+
+  .nav-link {
+    font-size: 12px;
   }
 
   .hero {
@@ -725,11 +757,11 @@ footer a:hover { color: var(--ink); }
 <!-- NAV -->
 <nav>
   <a href="index.html" class="nav-logo" aria-label="MortgageStressScore home"><img src="logo.png" alt="MortgageStressScore.com" class="logo-img-nav"></a>
-  <div class="nav-right">
+  <div class="nav-links" aria-label="Primary navigation">
     <a href="#how" class="nav-link">How it works</a>
     <a href="guides.html" class="nav-link">Guides</a>
-    <a href="#calc" class="btn-nav" data-ga-event="click_check_free_score" data-ga-location="nav">Get my score</a>
   </div>
+  <a href="#calc" class="btn-nav" data-ga-event="click_check_free_score" data-ga-location="nav">Get my score</a>
 </nav>
 
 <!-- HERO -->
