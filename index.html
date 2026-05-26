@@ -3,62 +3,516 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="google-site-verification" content="ufurZHq5oBg5E1-KnDqe1TSm3WyLoYqqsbzfUASfeCc" />
 <title>MortgageStressScore — Know your risk before it's too late</title>
 <meta name="description" content="Check your Mortgage Stress Score in minutes. Compare possible next steps like refinance, loan modification, forbearance, HUD counseling, and state assistance.">
-<link rel="canonical" href="https://mortgagestressscore.com/">
-<!-- Open Graph -->
-<meta property="og:title" content="MortgageStressScore — Know your mortgage risk honestly">
-<meta property="og:description" content="Free calculator. No phone number. No lender calls. Know your risk and see all 7 options ranked for your situation.">
-<meta property="og:image" content="https://mortgagestressscore.com/logo.png">
-<meta property="og:url" content="https://mortgagestressscore.com/">
-<meta property="og:type" content="website">
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="MortgageStressScore — Know your risk before it's too late">
-<meta name="twitter:description" content="Free mortgage stress calculator. Browser-only. No phone number required.">
-<meta name="twitter:image" content="https://mortgagestressscore.com/logo.png">
-<meta name="google-site-verification" content="ufurZHq5oBg5E1-KnDqe1TSm3WyLoYqqsbzfUASfeCc">
-<!-- Fonts -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css">
-<!-- Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-TJTKS00LW6"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-TJTKS00LW6');
-  function mssTrack(e, p) { if (typeof gtag === 'function') gtag('event', e, p || {}); }
-</script>
+<style>
+:root {
+  --ink:    #0f0e0c;
+  --paper:  #f8f6f1;
+  --rule:   #e0ddd5;
+  --muted:  #999690;
+  --green:  #1a5c3a;
+  --green-s:#d4ead9;
+  --amber:  #92510a;
+  --amber-s:#faebd4;
+  --red:    #8b1f1f;
+  --red-s:  #f9e8e8;
+  --accent: #1a5c3a;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible {
+  outline: 2px solid var(--green);
+  outline-offset: 3px;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background: var(--paper);
+  color: var(--ink);
+  font-size: 15px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ─── NAV ─── */
+nav {
+  position: sticky; top: 0; z-index: 100;
+  background: var(--paper);
+  border-bottom: 1px solid var(--rule);
+  padding: 0 32px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.nav-logo {
+  font-family: 'Instrument Serif', serif;
+  font-size: 17px;
+  letter-spacing: -.3px;
+  color: var(--ink);
+  text-decoration: none;
+}
+.nav-logo span { font-style: italic; }
+.nav-right { display: flex; align-items: center; gap: 24px; }
+.nav-link { font-size: 13px; color: var(--muted); text-decoration: none; }
+.nav-link:hover { color: var(--ink); }
+.btn-nav {
+  font-size: 13px;
+  font-weight: 500;
+  padding: 8px 20px;
+  border-radius: 3px;
+  border: 1px solid var(--ink);
+  background: var(--ink);
+  color: var(--paper);
+  cursor: pointer;
+  text-decoration: none;
+  transition: opacity .15s;
+}
+.btn-nav:hover { opacity: .85; }
+
+.logo-img-nav {
+  display: block;
+  height: 44px;
+  width: auto;
+}
+.logo-img-footer {
+  display: block;
+  height: 28px;
+  width: auto;
+}
+
+.nav-logo { display:flex; align-items:center; }
+.logo-img-nav { max-width: 250px; object-fit: contain; }
+.footer-logo { display:flex; align-items:center; }
+
+/* ─── HERO ─── */
+.hero {
+  max-width: 820px;
+  margin: 0 auto;
+  padding: 96px 32px 80px;
+  text-align: center;
+}
+.hero-kicker {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--green);
+  background: var(--green-s);
+  padding: 4px 12px;
+  border-radius: 2px;
+  margin-bottom: 28px;
+}
+.hero h1 {
+  font-family: 'Instrument Serif', serif;
+  font-size: clamp(36px, 5vw, 58px);
+  line-height: 1.12;
+  letter-spacing: -.5px;
+  margin-bottom: 22px;
+  color: var(--ink);
+}
+.hero h1 em { font-style: italic; color: var(--green); }
+.hero-sub {
+  font-size: 17px;
+  color: #5a5852;
+  max-width: 500px;
+  margin: 0 auto 40px;
+  line-height: 1.6;
+  font-weight: 300;
+}
+.btn-primary {
+  display: inline-block;
+  font-size: 15px;
+  font-weight: 500;
+  padding: 14px 36px;
+  border-radius: 3px;
+  background: var(--ink);
+  color: var(--paper);
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  transition: opacity .15s;
+}
+.btn-primary:hover { opacity: .85; }
+.hero-trust {
+  margin-top: 18px;
+  font-size: 12px;
+  color: var(--muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+.lock-icon { font-size: 11px; }
+
+/* ─── DIVIDER ─── */
+hr { border: none; border-top: 1px solid var(--rule); }
+
+/* ─── CALCULATOR ─── */
+.calc-section {
+  max-width: 680px;
+  margin: 0 auto;
+  padding: 72px 32px;
+}
+.section-eyebrow {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 10px;
+}
+.section-title {
+  font-family: 'Instrument Serif', serif;
+  font-size: 30px;
+  line-height: 1.15;
+  letter-spacing: -.3px;
+  margin-bottom: 40px;
+}
+.section-title em { font-style: italic; }
+
+.form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-bottom: 28px; }
+.field { display: flex; flex-direction: column; gap: 6px; }
+.field label { font-size: 12px; font-weight: 500; color: #5a5852; }
+.field input, .field select {
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  padding: 10px 14px;
+  border: 1px solid var(--rule);
+  border-radius: 4px;
+  background: #fff;
+  color: var(--ink);
+  appearance: none;
+  outline: none;
+  transition: border-color .15s;
+}
+.field input:focus, .field select:focus { border-color: var(--ink); }
+.field select { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='7'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23999' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 12px center; padding-right: 32px; }
+
+.btn-calc {
+  width: 100%;
+  padding: 14px;
+  font-family: 'Inter', sans-serif;
+  font-size: 15px;
+  font-weight: 500;
+  border: none;
+  border-radius: 4px;
+  background: var(--ink);
+  color: var(--paper);
+  cursor: pointer;
+  transition: opacity .15s;
+}
+.btn-calc:hover { opacity: .85; }
+
+.calculator-note {
+  margin-top: 14px;
+  font-size: 11px;
+  color: var(--muted);
+  line-height: 1.55;
+}
+.result-actions {
+  padding: 24px 32px 28px;
+  border-top: 1px solid var(--rule);
+  background: #fff;
+}
+.result-actions p {
+  font-size: 13px;
+  color: #5a5852;
+  margin-bottom: 14px;
+}
+.btn-secondary {
+  display: inline-block;
+  font-size: 14px;
+  font-weight: 500;
+  padding: 11px 18px;
+  border-radius: 4px;
+  border: 1px solid var(--ink);
+  color: var(--ink);
+  background: transparent;
+  text-decoration: none;
+}
+.btn-secondary:hover { background: var(--ink); color: var(--paper); }
+.disclaimer {
+  max-width: 820px;
+  margin: 0 auto;
+  padding: 18px 32px 0;
+  font-size: 11px;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+/* SCORE RESULT */
+.score-result {
+  margin-top: 32px;
+  border: 1px solid var(--rule);
+  border-radius: 6px;
+  overflow: hidden;
+  display: none;
+}
+.score-result.visible { display: block; }
+.score-top {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  padding: 28px 32px;
+  border-bottom: 1px solid var(--rule);
+}
+.score-ring {
+  width: 88px; height: 88px;
+  border-radius: 50%;
+  border: 3px solid;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.score-num { font-family: 'Instrument Serif', serif; font-size: 32px; line-height: 1; }
+.score-lbl { font-size: 9px; font-weight: 500; letter-spacing: .05em; text-transform: uppercase; margin-top: 2px; }
+.score-info {}
+.score-verdict { font-size: 16px; font-weight: 500; margin-bottom: 4px; }
+.score-desc { font-size: 13px; color: #5a5852; line-height: 1.55; }
+
+.score-meter {
+  height: 5px;
+  background: linear-gradient(to right, #1a5c3a 0%, #d4970a 50%, #8b1f1f 100%);
+  position: relative;
+  margin: 0 32px;
+  border-radius: 3px;
+}
+.meter-dot {
+  position: absolute;
+  top: -5px;
+  width: 14px; height: 14px;
+  border-radius: 50%;
+  background: var(--ink);
+  border: 2px solid var(--paper);
+  transform: translateX(-50%);
+  transition: left .5s cubic-bezier(.4,0,.2,1);
+  box-shadow: 0 1px 4px rgba(0,0,0,.2);
+}
+.meter-labels {
+  display: flex;
+  justify-content: space-between;
+  font-size: 10px;
+  color: var(--muted);
+  padding: 8px 32px 0;
+  margin-bottom: 20px;
+}
+.score-factors { display: grid; grid-template-columns: 1fr 1fr; gap: 0; border-top: 1px solid var(--rule); }
+.factor {
+  padding: 14px 24px;
+  border-right: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.factor:nth-child(even) { border-right: none; }
+.factor:nth-last-child(-n+2) { border-bottom: none; }
+.factor-name { font-size: 12px; color: #5a5852; }
+.factor-bar { width: 60px; height: 4px; background: var(--rule); border-radius: 2px; overflow: hidden; }
+.factor-fill { height: 4px; border-radius: 2px; transition: width .5s ease; }
+.factor-val { font-size: 12px; font-weight: 500; min-width: 28px; text-align: right; }
+
+/* ─── HOW IT'S DIFFERENT ─── */
+.diff-section {
+  background: var(--ink);
+  color: var(--paper);
+  padding: 80px 32px;
+}
+.diff-inner { max-width: 820px; margin: 0 auto; }
+.diff-inner .section-eyebrow { color: rgba(255,255,255,.4); }
+.diff-inner .section-title { color: var(--paper); margin-bottom: 48px; }
+.diff-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
+.diff-col-title { font-size: 11px; font-weight: 500; letter-spacing: .08em; text-transform: uppercase; color: rgba(255,255,255,.4); margin-bottom: 16px; }
+.diff-item { display: flex; gap: 10px; margin-bottom: 14px; font-size: 13px; line-height: 1.5; }
+.diff-item .dot { width: 5px; height: 5px; border-radius: 50%; flex-shrink: 0; margin-top: 7px; }
+.diff-them .dot { background: rgba(255,255,255,.2); }
+.diff-us .dot { background: #4cde8f; }
+.diff-them .diff-item { color: rgba(255,255,255,.4); }
+.diff-us .diff-item { color: rgba(255,255,255,.9); }
+
+/* ─── PRINCIPLES ─── */
+.principles-section {
+  max-width: 820px;
+  margin: 0 auto;
+  padding: 80px 32px;
+}
+.principles-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; margin-top: 48px; }
+.principle-num {
+  font-family: 'Instrument Serif', serif;
+  font-size: 42px;
+  color: var(--rule);
+  line-height: 1;
+  margin-bottom: 14px;
+}
+.principle-title { font-size: 14px; font-weight: 500; margin-bottom: 8px; }
+.principle-body { font-size: 13px; color: #5a5852; line-height: 1.65; }
+
+/* ─── OPTIONS STRIP ─── */
+.options-section {
+  background: #f2efea;
+  padding: 64px 32px;
+  border-top: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+}
+.options-inner { max-width: 820px; margin: 0 auto; }
+.options-row { display: grid; grid-template-columns: repeat(7, 1fr); gap: 12px; margin-top: 40px; }
+.option-card {
+  background: var(--paper);
+  border: 1px solid var(--rule);
+  border-radius: 4px;
+  padding: 18px 14px;
+  text-align: center;
+}
+.option-icon { font-size: 22px; margin-bottom: 8px; }
+.option-name { font-size: 11px; font-weight: 500; line-height: 1.35; }
+.option-tag {
+  display: inline-block;
+  margin-top: 6px;
+  font-size: 9px;
+  font-weight: 500;
+  padding: 2px 6px;
+  border-radius: 2px;
+  text-transform: uppercase;
+  letter-spacing: .05em;
+}
+.tag-free { background: var(--green-s); color: var(--green); }
+.tag-rec { background: var(--ink); color: var(--paper); }
+.tag-last { background: var(--red-s); color: var(--red); }
+
+
+/* ─── GUIDES ─── */
+.guides-section {
+  max-width: 820px;
+  margin: 0 auto;
+  padding: 72px 32px;
+}
+.guides-intro {
+  font-size: 14px;
+  color: #5a5852;
+  max-width: 520px;
+  margin-top: -24px;
+  margin-bottom: 34px;
+  line-height: 1.65;
+}
+.guides-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
+}
+.guide-card {
+  display: block;
+  padding: 20px 22px;
+  border: 1px solid var(--rule);
+  border-radius: 6px;
+  background: #fff;
+  text-decoration: none;
+  color: var(--ink);
+  transition: transform .15s ease, border-color .15s ease, box-shadow .15s ease;
+}
+.guide-card:hover {
+  transform: translateY(-2px);
+  border-color: #c9c5bb;
+  box-shadow: 0 8px 24px rgba(0,0,0,.05);
+}
+.guide-card strong {
+  display: block;
+  font-size: 15px;
+  font-weight: 500;
+  margin-bottom: 6px;
+}
+.guide-card span {
+  display: block;
+  font-size: 12px;
+  color: #5a5852;
+  line-height: 1.55;
+}
+.guide-card.featured {
+  grid-column: span 2;
+  background: #f2efea;
+}
+
+/* ─── FOOTER ─── */
+footer {
+  max-width: 820px;
+  margin: 0 auto;
+  padding: 40px 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 12px;
+  color: var(--muted);
+  border-top: 1px solid var(--rule);
+}
+footer a { color: var(--muted); text-decoration: none; }
+footer a:hover { color: var(--ink); }
+.footer-logo {
+  font-family: 'Instrument Serif', serif;
+  font-size: 15px;
+  color: var(--ink);
+}
+.footer-logo span { font-style: italic; }
+
+/* ─── RESPONSIVE ─── */
+@media (max-width: 860px) {
+  .options-row { grid-template-columns: repeat(4, 1fr); }
+}
+@media (max-width: 620px) {
+  .form-grid { grid-template-columns: 1fr; }
+  .diff-grid { grid-template-columns: 1fr; }
+  .principles-grid { grid-template-columns: 1fr; gap: 28px; }
+  .options-row { grid-template-columns: repeat(2, 1fr); }
+  .score-factors { grid-template-columns: 1fr; }
+  .factor { border-right: none; }
+  nav { padding: 0 20px; }
+  .hero { padding: 60px 20px 56px; }
+  .calc-section { padding: 56px 20px; }
+  .logo-img-nav { height: 36px; }
+    .logo-img-footer { height: 24px; }
+  .guides-grid { grid-template-columns: 1fr; }
+  .guide-card.featured { grid-column: span 1; }
+  .guides-section { padding: 56px 20px; }
+}
+</style>
 </head>
 <body>
-<div class="page-wrapper">
 
-<nav class="site-nav">
-  <a href="index.html" class="site-logo" aria-label="MortgageStressScore home">
-    <img src="logo.png" alt="MortgageStressScore.com">
-  </a>
-  <div class="site-nav-links" aria-label="Primary navigation">
-    <a href="#how" class="site-nav-link">How it works</a>
-    <a href="guides.html" class="site-nav-link">Guides</a>
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo" aria-label="MortgageStressScore home"><img src="logo.png?v=4" alt="MortgageStressScore.com" class="logo-img-nav"></a>
+  <div class="nav-right">
+    <a href="#how" class="nav-link">How it works</a>
+    <a href="#guides" class="nav-link">Guides</a>
+    <a href="#calc" class="btn-nav">Get my score</a>
   </div>
-  <a href="#calc" class="site-btn-nav" onclick="mssTrack('click_check_free_score',{location:'nav'})">Get my score</a>
 </nav>
 
+<!-- HERO -->
 <section class="hero">
   <div class="hero-kicker">Free · Private · No lender calls</div>
   <h1>Your mortgage risk,<br><em>honestly assessed.</em></h1>
   <p class="hero-sub">Not a rate comparison. Not a lead form. A real score that tells you where you stand — and what to do next.</p>
-  <a href="#calc" class="btn-primary" onclick="mssTrack('click_check_free_score',{location:'hero'})">Check my free score</a>
+  <a href="#calc" class="btn-primary">Check my free score</a>
   <p class="hero-trust">
-    <span>🔒</span>
+    <span class="lock-icon">🔒</span>
     This calculator runs in your browser. We do not ask for your phone number.
   </p>
 </section>
 
 <hr>
 
+<!-- CALCULATOR -->
 <section class="calc-section" id="calc">
   <p class="section-eyebrow">The score</p>
   <h2 class="section-title">Six inputs.<br><em>One honest number.</em></h2>
@@ -66,11 +520,11 @@
   <div class="form-grid">
     <div class="field">
       <label for="f-payment">Monthly mortgage payment ($)</label>
-      <input type="number" id="f-payment" placeholder="e.g. 2400" min="0" inputmode="decimal">
+      <input type="number" id="f-payment" placeholder="e.g. 2400" min="0">
     </div>
     <div class="field">
       <label for="f-income">Gross monthly income ($)</label>
-      <input type="number" id="f-income" placeholder="e.g. 6000" min="0" inputmode="decimal">
+      <input type="number" id="f-income" placeholder="e.g. 6000" min="0">
     </div>
     <div class="field">
       <label for="f-missed">Missed payments in last 12 months</label>
@@ -84,7 +538,7 @@
     <div class="field">
       <label for="f-equity">Home equity estimate</label>
       <select id="f-equity">
-        <option value="0">I'm not sure</option>
+        <option value="0">I’m not sure</option>
         <option value="0">None or underwater</option>
         <option value="1">Under 10%</option>
         <option value="2" selected>10–25%</option>
@@ -94,7 +548,7 @@
     <div class="field">
       <label for="f-loan">Loan type</label>
       <select id="f-loan">
-        <option value="0">I'm not sure</option>
+        <option value="0">I’m not sure</option>
         <option value="0">ARM or interest-only</option>
         <option value="1" selected>Fixed 30-year</option>
         <option value="2">Fixed 15-year</option>
@@ -111,9 +565,10 @@
     </div>
   </div>
 
-  <button class="btn-calc" onclick="mssTrack('click_calculate_score',{location:'calculator'}); calcScore();">Check my free score →</button>
+  <button class="btn-calc" onclick="calcScore()">Check my free score →</button>
   <p class="calculator-note">Educational estimate only. This is not a credit score, lending decision, legal advice, financial advice, or foreclosure-prevention service.</p>
 
+  <!-- RESULT -->
   <div class="score-result" id="score-result">
     <div class="score-top">
       <div class="score-ring" id="score-ring">
@@ -125,15 +580,45 @@
         <p class="score-desc" id="score-desc">–</p>
       </div>
     </div>
-    <div class="score-meter"><div class="meter-dot" id="meter-dot" style="left:50%"></div></div>
-    <div class="meter-labels"><span>Low risk</span><span>Moderate</span><span>High risk</span></div>
+    <div class="score-meter">
+      <div class="meter-dot" id="meter-dot" style="left: 50%"></div>
+    </div>
+    <div class="meter-labels">
+      <span>Low risk</span>
+      <span>Moderate</span>
+      <span>High risk</span>
+    </div>
     <div class="score-factors">
-      <div class="factor"><span class="factor-name">Payment burden</span><div class="factor-bar"><div class="factor-fill" id="fb-burden"></div></div><span class="factor-val" id="fv-burden">–</span></div>
-      <div class="factor"><span class="factor-name">Income stability</span><div class="factor-bar"><div class="factor-fill" id="fb-income"></div></div><span class="factor-val" id="fv-income">–</span></div>
-      <div class="factor"><span class="factor-name">Home equity</span><div class="factor-bar"><div class="factor-fill" id="fb-equity"></div></div><span class="factor-val" id="fv-equity">–</span></div>
-      <div class="factor"><span class="factor-name">Loan type risk</span><div class="factor-bar"><div class="factor-fill" id="fb-loan"></div></div><span class="factor-val" id="fv-loan">–</span></div>
-      <div class="factor"><span class="factor-name">Missed payments</span><div class="factor-bar"><div class="factor-fill" id="fb-missed"></div></div><span class="factor-val" id="fv-missed">–</span></div>
-      <div class="factor"><span class="factor-name">Urgency level</span><div class="factor-bar"><div class="factor-fill" id="fb-urgency"></div></div><span class="factor-val" id="fv-urgency">–</span></div>
+      <div class="factor">
+        <span class="factor-name">Payment burden</span>
+        <div class="factor-bar"><div class="factor-fill" id="fb-burden"></div></div>
+        <span class="factor-val" id="fv-burden">–</span>
+      </div>
+      <div class="factor">
+        <span class="factor-name">Income stability</span>
+        <div class="factor-bar"><div class="factor-fill" id="fb-income"></div></div>
+        <span class="factor-val" id="fv-income">–</span>
+      </div>
+      <div class="factor">
+        <span class="factor-name">Home equity</span>
+        <div class="factor-bar"><div class="factor-fill" id="fb-equity"></div></div>
+        <span class="factor-val" id="fv-equity">–</span>
+      </div>
+      <div class="factor">
+        <span class="factor-name">Loan type risk</span>
+        <div class="factor-bar"><div class="factor-fill" id="fb-loan"></div></div>
+        <span class="factor-val" id="fv-loan">–</span>
+      </div>
+      <div class="factor">
+        <span class="factor-name">Missed payments</span>
+        <div class="factor-bar"><div class="factor-fill" id="fb-missed"></div></div>
+        <span class="factor-val" id="fv-missed">–</span>
+      </div>
+      <div class="factor">
+        <span class="factor-name">Urgency level</span>
+        <div class="factor-bar"><div class="factor-fill" id="fb-urgency"></div></div>
+        <span class="factor-val" id="fv-urgency">–</span>
+      </div>
     </div>
     <div class="result-actions">
       <p><strong>Next step:</strong> use this score as a starting point. If you are behind or close to missing a payment, contact your mortgage servicer and consider a HUD-approved housing counselor.</p>
@@ -144,6 +629,7 @@
 
 <hr>
 
+<!-- HOW IT'S DIFFERENT -->
 <section class="diff-section" id="how">
   <div class="diff-inner">
     <p class="section-eyebrow">Why this is different</p>
@@ -171,22 +657,52 @@
   </div>
 </section>
 
+<!-- OPTIONS STRIP -->
 <section class="options-section" id="options">
   <div class="options-inner">
     <p class="section-eyebrow">The full picture</p>
-    <h2 class="section-title" style="font-size:clamp(22px,3vw,28px)">Every option. Ranked for your situation.</h2>
+    <h2 class="section-title" style="font-size:26px">Every option. Ranked for your situation.</h2>
     <div class="options-row">
-      <div class="option-card"><div class="option-icon">🔁</div><p class="option-name">Refinance</p><span class="option-tag tag-rec">Top pick</span></div>
-      <div class="option-card"><div class="option-icon">📝</div><p class="option-name">Loan modification</p><span class="option-tag tag-free">No credit req.</span></div>
-      <div class="option-card"><div class="option-icon">⏸</div><p class="option-name">Forbearance</p><span class="option-tag tag-free">Free to request</span></div>
-      <div class="option-card"><div class="option-icon">🏛</div><p class="option-name">HUD counselor</p><span class="option-tag tag-free">Always free</span></div>
-      <div class="option-card"><div class="option-icon">🗓</div><p class="option-name">Repayment plan</p><span class="option-tag tag-free">Ask servicer</span></div>
-      <div class="option-card"><div class="option-icon">🏠</div><p class="option-name">Sell or rent out</p><span class="option-tag tag-last">Last resort</span></div>
-      <div class="option-card" style="border-color:#b8d9c4;background:#f0f8f3"><div class="option-icon">🏦</div><p class="option-name">State assistance programs</p><span class="option-tag tag-free">State aid</span></div>
+      <div class="option-card">
+        <div class="option-icon">🔁</div>
+        <p class="option-name">Refinance</p>
+        <span class="option-tag tag-rec">Top pick</span>
+      </div>
+      <div class="option-card">
+        <div class="option-icon">📝</div>
+        <p class="option-name">Loan modification</p>
+        <span class="option-tag tag-free">No credit req.</span>
+      </div>
+      <div class="option-card">
+        <div class="option-icon">⏸</div>
+        <p class="option-name">Forbearance</p>
+        <span class="option-tag tag-free">Free to request</span>
+      </div>
+      <div class="option-card">
+        <div class="option-icon">🏛</div>
+        <p class="option-name">HUD counselor</p>
+        <span class="option-tag tag-free">Always free</span>
+      </div>
+      <div class="option-card">
+        <div class="option-icon">🗓</div>
+        <p class="option-name">Repayment plan</p>
+        <span class="option-tag tag-free">Ask servicer</span>
+      </div>
+      <div class="option-card">
+        <div class="option-icon">🏠</div>
+        <p class="option-name">Sell or rent out</p>
+        <span class="option-tag tag-last">Last resort</span>
+      </div>
+      <div class="option-card" style="border-color: #b8d9c4; background: #f0f8f3;">
+        <div class="option-icon">🏦</div>
+        <p class="option-name">State assistance programs</p>
+        <span class="option-tag tag-free">State aid</span>
+      </div>
     </div>
   </div>
 </section>
 
+<!-- PRINCIPLES -->
 <section class="principles-section">
   <p class="section-eyebrow">Our commitments</p>
   <h2 class="section-title">Built around you,<br><em>not around leads.</em></h2>
@@ -209,46 +725,42 @@
   </div>
 </section>
 
+
+<!-- GUIDES -->
 <section class="guides-section" id="guides">
   <p class="section-eyebrow">Mortgage help guides</p>
-  <h2 class="section-title">Plain-English answers for stressful mortgage decisions.</h2>
+  <h2 class="section-title">Learn your options before you make a mortgage decision.</h2>
+  <p class="guides-intro">These educational guides explain common homeowner situations in plain English. They are not legal, financial, or mortgage advice, but they can help you prepare better questions for your servicer, lender, or a HUD-approved housing counselor.</p>
   <div class="guides-grid">
-    <a class="guide-card" href="help-with-mortgage-payment.html" onclick="mssTrack('click_guide_link',{guide:'help-with-mortgage-payment'})">
-      <h3>Help with mortgage payment</h3>
-      <p>What to do when the payment is becoming hard to manage and which options to compare first.</p>
-      <span class="guide-arrow">Read guide →</span>
+    <a class="guide-card featured" href="help-with-mortgage-payment.html">
+      <strong>Help with mortgage payment</strong>
+      <span>Start here if your payment is becoming difficult or you are worried about missing a payment.</span>
     </a>
-    <a class="guide-card" href="cant-afford-mortgage.html" onclick="mssTrack('click_guide_link',{guide:'cant-afford-mortgage'})">
-      <h3>Can't afford your mortgage?</h3>
-      <p>A calm checklist for homeowners worried about falling behind or already under pressure.</p>
-      <span class="guide-arrow">Read guide →</span>
+    <a class="guide-card" href="cant-afford-mortgage.html">
+      <strong>Can’t afford your mortgage?</strong>
+      <span>Understand the first steps to take before the problem gets worse.</span>
     </a>
-    <a class="guide-card" href="refinance-vs-loan-modification.html" onclick="mssTrack('click_guide_link',{guide:'refinance-vs-loan-modification'})">
-      <h3>Refinance vs loan modification</h3>
-      <p>Understand the difference between replacing your loan and asking your servicer to change it.</p>
-      <span class="guide-arrow">Read guide →</span>
+    <a class="guide-card" href="refinance-vs-loan-modification.html">
+      <strong>Refinance vs loan modification</strong>
+      <span>Compare two very different paths for changing your mortgage situation.</span>
     </a>
-    <a class="guide-card" href="mortgage-forbearance-vs-loan-modification.html" onclick="mssTrack('click_guide_link',{guide:'forbearance-vs-modification'})">
-      <h3>Forbearance vs loan modification</h3>
-      <p>Compare temporary payment relief with longer-term mortgage changes.</p>
-      <span class="guide-arrow">Read guide →</span>
+    <a class="guide-card" href="mortgage-forbearance-vs-loan-modification.html">
+      <strong>Forbearance vs loan modification</strong>
+      <span>Learn the difference between temporary payment relief and a longer-term loan change.</span>
     </a>
-    <a class="guide-card full" href="mortgage-hardship-letter.html" onclick="mssTrack('click_guide_link',{guide:'hardship-letter'})">
-      <h3>Mortgage hardship letter</h3>
-      <p>Learn what a hardship letter usually includes before contacting your mortgage servicer.</p>
-      <span class="guide-arrow">Read guide →</span>
+    <a class="guide-card" href="mortgage-hardship-letter.html">
+      <strong>Mortgage hardship letter</strong>
+      <span>See what a hardship letter usually includes before contacting your servicer.</span>
     </a>
   </div>
 </section>
 
-<footer class="site-footer">
-  <a href="index.html" aria-label="MortgageStressScore home"><img src="logo.png" alt="MortgageStressScore.com"></a>
-  <p class="footer-tagline">No surprise lender calls. No data sales. You stay in control.</p>
-  <div class="footer-links">
-    <a href="privacy.html">Privacy</a> ·
-    <a href="disclaimer.html">Disclaimer</a> ·
-    <a href="terms.html">Terms</a>
-  </div>
+<hr>
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo"><img src="logo.png?v=4" alt="MortgageStressScore.com" class="logo-img-footer"></div>
+  <div style="text-align:center;font-size:12px;color:var(--muted)">No surprise lender calls. No data sales. You stay in control.</div>
+  <div><a href="#">Privacy</a> · <a href="#">About</a></div>
 </footer>
 
 <script>
@@ -259,7 +771,9 @@ function calcScore() {
   const equity  = parseInt(document.getElementById('f-equity').value);
   const loan    = parseInt(document.getElementById('f-loan').value);
   const urgency = parseInt(document.getElementById('f-urgency').value);
+
   if (!payment || !income) { alert('Please enter your monthly payment and income to calculate your score.'); return; }
+
   const ratio   = Math.min(payment / income, 1);
   const burden  = Math.round(ratio * 45);
   const incomeS = Math.round(Math.max(0, (1 - ratio * 0.8) * 20));
@@ -267,7 +781,10 @@ function calcScore() {
   const loanS   = Math.round((3 - loan) * 7);
   const missedS = Math.round(missed * 11);
   const urgencyS= Math.round((2 - urgency) * 9);
-  const score   = Math.min(100, Math.max(0, Math.round(burden + missedS + equityS + loanS + urgencyS)));
+
+  const raw = burden + missedS + equityS + loanS + urgencyS;
+  const score = Math.min(100, Math.max(0, Math.round(raw)));
+
   let color, verdict, desc;
   if (score < 35) {
     color = '#1a5c3a'; verdict = 'Low stress — stay prepared';
@@ -279,6 +796,7 @@ function calcScore() {
     color = '#8b1f1f'; verdict = 'High risk — contact HUD counselor today';
     desc = 'Your situation needs immediate attention. Consider contacting your mortgage servicer and a free HUD-approved housing counselor as soon as possible. Time matters.';
   }
+
   const ring = document.getElementById('score-ring');
   ring.style.borderColor = color;
   document.getElementById('score-num').style.color = color;
@@ -287,26 +805,27 @@ function calcScore() {
   document.getElementById('score-verdict').textContent = verdict;
   document.getElementById('score-desc').textContent = desc;
   document.getElementById('meter-dot').style.left = score + '%';
-  function setFactor(id, val, max, c) {
+
+  function setFactor(id, val, max, color) {
     const pct = Math.round(Math.min(100, (val / max) * 100));
     document.getElementById('fb-' + id).style.width = pct + '%';
-    document.getElementById('fb-' + id).style.background = c;
+    document.getElementById('fb-' + id).style.background = color;
     document.getElementById('fv-' + id).textContent = val;
-    document.getElementById('fv-' + id).style.color = c;
+    document.getElementById('fv-' + id).style.color = color;
   }
-  const fc = (v, max) => v / max < .4 ? '#1a5c3a' : v / max < .7 ? '#92510a' : '#8b1f1f';
-  setFactor('burden',  burden,  45, fc(burden, 45));
-  setFactor('income',  incomeS, 20, fc(20-incomeS, 20));
-  setFactor('equity',  equityS, 27, fc(equityS, 27));
-  setFactor('loan',    loanS,   21, fc(loanS, 21));
-  setFactor('missed',  missedS, 33, fc(missedS, 33));
-  setFactor('urgency', urgencyS,18, fc(urgencyS, 18));
-  mssTrack('mortgage_score_generated', { score, risk_level: score < 35 ? 'low' : score < 65 ? 'moderate' : 'high', payment_to_income_ratio: Number(ratio.toFixed(2)), missed_payments_bucket: missed });
+
+  const fColor = (v, max) => v / max < .4 ? '#1a5c3a' : v / max < .7 ? '#92510a' : '#8b1f1f';
+  setFactor('burden',  burden,  45, fColor(burden, 45));
+  setFactor('income',  incomeS, 20, fColor(20-incomeS, 20));
+  setFactor('equity',  equityS, 27, fColor(equityS, 27));
+  setFactor('loan',    loanS,   21, fColor(loanS, 21));
+  setFactor('missed',  missedS, 33, fColor(missedS, 33));
+  setFactor('urgency', urgencyS,18, fColor(urgencyS, 18));
+
   const result = document.getElementById('score-result');
   result.classList.add('visible');
   setTimeout(() => result.scrollIntoView({ behavior: 'smooth', block: 'nearest' }), 100);
 }
 </script>
-</div>
 </body>
 </html>
