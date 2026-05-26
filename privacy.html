@@ -228,6 +228,135 @@
   }
 }
 
+
+
+/* ─── UNIFIED SITE HEADER / MOBILE NAV ─── */
+.site-nav {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: var(--paper, #f8f6f1);
+  border-bottom: 1px solid var(--rule, #e0ddd5);
+  padding: 0 32px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+.site-logo {
+  display: flex;
+  align-items: center;
+  min-width: 0;
+  text-decoration: none;
+}
+.site-logo img {
+  display: block;
+  height: 42px;
+  width: auto;
+  max-width: 260px;
+  object-fit: contain;
+}
+.site-nav-links {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+.site-nav-link {
+  font-size: 13px;
+  color: var(--muted, #77736b);
+  text-decoration: none;
+  white-space: nowrap;
+}
+.site-nav-link:hover { color: var(--ink, #0f0e0c); }
+.site-btn-nav {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  font-weight: 600;
+  padding: 8px 20px;
+  border-radius: 3px;
+  border: 1px solid var(--ink, #0f0e0c);
+  background: var(--ink, #0f0e0c);
+  color: var(--paper, #f8f6f1);
+  cursor: pointer;
+  text-decoration: none;
+  transition: opacity .15s;
+  white-space: nowrap;
+}
+.site-btn-nav:hover { opacity: .85; }
+
+@media (max-width: 760px) {
+  .site-nav {
+    height: auto;
+    min-height: 92px;
+    padding: 10px 14px 9px;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-areas:
+      "logo cta"
+      "links links";
+    row-gap: 8px;
+    column-gap: 10px;
+    align-items: center;
+  }
+  .site-logo {
+    grid-area: logo;
+    min-width: 0;
+  }
+  .site-logo img {
+    width: 168px;
+    max-width: 52vw;
+    height: auto;
+  }
+  .site-nav-links {
+    grid-area: links;
+    margin-left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    padding-top: 5px;
+    border-top: 1px solid rgba(15,14,12,.08);
+  }
+  .site-nav-link {
+    font-size: 13px;
+    line-height: 1.15;
+    min-height: 28px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2px 4px;
+  }
+  .site-btn-nav {
+    grid-area: cta;
+    padding: 10px 13px;
+    border-radius: 7px;
+    font-size: 12px;
+    line-height: 1;
+    min-width: auto;
+    white-space: nowrap;
+  }
+}
+@media (max-width: 390px) {
+  .site-nav {
+    padding: 9px 12px 8px;
+    min-height: 88px;
+  }
+  .site-logo img {
+    width: 148px;
+    max-width: 48vw;
+  }
+  .site-btn-nav {
+    padding: 9px 10px;
+    font-size: 11px;
+  }
+  .site-nav-links { gap: 16px; }
+  .site-nav-link { font-size: 12px; }
+}
+
 </style><title>Privacy Policy — MortgageStressScore.com</title><!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-TJTKS00LW6"></script>
 <script>
@@ -241,4 +370,11 @@
     }
   }
 </script>
-</head><body><nav><a href="index.html" aria-label="MortgageStressScore home"><img src="logo.png" alt="MortgageStressScore.com"></a><a href="index.html#calc">Get my score</a></nav><div class="wrap"><div class="eyebrow">Privacy Policy</div><h1>Privacy Policy</h1><p class="date">Last updated: May 25, 2026</p><div class="note"><strong>Plain-English summary:</strong> the mortgage score calculator is designed to run in your browser. We do not ask for your phone number in the calculator, and we do not sell your calculator inputs to lenders.</div><h2>1. Who we are</h2><p>MortgageStressScore.com is an educational website that helps homeowners estimate mortgage payment stress and compare possible next steps.</p><h2>2. Calculator inputs</h2><p>The basic calculator is intended to process your inputs locally in your browser. The calculator does not require your name, phone number, Social Security number, bank statements, tax returns, or mortgage documents.</p><h2>3. Information we may collect later</h2><p>If we add contact forms, email reports, analytics, or paid features, we may collect information you choose to provide, such as your email address. If that happens, we will use the information to provide the requested service and improve the website.</p><h2>4. What we do not do</h2><ul><li>We do not sell calculator inputs to lenders.</li><li>We do not ask for Social Security numbers in the calculator.</li><li>We do not require phone numbers to calculate a score.</li><li>We do not promise mortgage approval, mortgage relief, loan modification, or foreclosure prevention.</li></ul><h2>5. Cookies and analytics</h2><p>The current simple site may not require tracking cookies to operate. If analytics or advertising tools are added later, this policy should be updated before launch.</p><h2>6. Third-party links</h2><p>The site may link to official resources or third-party websites. We are not responsible for the privacy practices of external websites.</p><h2>7. Data security</h2><p>No website can guarantee perfect security. We aim to collect as little sensitive information as possible, especially during the MVP stage.</p><h2>8. Contact</h2><p>For privacy questions, contact the site owner through the contact method provided on the website or repository.</p><a class="back" href="index.html">Back to Mortgage Stress Score</a></div><footer>MortgageStressScore.com · Educational tool only · Not legal, financial, lending, or foreclosure-prevention advice.</footer></body></html>
+</head><body><nav class="site-nav">
+  <a href="index.html" class="site-logo" aria-label="MortgageStressScore home"><img src="logo.png" alt="MortgageStressScore.com"></a>
+  <div class="site-nav-links" aria-label="Primary navigation">
+    <a href="index.html#how" class="site-nav-link">How it works</a>
+    <a href="guides.html" class="site-nav-link">Guides</a>
+  </div>
+  <a href="index.html#calc" class="site-btn-nav" data-ga-event="click_check_free_score" data-ga-location="nav">Get my score</a>
+</nav><div class="wrap"><div class="eyebrow">Privacy Policy</div><h1>Privacy Policy</h1><p class="date">Last updated: May 25, 2026</p><div class="note"><strong>Plain-English summary:</strong> the mortgage score calculator is designed to run in your browser. We do not ask for your phone number in the calculator, and we do not sell your calculator inputs to lenders.</div><h2>1. Who we are</h2><p>MortgageStressScore.com is an educational website that helps homeowners estimate mortgage payment stress and compare possible next steps.</p><h2>2. Calculator inputs</h2><p>The basic calculator is intended to process your inputs locally in your browser. The calculator does not require your name, phone number, Social Security number, bank statements, tax returns, or mortgage documents.</p><h2>3. Information we may collect later</h2><p>If we add contact forms, email reports, analytics, or paid features, we may collect information you choose to provide, such as your email address. If that happens, we will use the information to provide the requested service and improve the website.</p><h2>4. What we do not do</h2><ul><li>We do not sell calculator inputs to lenders.</li><li>We do not ask for Social Security numbers in the calculator.</li><li>We do not require phone numbers to calculate a score.</li><li>We do not promise mortgage approval, mortgage relief, loan modification, or foreclosure prevention.</li></ul><h2>5. Cookies and analytics</h2><p>The current simple site may not require tracking cookies to operate. If analytics or advertising tools are added later, this policy should be updated before launch.</p><h2>6. Third-party links</h2><p>The site may link to official resources or third-party websites. We are not responsible for the privacy practices of external websites.</p><h2>7. Data security</h2><p>No website can guarantee perfect security. We aim to collect as little sensitive information as possible, especially during the MVP stage.</p><h2>8. Contact</h2><p>For privacy questions, contact the site owner through the contact method provided on the website or repository.</p><a class="back" href="index.html">Back to Mortgage Stress Score</a></div><footer>MortgageStressScore.com · Educational tool only · Not legal, financial, lending, or foreclosure-prevention advice.</footer></body></html>
