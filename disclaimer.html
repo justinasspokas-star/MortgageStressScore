@@ -8,7 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=6">
+<link rel="stylesheet" href="style.css?v=7">
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-TJTKS00LW6"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -20,12 +20,15 @@
 <body>
 <div class="page-wrapper">
 <nav class="site-nav">
-  <a href="index.html" class="site-logo" aria-label="MortgageStressScore home"><img src="logo.png?v=6" alt="MortgageStressScore.com"></a>
+  <a href="index.html" class="site-logo" aria-label="MortgageStressScore home">
+    <img src="logo.png?v=7" alt="MortgageStressScore.com">
+  </a>
   <div class="site-nav-links">
     <a href="index.html#how" class="site-nav-link">How it works</a>
     <a href="guides.html" class="site-nav-link">Guides</a>
+    <a href="about.html" class="site-nav-link">About</a>
   </div>
-  <a href="index.html#calc" class="site-btn-nav">Get my score</a>
+  <a href="index.html#calc" class="site-btn-nav" onclick="mssTrack('click_cta_nav',{page:document.title})">Get my score</a>
 </nav>
 <div class="legal-wrap">
   <div class="eyebrow">Important Disclaimer</div>
