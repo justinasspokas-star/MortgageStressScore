@@ -652,61 +652,75 @@ hr { border: none; border-top: 1px solid var(--rule); }
    ═══════════════════════════════ */
 @media (max-width: 760px) {
 
-  /* ── NAV: single compact row, always sticky ──
-     [Logo]  [How it works] [Guides]  [Get score]
-     56px height, no 2nd row = always visible while scrolling. */
+  /* NAV: 2-row compact mobile layout
+     Row 1 = logo + CTA
+     Row 2 = centered text links */
   .site-nav {
     position: sticky;
     top: 0;
     z-index: 999;
-    height: 56px;
-    min-height: 56px;
-    padding: 0 14px;
-    display: flex;
-    flex-direction: row;
+    min-height: 96px;
+    height: auto;
+    padding: 10px 14px 8px;
+    display: grid;
+    grid-template-columns: minmax(0,1fr) auto;
+    grid-template-areas:
+      "logo cta"
+      "links links";
     align-items: center;
-    gap: 0;
+    row-gap: 8px;
+    column-gap: 10px;
     background: var(--paper);
     box-shadow: 0 1px 0 var(--rule);
     border-bottom: none;
   }
   .site-logo {
+    grid-area: logo;
     flex: 0 0 auto;
-    margin-right: 8px;
+    margin-right: 0;
+    min-width: 0;
   }
   .site-logo img {
-    height: 30px;
+    height: 28px;
     width: auto;
-    max-width: 120px;
+    max-width: 150px;
+    object-fit: contain;
   }
   .site-nav-links {
-    flex: 1 1 auto;
+    grid-area: links;
+    width: 100%;
     display: flex;
     align-items: center;
-    justify-content: flex-start;
-    gap: 2px;
+    justify-content: center;
+    gap: 18px;
     margin-left: 0;
-    overflow: hidden;
+    overflow: visible;
+    padding: 0 2px;
   }
   .site-nav-link {
-    font-size: 12px;
+    font-size: 14px;
+    line-height: 1.2;
     color: var(--muted);
-    padding: 6px 8px;
-    min-height: 44px;
+    padding: 6px 2px;
+    min-height: auto;
     display: inline-flex;
     align-items: center;
+    justify-content: center;
     white-space: nowrap;
     border-radius: 4px;
+    text-align: center;
   }
   .site-nav-link:active { background: rgba(15,14,12,.06); }
   .site-btn-nav {
+    grid-area: cta;
     flex: 0 0 auto;
-    margin-left: auto;
-    padding: 8px 12px;
-    font-size: 12px;
-    font-weight: 500;
-    border-radius: 5px;
-    min-height: 36px;
+    margin-left: 0;
+    padding: 10px 14px;
+    font-size: 13px;
+    font-weight: 600;
+    border-radius: 6px;
+    min-height: 42px;
+    white-space: nowrap;
   }
 
   /* HERO */
@@ -788,12 +802,35 @@ hr { border: none; border-top: 1px solid var(--rule); }
 }
 
 /* ═══════════════════════════════
-   RESPONSIVE — SMALL MOBILE (≤390px)
+   RESPONSIVE — SMALL MOBILE (≤440px)
    ═══════════════════════════════ */
-@media (max-width: 390px) {
-  .site-nav { padding: 0 10px; height: 52px; min-height: 52px; }
-  .site-logo img { height: 26px; max-width: 110px; }
-  .site-nav-link { font-size: 11.5px; padding: 6px 6px; }
-  .site-btn-nav { padding: 7px 10px; font-size: 11px; }
+@media (max-width: 440px) {
+  .site-nav {
+    min-height: 92px;
+    padding: 10px 12px 8px;
+    row-gap: 7px;
+  }
+  .site-logo img {
+    height: 26px;
+    max-width: 138px;
+  }
+  .site-nav-links {
+    gap: 14px;
+  }
+  .site-nav-link {
+    font-size: 13px;
+  }
+  .site-btn-nav {
+    padding: 10px 12px;
+    font-size: 12px;
+    min-height: 40px;
+  }
   .hero h1 { font-size: clamp(34px, 10vw, 46px); }
+}
+
+@media (max-width: 360px) {
+  .site-logo img { max-width: 124px; }
+  .site-nav-links { gap: 10px; }
+  .site-nav-link { font-size: 12px; }
+  .site-btn-nav { padding: 9px 10px; }
 }
