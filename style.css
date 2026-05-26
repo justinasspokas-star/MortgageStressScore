@@ -883,46 +883,100 @@ hr { border: none; border-top: 1px solid var(--rule); }
 }
 
 /* ═══════════════════════════════
-   SOURCES BLOCK (guide pages)
+   MISSING /补充 CLASSES (v6 patch)
    ═══════════════════════════════ */
-.sources-block {
-  border-top: 1px solid var(--rule);
-  margin-top: 52px;
-  padding-top: 24px;
-}
-.sources-title {
-  font-size: 11px;
-  font-weight: 500;
-  text-transform: uppercase;
-  letter-spacing: .08em;
-  color: var(--muted);
-  margin-bottom: 12px;
-}
-.sources-block ul {
-  padding-left: 0;
-  list-style: none;
-  margin: 0;
-}
-.sources-block li {
-  font-size: 13px;
-  margin: 6px 0;
-}
-.sources-block a {
-  color: var(--green);
-  text-decoration: none;
-}
-.sources-block a:hover { text-decoration: underline; }
+
+/* score-info wrapper — needed by index.html */
+.score-info { flex: 1; min-width: 0; }
+
+/* diff-col — wrapper for each comparison column */
+.diff-col { display: flex; flex-direction: column; }
+
+/* Ensure diff section title inherits colour on mobile */
+.diff-inner .section-title em { color: #4cde8f; }
 
 /* ═══════════════════════════════
-   ARTICLE REVIEWED LINE
+   MOBILE FIXES — "How it works" + options (v6 patch)
    ═══════════════════════════════ */
-.article-reviewed {
-  font-size: 12px;
-  color: var(--muted);
-  margin-bottom: 28px;
-  margin-top: -8px;
+@media (max-width: 760px) {
+
+  /* How it works: clear separator between the two columns */
+  .diff-section { padding: 52px 20px; }
+  .diff-grid { grid-template-columns: 1fr; gap: 0; }
+  .diff-col { padding: 28px 0; }
+  .diff-col.diff-them {
+    border-bottom: 1px solid rgba(255,255,255,.12);
+    padding-bottom: 28px;
+  }
+  .diff-col.diff-us { padding-top: 28px; }
+  .diff-col-title { font-size: 12px; margin-bottom: 18px; }
+  .diff-item { font-size: 14px; margin-bottom: 12px; }
+
+  /* Options strip: 2 cols, last item full-width */
+  .options-section { padding: 48px 20px; }
+  .options-row {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    margin-top: 28px;
+  }
+  .options-row .option-card:last-child { grid-column: 1 / -1; }
+  .option-card { padding: 16px 12px; }
+  .option-icon { font-size: 20px; margin-bottom: 6px; }
+  .option-name { font-size: 12px; }
+
+  /* Hero adjustments */
+  .hero { padding: 52px 20px 48px; }
+  .hero-sub { font-size: 15px; }
+  .btn-primary { display: block; width: 100%; max-width: 320px; margin: 0 auto; text-align: center; padding: 15px 20px; }
+
+  /* Calc section */
+  .calc-section { padding: 52px 20px; }
+  .section-title { font-size: clamp(24px, 7vw, 30px); margin-bottom: 24px; }
+  .field label { font-size: 13px; }
+  .field input, .field select { font-size: 16px; min-height: 50px; padding: 12px 14px; }
+  .btn-calc { min-height: 54px; font-size: 15px; border-radius: 6px; }
+
+  /* Score result */
+  .score-top { flex-direction: column; align-items: flex-start; gap: 14px; padding: 20px; }
+  .score-ring { width: 80px; height: 80px; }
+  .score-num { font-size: 28px; }
+  .score-desc { font-size: 13px; }
+  .score-meter { margin: 16px 20px 0; }
+  .meter-labels { padding: 6px 20px 16px; font-size: 10px; }
+  .score-factors { grid-template-columns: 1fr; }
+  .factor { border-right: none !important; padding: 12px 20px; }
+  .factor:nth-last-child(-n+2) { border-bottom: 1px solid var(--rule) !important; }
+  .factor:last-child { border-bottom: none !important; }
+  .result-actions { padding: 18px 20px 22px; }
+  .btn-secondary { display: block; width: 100%; text-align: center; padding: 13px; }
+
+  /* Principles */
+  .principles-section { padding: 52px 20px; }
+  .principles-grid { grid-template-columns: 1fr; gap: 32px; margin-top: 32px; }
+
+  /* Guides */
+  .guides-section { padding: 52px 20px; }
+  .guides-grid { grid-template-columns: 1fr; gap: 12px; }
+  .guide-card.full { grid-column: auto; }
+  .guide-card { padding: 20px; }
+  .guide-card h3 { font-size: 18px; }
+
+  /* Footer */
+  .site-footer {
+    padding: 32px 20px;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 14px;
+  }
 }
-.article-reviewed a {
-  color: var(--muted);
-  text-decoration: underline;
+
+@media (max-width: 390px) {
+  .site-nav { padding: 0 10px; height: 52px; min-height: 52px; }
+  .site-logo img { height: 26px; max-width: 110px; }
+  .site-nav-link { font-size: 11px; padding: 6px 5px; }
+  .site-btn-nav { padding: 7px 10px; font-size: 11px; }
+  .hero h1 { font-size: clamp(32px, 10vw, 44px); }
+  .diff-section { padding: 44px 16px; }
+  .options-section { padding: 40px 16px; }
 }
