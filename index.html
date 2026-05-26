@@ -642,18 +642,17 @@ footer a:hover { color: var(--ink); }
       <p class="ec-box-title">Get this checklist by email</p>
       <p class="ec-box-sub">We'll send your personalized plan once — no sequences, no lender calls, no spam.</p>
       <p class="ec-promise">🔒 Your email is never shared with lenders or servicers.</p>
-      <!-- Hidden fields passed to Tally as hidden fields -->
       <input type="hidden" id="ec-score">
       <input type="hidden" id="ec-risk">
       <div id="ec-cta-area">
-        <button class="ec-btn" id="ec-tally-btn" onclick="openTallyChecklist()">
+        <button class="ec-btn" id="ec-gform-btn" onclick="openGoogleForm()">
           Get my free checklist →
         </button>
         <p class="ec-fine">No lender referrals. No phone calls. Unsubscribe anytime.</p>
       </div>
       <div class="ec-success" id="ec-success" style="display:none">
-        <p class="ec-success-msg">✓ On its way — check your inbox.</p>
-        <p class="ec-fine">Didn't receive it? Check your spam folder.</p>
+        <p class="ec-success-msg">✓ Form opened — fill it in to receive your checklist.</p>
+        <p class="ec-fine">Didn't see it open? <a href="#" id="ec-retry-link">Click here to try again.</a></p>
       </div>
     </div>
 
@@ -921,52 +920,58 @@ function calcScore() {
   }, 600);
 }
 
-// ── Tally.so integration ────────────────────────────────────────────────────
-// SETUP (2 steps):
-//   1. Go to tally.so → create a form with an Email field
-//      Add two hidden fields named: "score" and "risk_level"
-//   2. Replace YOUR_TALLY_FORM_ID below with your actual Tally form ID
-//      (found in the share URL: tally.so/r/FORM_ID)
+// ── Google Forms integration ────────────────────────────────────────────────
 //
-// Optional: In Tally, set up an email notification with {{score}} and {{risk_level}}
-// to send a personalised reply to the user automatically.
+// SETUP (3 steps, ~5 minutes):
+//
+//   STEP 1 — Create your Google Form:
+//     a. Go to forms.google.com → blank form
+//     b. Add question: "Email address" (Short answer, mark as Required)
+//     c. Add question: "Score" (Short answer) → click ⋮ → "Description" is fine
+//     d. Add question: "Risk level" (Short answer)
+//     e. In Settings → Responses → enable "Collect email addresses" (optional)
+//
+//   STEP 2 — Get the pre-fill entry IDs:
+//     a. In your form editor, click ⋮ (top right) → "Get pre-filled link"
+//     b. Fill in dummy values in each field → click "Get link"
+//     c. Copy the URL — it looks like:
+//        https://docs.google.com/forms/d/e/FORM_ID/viewform?usp=pp_url
+//          &entry.1234567890=dummy_email
+//          &entry.0987654321=dummy_score
+//          &entry.1122334455=dummy_risk
+//     d. Copy FORM_ID and each entry.XXXXXXXXXX number below
+//
+//   STEP 3 — Paste the IDs into the 4 constants below:
 
-function openTallyChecklist() {
+const GOOGLE_FORM_ID     = 'YOUR_FORM_ID';       // from the form URL
+const ENTRY_EMAIL        = 'entry.YOUR_EMAIL_ENTRY_ID';    // e.g. entry.1234567890
+const ENTRY_SCORE        = 'entry.YOUR_SCORE_ENTRY_ID';    // e.g. entry.0987654321
+const ENTRY_RISK         = 'entry.YOUR_RISK_ENTRY_ID';     // e.g. entry.1122334455
+
+function openGoogleForm() {
   const score     = document.getElementById('ec-score').value;
   const riskLevel = document.getElementById('ec-risk').value;
 
-  // Replace with your Tally form ID
-  const TALLY_FORM_ID = 'YOUR_TALLY_FORM_ID';
+  const base = `https://docs.google.com/forms/d/e/${GOOGLE_FORM_ID}/viewform`;
+  const url  = `${base}?usp=pp_url&${ENTRY_SCORE}=${encodeURIComponent(score)}&${ENTRY_RISK}=${encodeURIComponent(riskLevel)}`;
 
-  if (typeof Tally !== 'undefined') {
-    Tally.openPopup(TALLY_FORM_ID, {
-      width: 420,
-      overlay: true,
-      hiddenFields: {
-        score:      score,
-        risk_level: riskLevel
-      },
-      onSubmit: function() {
-        document.getElementById('ec-cta-area').style.display = 'none';
-        document.getElementById('ec-success').style.display  = 'block';
-        if (typeof gtag === 'function') {
-          gtag('event', 'checklist_submitted', {
-            risk_level: riskLevel,
-            score:      parseInt(score)
-          });
-        }
-      }
+  const win = window.open(url, '_blank');
+
+  // Show success state and retry link
+  document.getElementById('ec-cta-area').style.display = 'none';
+  document.getElementById('ec-success').style.display  = 'block';
+  document.getElementById('ec-retry-link').onclick = function(e) {
+    e.preventDefault();
+    window.open(url, '_blank');
+  };
+
+  if (typeof gtag === 'function') {
+    gtag('event', 'checklist_form_opened', {
+      risk_level: riskLevel,
+      score:      parseInt(score)
     });
-  } else {
-    // Fallback: open Tally form in new tab if embed script not loaded
-    window.open(
-      `https://tally.so/r/${TALLY_FORM_ID}?score=${score}&risk_level=${riskLevel}`,
-      '_blank'
-    );
   }
 }
 </script>
-<!-- Tally embed script (loads Tally.openPopup globally) -->
-<script src="https://tally.so/widgets/embed.js" async></script>
 </body>
 </html>
