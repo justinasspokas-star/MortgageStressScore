@@ -4,10 +4,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>MortgageStressScore — Know your risk before it's too late</title>
-<meta name="description" content="Check your Mortgage Stress Score in minutes. Compare possible next steps like refinance, loan modification, forbearance, HUD counseling, and state assistance.">
+<meta name="description" content="Check your Mortgage Stress Score in minutes. Refinance, modification, forbearance, HUD counseling — see which options fit your situation. Free, private.">
 <link rel="canonical" href="https://mortgagestressscore.com/">
 <meta property="og:title" content="MortgageStressScore — Know your risk before it's too late">
-<meta property="og:description" content="Check your Mortgage Stress Score in minutes. Compare possible next steps like refinance, loan modification, forbearance, HUD counseling, and state assistance.">
+<meta property="og:description" content="Check your Mortgage Stress Score in minutes. Refinance, modification, forbearance, HUD counseling — see which options fit your situation. Free, private.">
 <meta property="og:image" content="https://mortgagestressscore.com/logo.png">
 <meta property="og:url" content="https://mortgagestressscore.com/">
 <meta property="og:type" content="website">
@@ -345,8 +345,11 @@ function calcScore() {
 <script>
 
 // ── Google Forms integration ─────────────────────────────────────────────────
-// Google Form URL for the free checklist request.
-const GOOGLE_FORM_URL = 'https://docs.google.com/forms/d/e/1FAIpQLScApP0pKmQT1E2V5r8fQWTC3QUHBbYw8MmRCNc68rJ2mtfdwg/viewform?usp=sf_link';
+// SETUP: Replace the 4 constants below with your Google Form values.
+// How to get entry IDs: form editor → ⋮ → "Get pre-filled link" → fill dummy values → copy URL
+const GOOGLE_FORM_ID  = 'YOUR_FORM_ID';
+const ENTRY_SCORE     = 'entry.YOUR_SCORE_ENTRY_ID';
+const ENTRY_RISK      = 'entry.YOUR_RISK_ENTRY_ID';
 
 const PLANS = {
   low: {
@@ -392,12 +395,13 @@ const PLANS = {
 function openGoogleForm() {
   const score = document.getElementById('ec-score').value;
   const risk  = document.getElementById('ec-risk').value;
-  const url   = GOOGLE_FORM_URL;
-  window.open(url, '_blank', 'noopener');
+  const base  = `https://docs.google.com/forms/d/e/${GOOGLE_FORM_ID}/viewform`;
+  const url   = `${base}?usp=pp_url&${ENTRY_SCORE}=${encodeURIComponent(score)}&${ENTRY_RISK}=${encodeURIComponent(risk)}`;
+  window.open(url, '_blank');
   document.getElementById('ec-cta-area').style.display = 'none';
   document.getElementById('ec-success').style.display  = 'block';
   document.getElementById('ec-retry-link').onclick = function(e) {
-    e.preventDefault(); window.open(url, '_blank', 'noopener');
+    e.preventDefault(); window.open(url, '_blank');
   };
   if (typeof gtag === 'function') gtag('event','checklist_form_opened',{risk_level:risk,score:parseInt(score)});
 }
