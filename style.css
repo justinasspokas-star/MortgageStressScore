@@ -565,3 +565,40 @@ hr { border: none; border-top: 1px solid var(--rule); }
   .site-btn-nav { padding: 8px 10px; font-size: 11px; }
   .hero h1 { font-size: clamp(32px,10vw,44px); }
 }
+
+/* ── Related guides block ─── */
+.related-guides {
+  margin: 36px 0 32px;
+  padding: 22px 26px;
+  background: var(--paper);
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+}
+.related-title {
+  font-size: 11px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  color: var(--muted);
+  margin-bottom: 12px;
+}
+.related-guides ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.related-guides li::before {
+  content: "→ ";
+  color: var(--muted);
+  font-size: 13px;
+}
+.related-guides a {
+  font-size: 13px;
+  color: var(--green);
+  text-decoration: none;
+  line-height: 1.5;
+}
+.related-guides a:hover { text-decoration: underline; }
