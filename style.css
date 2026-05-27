@@ -72,15 +72,10 @@ hr { border: none; border-top: 1px solid var(--rule); }
   flex-shrink: 0;
   margin-right: 8px;
 }
-.site-logo picture {
-  display: flex;
-  align-items: center;
-  flex-shrink: 0;
-}
 .site-logo img {
-  height: 43px;
+  height: 40px;
   width: auto;
-  max-width: 240px;
+  max-width: 220px;
   object-fit: contain;
   display: block;
 }
@@ -454,8 +449,7 @@ hr { border: none; border-top: 1px solid var(--rule); }
     margin-right: 0;
     align-self: center;
   }
-  .site-logo picture { align-items: center; }
-  .site-logo img { height: 34px; max-width: 156px; }
+  .site-logo img { height: 30px; max-width: 140px; }
 
   .site-btn-nav {
     grid-area: cta;
@@ -566,46 +560,8 @@ hr { border: none; border-top: 1px solid var(--rule); }
    ═══════════════════════════════════════════════ */
 @media (max-width: 390px) {
   .site-nav { padding: 9px 12px 0; min-height: 82px; }
-  .site-logo picture { align-items: center; }
-  .site-logo img { height: 29px; max-width: 132px; }
+  .site-logo img { height: 26px; max-width: 120px; }
   .site-nav-link { font-size: 11.5px; padding: 4px 7px; }
   .site-btn-nav { padding: 8px 10px; font-size: 11px; }
   .hero h1 { font-size: clamp(32px,10vw,44px); }
 }
-
-/* ── Related guides block ─── */
-.related-guides {
-  margin: 36px 0 32px;
-  padding: 22px 26px;
-  background: var(--paper);
-  border: 1px solid var(--rule);
-  border-radius: 8px;
-}
-.related-title {
-  font-size: 11px;
-  font-weight: 500;
-  text-transform: uppercase;
-  letter-spacing: .08em;
-  color: var(--muted);
-  margin-bottom: 12px;
-}
-.related-guides ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-}
-.related-guides li::before {
-  content: "→ ";
-  color: var(--muted);
-  font-size: 13px;
-}
-.related-guides a {
-  font-size: 13px;
-  color: var(--green);
-  text-decoration: none;
-  line-height: 1.5;
-}
-.related-guides a:hover { text-decoration: underline; }
