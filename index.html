@@ -449,19 +449,14 @@ const PLANS = {
 };
 
 function openGoogleForm() {
-  const score = document.getElementById('ec-score')?.value || '';
-  const risk  = document.getElementById('ec-risk')?.value || '';
-  const url   = 'https://docs.google.com/forms/d/e/1FAIpQLScApP0pKmQT1E2V5r8fQWTC3QUHBbYw8MmRCNc68rJ2mtfdwg/viewform?usp=sf_link';
-  window.open(url, '_blank', 'noopener,noreferrer');
-  const cta = document.getElementById('ec-cta-area');
+  const formUrl = "https://docs.google.com/forms/d/e/1FAIpQLScApP0pKmQT1E2V5r8fQWTC3QUHBbYw8MmRCNc68rJ2mtfdwg/viewform?usp=sf_link";
+  mssTrack('checklist_form_opened', {
+    score: document.getElementById('ec-score')?.value || '',
+    risk: document.getElementById('ec-risk')?.value || ''
+  });
+  window.open(formUrl, '_blank', 'noopener,noreferrer');
   const success = document.getElementById('ec-success');
-  if (cta) cta.style.display = 'none';
   if (success) success.style.display = 'block';
-  const retry = document.getElementById('ec-retry-link');
-  if (retry) retry.onclick = function(e) {
-    e.preventDefault(); window.open(url, '_blank', 'noopener,noreferrer');
-  };
-  if (typeof gtag === 'function') gtag('event','checklist_form_opened',{risk_level:risk,score:parseInt(score)||0});
 }
 
 // ── Action plan ──────────────────────────────────────────────────────────────
