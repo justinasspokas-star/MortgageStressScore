@@ -422,8 +422,8 @@ function calcScore() {
 // SETUP: Replace the 4 constants below with your Google Form values.
 // How to get entry IDs: form editor → ⋮ → "Get pre-filled link" → fill dummy values → copy URL
 const GOOGLE_FORM_ID  = '1FAIpQLScApP0pKmQT1E2V5r8fQWTC3QUHBbYw8MmRCNc68rJ2mtfdwg';
-const ENTRY_SCORE     = '';
-const ENTRY_RISK      = '';
+const ENTRY_SCORE     = 'entry.1805484768';
+const ENTRY_RISK      = 'entry.904975798';
 
 const PLANS = {
   low: {
@@ -467,17 +467,29 @@ const PLANS = {
 };
 
 function openGoogleForm() {
-  mssTrack('checklist_form_opened', {
-    score: document.getElementById('ec-score')?.value || '',
-    risk: document.getElementById('ec-risk')?.value || ''
-  });
-  const formSection = document.getElementById('checklist-form');
-  if (formSection) {
-    formSection.style.display = 'block';
-    formSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-  }
-  const success = document.getElementById('ec-success');
-  if (success) success.style.display = 'block';
+  const score = document.getElementById('ec-score').value;
+  const risk  = document.getElementById('ec-risk').value;
+
+  // Map risk level → form multiple-choice option
+  const situationMap = {
+    low:      'I am current but worried',
+    moderate: 'I am current but worried',
+    high:     'I missed 1 payment'
+  };
+  const situation = situationMap[risk] || 'I just want the checklist';
+
+  const base = `https://docs.google.com/forms/d/e/${GOOGLE_FORM_ID}/viewform`;
+  const url  = `${base}?usp=pp_url`
+             + `&${ENTRY_SCORE}=${encodeURIComponent(score)}`
+             + `&${ENTRY_RISK}=${encodeURIComponent(situation)}`;
+
+  window.open(url, '_blank');
+  document.getElementById('ec-cta-area').style.display = 'none';
+  document.getElementById('ec-success').style.display  = 'block';
+  document.getElementById('ec-retry-link').onclick = function(e) {
+    e.preventDefault(); window.open(url, '_blank');
+  };
+  if (typeof gtag === 'function') gtag('event','checklist_form_opened',{risk_level:risk,score:parseInt(score)});
 }
 
 // ── Action plan ──────────────────────────────────────────────────────────────
