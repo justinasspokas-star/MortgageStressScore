@@ -419,7 +419,6 @@ function calcScore() {
 
   const result = document.getElementById('score-result');
   result.classList.add('visible');
-  setTimeout(() => result.scrollIntoView({ behavior: 'smooth', block: 'nearest' }), 100);
 }
 </script>
 <script>
@@ -532,10 +531,6 @@ function showActionPlan() {
   const btn = document.getElementById('result-checklist-btn');
   if (btn) btn.style.display = 'inline-flex';
 
-  // Scroll smoothly to action plan after short delay
-  setTimeout(() => {
-    ap.scrollIntoView({ behavior: 'smooth', block: 'start' });
-  }, 400);
 }
 
 function scrollToActionPlan() {
