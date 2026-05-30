@@ -149,7 +149,12 @@
     </div>
     <div class="result-actions">
       <p><strong>Next step:</strong> use this score as a starting point. If you are behind or close to missing a payment, contact your mortgage servicer and consider a HUD-approved housing counselor.</p>
-      <a href="#options" class="btn-secondary">See possible next steps</a>
+      <div class="result-cta-row">
+        <button class="btn-primary result-checklist-btn" id="result-checklist-btn" onclick="scrollToActionPlan()" style="display:none">
+          Get my free action plan ↓
+        </button>
+        <a href="#options" class="btn-secondary">See all options</a>
+      </div>
     </div>
   </div>
 </section>
@@ -177,6 +182,7 @@
       <p class="ec-fine">Didn't see it? <a href="#" id="ec-retry-link">Click here to try again.</a></p>
     </div>
   </div>
+  <p class="action-see-options"><a href="#options">See all mortgage relief options ↓</a></p>
 </section>
 
 <hr>
@@ -521,6 +527,20 @@ function showActionPlan() {
   const ap = document.getElementById('action-plan');
   ap.style.display = 'block';
   setTimeout(() => ap.classList.add('action-visible'), 50);
+
+  // Show the action plan button in the score result box
+  const btn = document.getElementById('result-checklist-btn');
+  if (btn) btn.style.display = 'inline-flex';
+
+  // Scroll smoothly to action plan after short delay
+  setTimeout(() => {
+    ap.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }, 400);
+}
+
+function scrollToActionPlan() {
+  const ap = document.getElementById('action-plan');
+  if (ap) ap.scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 </script>
 </body>
