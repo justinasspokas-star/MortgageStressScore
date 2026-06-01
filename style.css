@@ -730,3 +730,39 @@ hr { border: none; border-top: 1px solid var(--rule); }
   .premium-box { padding: 18px; }
   .premium-title { font-size: 15px; }
 }
+
+/* ── Premium box fields ─── */
+.premium-fields {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 18px;
+}
+.premium-field-row {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.premium-label {
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: .05em;
+}
+.premium-select {
+  font-family: var(--font-body);
+  font-size: 13px;
+  padding: 10px 12px;
+  border: 1px solid var(--rule);
+  border-radius: 6px;
+  background: var(--paper);
+  color: var(--ink);
+  width: 100%;
+  cursor: pointer;
+  appearance: auto;
+}
+.premium-select:focus {
+  outline: none;
+  border-color: var(--green);
+}

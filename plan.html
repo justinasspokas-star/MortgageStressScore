@@ -199,10 +199,105 @@ const CONTENT = {
   }
 };
 
+
+// ── State-specific data ───────────────────────────────────────────────────────
+const STATES = {
+  CA: { name:'California', type:'Non-judicial', timeline:'4–9 months', key_law:'HBOR AB 2424 (2026) — servicer must pause foreclosure during modification review',
+        program:'CalAssist Mortgage Fund: up to $100,000 for disaster-affected homeowners. CalHFA counselors: (877) 922-5432 · calhfa.ca.gov',
+        hud:'CalHFA statewide network: calhfa.ca.gov or hud.gov/housingcounseling', urgent:'Non-judicial — act within days of any Notice of Default.' },
+  TX: { name:'Texas', type:'Non-judicial', timeline:'6–8 weeks (!)',  key_law:'No mandatory mediation. NOD → 20-day cure → sale. Fastest foreclosure in the US.',
+        program:'TDHCA housing counselors: (800) 525-0657 · tdhca.state.tx.us. TXHAF closed April 2025.',
+        hud:'Texas Homeownership Hotline: (800) 525-0657', urgent:'CRITICAL — Texas foreclosure is the fastest in the US. Contact servicer TODAY.' },
+  FL: { name:'Florida', type:'Judicial', timeline:'8–36 months',  key_law:'Judicial process — lender must file lawsuit. You have 20 days to respond to summons.',
+        program:'Florida Housing counselors: floridahousing.org. Call 211 for county-specific programs.',
+        hud:'Florida Housing Finance Corporation: (800) 814-HOME · floridahousing.org', urgent:'Respond to any court summons within 20 days or lose your defenses.' },
+  GA: { name:'Georgia', type:'Non-judicial', timeline:'60–90 days (!)', key_law:'Foreclosure notice requires only 30 days. One of the fastest non-judicial states.',
+        program:'Georgia DCA housing counselors: (404) 679-4840 · dca.ga.gov. HAF closed March 2026.',
+        hud:'Georgia Department of Community Affairs: (404) 679-4840', urgent:'CRITICAL — Georgia foreclosure can complete in 60 days. Act immediately on any notice.' },
+  IL: { name:'Illinois', type:'Judicial', timeline:'12–24 months', key_law:'90-day right to reinstate after judgment. Cook County has mandatory mediation (855-452-2637).',
+        program:'IHDA housing counselors: (312) 836-5200 · ihda.org. ILHAF closed October 2023.',
+        hud:'IHDA Homeownership Hotline: (800) 942-8439 · ihda.org', urgent:'File answer to complaint within 30 days to access mediation rights.' },
+  OH: { name:'Ohio', type:'Judicial', timeline:'6–18 months', key_law:'Post-sale right of redemption. County mediation available in Cleveland, Columbus, Cincinnati, Dayton.',
+        program:'OHFA Save the Dream — verify at ohiohome.org. Ohio Housing Finance Agency: (614) 387-2863.',
+        hud:'OHFA Housing Counselor Line: (888) 362-6432 · ohiohome.org', urgent:'File answer to complaint within 28 days to preserve mediation rights.' },
+  NJ: { name:'New Jersey', type:'Judicial', timeline:'2–4 years', key_law:'FMAP free mediation program (609-278-7400). ERMA assistance up to $75,000 — verify status.',
+        program:'ERMA: njerma.com or (609) 278-7400. NJHMFA FMAP: free counseling and mediation statewide.',
+        hud:'NJHMFA FMAP: (609) 278-7400 · nj.gov/dca/hmfa', urgent:'File answer to complaint within 35 days to preserve mediation rights.' },
+  NY: { name:'New York', type:'Judicial', timeline:'3–7 years (NYC)', key_law:'Mandatory settlement conference (CPLR §3408) — foreclosure paused during all conferences.',
+        program:'HOPP network: (855) 466-3456 · homeownerhelpny.org. NYS-MAP zero-interest loans up to $80,000.',
+        hud:'HOPP Hotline: (855) 466-3456 (24/7) · homeownerhelpny.org', urgent:'Respond to foreclosure summons within 20 days. HOPP counselor can attend court for you.' },
+  PA: { name:'Pennsylvania', type:'Judicial', timeline:'12–18 months', key_law:'Act 6 requires 30-day notice before foreclosure filing. PHFA counseling network.',
+        program:'PHFA counselors: (800) 342-2397 · phfa.org. Pennsylvania HAF — check status at phfa.org.',
+        hud:'PHFA Homeownership Hotline: (800) 342-2397 · phfa.org', urgent:'Respond to complaint within 20 days to preserve your right to mediation.' },
+};
+
+// Default for states not in the list
+const STATE_DEFAULT = {
+  type:'Varies by state', timeline:'Varies — verify with your state housing agency',
+  key_law:'Contact a HUD-approved counselor for state-specific rights and timelines.',
+  program:'Contact your state housing finance agency or call 211 for local programs.',
+  hud:'National HUD Counseling: (800) 569-4287 · hud.gov/housingcounseling',
+  urgent:'Contact a HUD counselor immediately for state-specific guidance.'
+};
+
+// ── Loan type data ────────────────────────────────────────────────────────────
+const LOANS = {
+  FHA: {
+    name: 'FHA loan',
+    programs: 'FHA-HAMP Loan Modification, FHA Partial Claim (defers arrears to end of loan), FHA Forbearance, FHA Home Affordable Modification.',
+    servicer_dept: 'FHA Loss Mitigation Department',
+    key_phrase: 'I have an FHA-insured loan and I am requesting evaluation for all FHA loss-mitigation options under Mortgagee Letter ML 2023-06, including FHA-HAMP modification and partial claim.',
+    credit_impact: 'FHA modifications are typically reported as "modified" — less severe than delinquency. Partial claims are generally not reported as derogatory.',
+    advantage: 'FHA loans have the strongest borrower protections of any loan type. Your servicer is required by HUD to evaluate you for FHA-HAMP before proceeding with foreclosure.'
+  },
+  VA: {
+    name: 'VA loan',
+    programs: 'VA HAMP Loan Modification, VA Refunding (VA purchases the loan to prevent foreclosure), VA Repayment Plan, VA Compromise Sale.',
+    servicer_dept: 'VA Loan Guaranty Service',
+    key_phrase: 'I have a VA-guaranteed loan and I am requesting evaluation for all VA loss-mitigation options. I would also like the VA Regional Loan Center contacted on my behalf.',
+    credit_impact: 'VA modifications are reported similarly to FHA — "modified" rather than "defaulted." The VA has a financial counseling service that can help protect your credit.',
+    advantage: 'VA loans have a dedicated advocate — the VA Regional Loan Center can intervene with your servicer on your behalf. Call the VA Loan Guaranty Service: (877) 827-3702.'
+  },
+  USDA: {
+    name: 'USDA / Rural Development loan',
+    programs: 'USDA Loan Modification, USDA Moratorium, USDA Special Forbearance, Rural Development emergency assistance.',
+    servicer_dept: 'USDA Rural Development Loss Mitigation',
+    key_phrase: 'I have a USDA Rural Development loan and I am requesting evaluation for all available loss-mitigation options under USDA guidelines.',
+    credit_impact: 'USDA modifications follow similar reporting to FHA. Contact a USDA housing counselor for state-specific guidance.',
+    advantage: 'USDA loans are backed by the federal government with strong anti-foreclosure mandates. Contact your local USDA Rural Development office for additional support.'
+  },
+  Conventional: {
+    name: 'Conventional loan',
+    programs: 'Flex Modification (Fannie Mae / Freddie Mac), Payment Deferral, Repayment Plan, Proprietary Modification (if not agency-backed).',
+    servicer_dept: 'Loss Mitigation Department',
+    key_phrase: 'I have a conventional mortgage and I am requesting evaluation for all available loss-mitigation options, including Flex Modification if my loan is owned by Fannie Mae or Freddie Mac.',
+    credit_impact: 'Conventional modifications are reported as "modified." Check if your loan is backed by Fannie Mae (fanniemae.com/loanlookup) or Freddie Mac (freddiemac.com/loanlookup) — both have stronger modification programs than non-agency loans.',
+    advantage: 'Look up your loan servicer at fanniemae.com/loanlookup or freddiemac.com/loanlookup. Fannie and Freddie-backed loans have the Flex Modification program which can reduce payments by up to 20%.'
+  },
+  ARM: {
+    name: 'Adjustable-rate mortgage (ARM)',
+    programs: 'Rate Freeze / Modification to Fixed Rate, ARM HAMP, Refinance to Fixed Rate (if equity exists), Repayment Plan.',
+    servicer_dept: 'Loss Mitigation / ARM Adjustment Department',
+    key_phrase: 'I have an adjustable-rate mortgage and I am concerned about my upcoming rate adjustment. I am requesting evaluation for modification to a fixed rate and all available loss-mitigation options.',
+    credit_impact: 'Converting from ARM to fixed rate via modification is reported as "modified." This is significantly better than foreclosure and protects against future payment increases.',
+    advantage: 'Request your complete ARM adjustment schedule in writing from your servicer. Know your next adjustment date, your rate caps, and your maximum possible payment before any conversation about refinancing or modification.'
+  },
+  Other: {
+    name: 'Mortgage loan',
+    programs: 'Forbearance, Repayment Plan, Loan Modification, Payment Deferral — specifics depend on your loan type and investor.',
+    servicer_dept: 'Loss Mitigation Department',
+    key_phrase: 'I am requesting evaluation for all available hardship assistance and loss-mitigation options for my mortgage loan.',
+    credit_impact: 'Any modification or forbearance agreement is significantly less damaging to your credit than delinquency or foreclosure. Ask your servicer how modifications are reported.',
+    advantage: 'Ask your servicer: "Who owns my loan — is it Fannie Mae, Freddie Mac, FHA, VA, or is it portfolio?" The answer determines which specific programs apply.'
+  }
+};
+
 // ── Read data and set up page ─────────────────────────────────────────────────
 const score = parseInt(localStorage.getItem('mss_score') || '0');
-const risk  = (localStorage.getItem('mss_risk') || 'high').toLowerCase();
-const ts    = parseInt(localStorage.getItem('mss_ts') || '0');
+const risk  = (localStorage.getItem('mss_risk')  || 'high').toLowerCase();
+const ts    = parseInt(localStorage.getItem('mss_ts')   || '0');
+const state = localStorage.getItem('mss_state') || '';
+const loan  = localStorage.getItem('mss_loan')  || 'Other';
 const AGE   = Date.now() - ts;
 const STALE = AGE > 4 * 60 * 60 * 1000; // 4 hours
 
@@ -251,7 +346,7 @@ function downloadPDF() {
   const doc = new jsPDF({ unit: 'pt', format: 'letter' });
 
   const W = 612, M = 50, TW = W - M * 2;
-  const INK = [15, 14, 12], CREAM = [248, 246, 241], GREEN = [26, 92, 58],
+  const INK = [15, 14, 12], CREAM = [248, 246, 241], GREEN = [26, 92, 58], GREEN_L = [212, 234, 217],
         MUTED = [153, 150, 144], RULE = [224, 221, 213],
         C = content.color;
 
@@ -265,6 +360,10 @@ function downloadPDF() {
   doc.text('mortgagestressscore.com', M, 28);
   doc.setFont('helvetica','bold'); doc.setFontSize(11);
   doc.text('Your Premium Mortgage Action Plan', M, 50);
+
+  // Resolve state + loan info
+  const stateInfo = (state && STATES[state]) ? STATES[state] : {...STATE_DEFAULT, name: state || 'Your State'};
+  const loanInfo  = LOANS[loan] || LOANS['Other'];
 
   // Score circle
   doc.setFillColor(255,255,255); doc.circle(M + 36, 140, 36, 'F');
@@ -284,10 +383,19 @@ function downloadPDF() {
   // Rule
   doc.setDrawColor(...RULE); doc.setLineWidth(0.5); doc.line(M, 195, W - M, 195);
 
+  // State + Loan info on cover
+  doc.setFillColor(240,238,234); doc.rect(M, 200, TW, 38, 'F');
+  doc.setTextColor(...MUTED); doc.setFont('helvetica','bold'); doc.setFontSize(8);
+  doc.text('PERSONALIZED FOR', M + 12, 214);
+  doc.setTextColor(...INK); doc.setFont('helvetica','normal'); doc.setFontSize(10);
+  doc.text(stateInfo.name + '  ·  ' + loanInfo.name, M + 12, 228);
+  doc.setTextColor(...MUTED); doc.setFontSize(8);
+  doc.text('Foreclosure type: ' + stateInfo.type + '  ·  Typical timeline: ' + stateInfo.timeline, M + 12, 240);
+
   // What's inside
   doc.setTextColor(...MUTED); doc.setFont('helvetica','bold'); doc.setFontSize(8);
-  doc.text('WHAT\'S IN THIS PLAN', M, 218);
-  doc.setDrawColor(...C); doc.setLineWidth(1); doc.line(M, 222, M + 48, 222);
+  doc.text('WHAT\'S IN THIS PLAN', M, 258);
+  doc.setDrawColor(...C); doc.setLineWidth(1); doc.line(M, 262, M + 48, 262);
 
   const WHAT = [
     ['20 personalized action steps', 'Tailored to your specific risk level and situation'],
@@ -296,7 +404,7 @@ function downloadPDF() {
     ['State-specific resources',     'Programs, timelines, and contacts for your state'],
   ];
 
-  let wy = 240;
+  let wy = 278;
   WHAT.forEach(([title, desc]) => {
     doc.setFillColor(...C); doc.rect(M, wy - 8, 4, 16, 'F');
     doc.setTextColor(...INK); doc.setFont('helvetica','bold'); doc.setFontSize(11);
@@ -368,17 +476,32 @@ function downloadPDF() {
   // Phone script section
   if (y > 580) { doc.addPage(); doc.setFillColor(...CREAM); doc.rect(0,0,W,792,'F'); y = 50; }
   else { y += 16; }
+  // Loan-specific phone script
+  const fullScript = content.phone_script + '\n\nLoan-type phrase to use: \"' + loanInfo.key_phrase + '\"';
   doc.setFillColor(...C); doc.setTextColor(255,255,255);
   doc.setFont('helvetica','bold'); doc.setFontSize(9);
   doc.roundedRect(M, y, TW, 18, 3, 3, 'F');
-  doc.text('SERVICER PHONE SCRIPT — Read this word for word', M + 12, y + 12);
+  doc.text('SERVICER PHONE SCRIPT — ' + loanInfo.servicer_dept, M + 12, y + 12);
   y += 28;
-  doc.setFillColor(255,255,255); doc.rect(M, y, TW, 4, 'F');
-  doc.setFillColor(248, 246, 241); doc.rect(M, y + 4, TW, 200, 'F');
+  doc.setFillColor(248, 246, 241); doc.rect(M, y, TW, 220, 'F');
+  doc.setDrawColor(...RULE); doc.setLineWidth(0.3); doc.rect(M, y, TW, 220, 'S');
   doc.setTextColor(...INK); doc.setFont('helvetica','normal'); doc.setFontSize(9);
-  const scriptLines = doc.splitTextToSize(content.phone_script, TW - 24);
-  doc.text(scriptLines, M + 12, y + 22);
-  y += scriptLines.length * 13 + 40;
+  const scriptLines = doc.splitTextToSize(fullScript, TW - 24);
+  doc.text(scriptLines, M + 12, y + 14);
+  y += Math.min(scriptLines.length * 13 + 28, 230);
+
+  // Loan advantage box
+  if (y < 680) {
+    y += 10;
+    doc.setFillColor(...GREEN); doc.roundedRect(M, y, TW, 14, 2, 2, 'F');
+    doc.setTextColor(255,255,255); doc.setFont('helvetica','bold'); doc.setFontSize(8);
+    doc.text('KEY ADVANTAGE FOR ' + loanInfo.name.toUpperCase(), M + 8, y + 10);
+    y += 18;
+    doc.setFillColor(GREEN_L[0], GREEN_L[1], GREEN_L[2]); doc.rect(M, y, TW, 50, 'F');
+    doc.setTextColor(...INK); doc.setFont('helvetica','normal'); doc.setFontSize(8.5);
+    const advLines = doc.splitTextToSize(loanInfo.advantage, TW - 16);
+    doc.text(advLines, M + 8, y + 12);
+  }
 
   // ── PAGE 4: Hardship Letter Template ─────────────────────────────────────
   doc.addPage();
@@ -436,14 +559,14 @@ function downloadPDF() {
   doc.setFillColor(...CREAM); doc.rect(0, 0, W, 792, 'F');
   doc.setFillColor(...INK); doc.rect(0, 0, W, 40, 'F');
   doc.setTextColor(255,255,255); doc.setFont('helvetica','bold'); doc.setFontSize(10);
-  doc.text('Key Resources & Contacts', M, 26);
+  doc.text('Resources for ' + stateInfo.name + ' · ' + loanInfo.name, M, 26);
 
   const resources = [
+    [stateInfo.name + ' — Local HUD Counselor', stateInfo.hud, stateInfo.program],
     ['HUD Housing Counseling Hotline', '800-569-4287 | hud.gov/housingcounseling', 'Free HUD-approved counselors nationwide — independent advice, no fees'],
+    [stateInfo.name + ' Foreclosure Type', stateInfo.type + ' · ' + stateInfo.timeline, stateInfo.key_law],
     ['CFPB Mortgage Help', 'consumerfinance.gov/housing', 'File servicer complaints, access mortgage guides, understand your rights'],
     ['HOPE NOW Alliance', '888-995-4673 | hopenow.com', '24/7 free counseling and servicer connection for homeowners in crisis'],
-    ['Legal Aid (free attorneys)', '211 or lawhelp.org', 'Free legal representation for income-eligible homeowners facing foreclosure'],
-    ['State programs (your state)', 'mortgagestressscore.com/guides.html', 'State-specific HAF status, mediation programs, and local resources'],
     ['CFPB Complaint Portal', 'consumerfinance.gov/complaint', 'Submit formal complaints against servicers — creates a legal record'],
   ];
 
