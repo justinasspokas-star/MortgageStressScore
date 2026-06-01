@@ -771,3 +771,55 @@ hr { border: none; border-top: 1px solid var(--rule); }
 #action-plan {
   scroll-margin-top: 72px;
 }
+
+/* ── Inline premium button in score result ─── */
+.result-premium-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex: 1;
+}
+.result-premium-tag {
+  font-size: 10px;
+  font-weight: 500;
+  color: var(--green);
+  letter-spacing: .03em;
+  padding-left: 2px;
+}
+.result-premium-inline {
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 500;
+  padding: 11px 16px;
+  border-radius: 6px;
+  background: var(--paper);
+  color: var(--green);
+  border: 1.5px solid var(--green);
+  cursor: pointer;
+  transition: background .15s, color .15s;
+  white-space: nowrap;
+  text-align: center;
+}
+.result-premium-inline:hover {
+  background: var(--green);
+  color: var(--paper);
+}
+.result-see-options {
+  margin-top: 8px;
+}
+.btn-secondary-sm {
+  font-size: 12px;
+  color: var(--muted);
+  text-decoration: none;
+  border: none;
+  background: none;
+  cursor: pointer;
+  padding: 0;
+}
+.btn-secondary-sm:hover { color: var(--ink); }
+
+@media (max-width: 760px) {
+  .result-cta-row { flex-direction: column; gap: 8px; }
+  .result-premium-wrap { width: 100%; }
+  .result-premium-inline { width: 100%; padding: 13px; font-size: 15px; }
+}

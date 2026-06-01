@@ -153,7 +153,15 @@
         <button class="btn-primary result-checklist-btn" id="result-checklist-btn" onclick="scrollToActionPlan()" style="display:none">
           Get my free action plan ↓
         </button>
-        <a href="#options" class="btn-secondary">See all options</a>
+        <div class="result-premium-wrap" id="result-premium-wrap" style="display:none">
+          <span class="result-premium-tag" id="result-premium-tag">⭐ Recommended for your score</span>
+          <button class="result-premium-inline" id="result-premium-inline" onclick="scrollToPremiumBox()">
+            Get my full plan — $9 →
+          </button>
+        </div>
+      </div>
+      <div class="result-see-options" id="result-see-options" style="display:none">
+        <a href="#options" class="btn-secondary-sm">See all options</a>
       </div>
     </div>
   </div>
@@ -597,6 +605,21 @@ function showActionPlan() {
   const btn = document.getElementById('result-checklist-btn');
   if (btn) btn.style.display = 'inline-flex';
 
+  // Show premium wrap and see-options link in result area (score >= 35)
+  const premWrap = document.getElementById('result-premium-wrap');
+  const seeOpts  = document.getElementById('result-see-options');
+  if (premWrap && score >= 35) {
+    premWrap.style.display = 'flex';
+    // Update tag by score range
+    const tag = document.getElementById('result-premium-tag');
+    if (tag) {
+      if (score >= 65)      tag.textContent = '🔴 Urgent — recommended for your score';
+      else if (score >= 45) tag.textContent = '⚠️ Recommended for your score';
+      else                  tag.textContent = '⭐ Suggested for your score';
+    }
+  }
+  if (seeOpts) seeOpts.style.display = 'block';
+
   // Save score to localStorage for premium PDF
   try {
     localStorage.setItem('mss_score', score);
@@ -635,6 +658,17 @@ function showActionPlan() {
   }
 }
 
+
+function scrollToPremiumBox() {
+  const pb = document.getElementById('premium-box');
+  if (!pb) return;
+  setTimeout(function() {
+    const navEl = document.querySelector('.site-nav');
+    const navH  = navEl ? navEl.offsetHeight + 12 : 72;
+    const top   = pb.getBoundingClientRect().top + window.pageYOffset - navH;
+    window.scrollTo({ top: Math.max(0, top), behavior: 'smooth' });
+  }, 80);
+}
 
 function scrollToActionPlan() {
   const ap = document.getElementById('action-plan');
