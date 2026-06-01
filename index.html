@@ -150,9 +150,9 @@
     <div class="result-actions">
       <p><strong>Next step:</strong> use this score as a starting point. If you are behind or close to missing a payment, contact your mortgage servicer and consider a HUD-approved housing counselor.</p>
       <div class="result-cta-grid" id="result-cta-grid" style="display:none">
-        <button class="btn-primary result-checklist-btn" id="result-checklist-btn" onclick="scrollToActionPlan()">
+        <a href="#action-plan" class="btn-primary result-checklist-btn" id="result-checklist-btn">
           Get my free action plan ↓
-        </button>
+        </a>
         <div class="result-premium-wrap" id="result-premium-wrap" style="display:none">
           <span class="result-premium-tag" id="result-premium-tag">⭐ Recommended for your score</span>
           <button class="result-premium-inline" id="result-premium-inline" onclick="scrollToPremiumBox()">
@@ -671,24 +671,7 @@ function scrollToPremiumBox() {
   }, 150);
 }
 
-function scrollToActionPlan() {
-  var ap = document.getElementById('action-plan');
-  if (!ap) return;
-  ap.style.display = 'block';
-  setTimeout(function() {
-    // offsetTop = distance from top of document (not affected by scroll or overflow)
-    var el = ap;
-    var offsetTop = 0;
-    while (el) { offsetTop += el.offsetTop; el = el.offsetParent; }
-    var navH = 68;
-    var target = Math.max(0, offsetTop - navH);
-    // Works in ALL browsers including iOS Safari
-    document.documentElement.scrollTop = target;
-    document.body.scrollTop = target;
-    // Also try smooth as enhancement
-    try { window.scrollTo({ top: target, behavior: 'smooth' }); } catch(e) {}
-  }, 200);
-}
+// scrollToActionPlan replaced by native anchor href='#action-plan'
 
 function openPremiumCheckout() {
   const state = document.getElementById('prem-state').value;
