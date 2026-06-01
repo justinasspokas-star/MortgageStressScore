@@ -97,8 +97,8 @@
     <div class="field">
       <label for="f-equity">Home equity estimate</label>
       <select id="f-equity">
-        <option value="0">I'm not sure</option>
-        <option value="0">None or underwater</option>
+        <option value="1">I'm not sure</option>
+          <option value="0">None or underwater</option>
         <option value="1">Under 10%</option>
         <option value="2" selected>10–25%</option>
         <option value="3">More than 25%</option>
@@ -107,7 +107,7 @@
     <div class="field">
       <label for="f-loan">Loan type</label>
       <select id="f-loan">
-        <option value="0">I'm not sure</option>
+        <option value="1">I'm not sure</option>
         <option value="0">ARM or interest-only</option>
         <option value="1" selected>Fixed 30-year</option>
         <option value="2">Fixed 15-year</option>
@@ -430,15 +430,18 @@ function calcScore() {
 
   if (!payment || !income) { alert('Please enter your monthly payment and income to calculate your score.'); return; }
 
-  const ratio   = Math.min(payment / income, 1);
-  const burden  = Math.round(ratio * 45);
-  const incomeS = Math.round(Math.max(0, (1 - ratio * 0.8) * 20));
-  const equityS = Math.round((3 - equity) * 9);
-  const loanS   = Math.round((3 - loan) * 7);
-  const missedS = Math.round(missed * 11);
-  const urgencyS= Math.round((2 - urgency) * 9);
+  const ratio    = Math.min(payment / income, 1);
+  const burden   = Math.round(ratio * 45);          // max 45 — payment pressure
+  const incomeR  = Math.round(ratio * 0.8 * 12);   // max 10 — income risk (high ratio = less buffer)
+  const incomeS  = Math.round(Math.max(0, (1 - ratio * 0.8) * 20)); // display only (inverse — stability)
+  const equityS  = Math.round((3 - equity) * 9);   // max 27
+  const loanS    = Math.round((3 - loan) * 7);     // max 21
+  const missedS  = Math.round(missed * 11);         // max 33
+  const urgencyS = Math.round((2 - urgency) * 9);  // max 18
 
-  const raw = burden + missedS + equityS + loanS + urgencyS;
+  // raw max: 45+10+27+21+33+18 = 154 → capped at 100
+  // incomeS is shown in breakdown display but incomeR is what counts in score
+  const raw = burden + incomeR + missedS + equityS + loanS + urgencyS;
   const score = Math.min(100, Math.max(0, Math.round(raw)));
 
   let color, verdict, desc;
