@@ -766,3 +766,8 @@ hr { border: none; border-top: 1px solid var(--rule); }
   outline: none;
   border-color: var(--green);
 }
+
+/* ── Scroll offset for sticky nav ─── */
+#action-plan {
+  scroll-margin-top: 72px;
+}

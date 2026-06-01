@@ -640,21 +640,14 @@ function scrollToActionPlan() {
   const ap = document.getElementById('action-plan');
   if (!ap) return;
 
-  // Get the element's position relative to the page
-  const rect   = ap.getBoundingClientRect();
-  const offset = window.pageYOffset || document.documentElement.scrollTop;
-  const top    = rect.top + offset - 16; // 16px breathing room at top
-
-  // Use smooth scroll — works on modern mobile and desktop
-  window.scrollTo({ top: top, behavior: 'smooth' });
-
-  // Fallback for older iOS Safari that ignores window.scrollTo behavior
+  // Wait for browser reflow after display:none → display:block
+  // then scroll accounting for sticky nav height
   setTimeout(function() {
-    const newRect = ap.getBoundingClientRect();
-    if (Math.abs(newRect.top) > 60) {
-      ap.scrollIntoView({ block: 'start' });
-    }
-  }, 600);
+    const navEl = document.querySelector('.site-nav');
+    const navH  = navEl ? navEl.offsetHeight + 12 : 72;
+    const apTop = ap.getBoundingClientRect().top + window.pageYOffset - navH;
+    window.scrollTo({ top: Math.max(0, apTop), behavior: 'smooth' });
+  }, 120);
 }
 
 function openPremiumCheckout() {
