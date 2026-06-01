@@ -184,8 +184,8 @@
   </div>
   <div class="premium-box" id="premium-box" style="display:none">
     <div class="premium-badge">Premium — $9</div>
-    <h3 class="premium-title">Get your complete 20-step action plan</h3>
-    <p class="premium-sub">Tell us your state and loan type and we personalize it for your exact situation:</p>
+    <h3 class="premium-title" id="premium-dynamic-title">Get your complete 20-step action plan</h3>
+    <p class="premium-sub" id="premium-dynamic-sub">Tell us your state and loan type and we personalize it for your exact situation:</p>
     <ul class="premium-list">
       <li>20 steps specific to your risk level and loan type</li>
       <li>Word-for-word script to call your servicer</li>
@@ -604,12 +604,34 @@ function showActionPlan() {
     localStorage.setItem('mss_ts',    Date.now());
   } catch(e) {}
 
-  // Show premium box only for moderate and high risk (score >= 35)
+  // Show premium box with differentiated message by score range
   const pb = document.getElementById('premium-box');
   if (pb && score >= 35) {
     pb.style.display = 'block';
     pb.dataset.score = score;
     pb.dataset.risk  = level;
+
+    // Differentiated title + CTA by score range
+    const ptitle = document.getElementById('premium-dynamic-title');
+    const psub   = document.getElementById('premium-dynamic-sub');
+    const pbtn   = document.getElementById('premium-pay-btn');
+
+    if (score >= 65) {
+      // HIGH — urgency
+      if (ptitle) ptitle.textContent = 'Get your urgent 20-step action plan';
+      if (psub)   psub.textContent   = 'Your score is high. This plan gives you the exact steps, scripts, and resources for your state and loan type — personalized for your situation:';
+      if (pbtn)   pbtn.textContent   = 'Get my urgent plan — $9 →';
+    } else if (score >= 45) {
+      // MODERATE high — escalation warning
+      if (ptitle) ptitle.textContent = 'Get your action plan before this escalates';
+      if (psub)   psub.textContent   = 'Your score shows real pressure. Act now while you still have all your options open — personalized for your state and loan type:';
+      if (pbtn)   pbtn.textContent   = 'Get my action plan — $9 →';
+    } else {
+      // MODERATE low (35–44) — prevention
+      if (ptitle) ptitle.textContent = 'Build your mortgage protection plan';
+      if (psub)   psub.textContent   = 'Your score is in the moderate range. A protection plan keeps you prepared — personalized for your state and loan type:';
+      if (pbtn)   pbtn.textContent   = 'Get my protection plan — $9 →';
+    }
   }
 }
 
