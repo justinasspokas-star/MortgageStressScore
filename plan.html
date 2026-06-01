@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Your Mortgage Action Plan — MortgageStressScore</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css?v=9">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-TJTKS00LW6"></script>
+<script>
+  window.dataLayer=window.dataLayer||[];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js',new Date()); gtag('config','G-TJTKS00LW6');
+</script>
+<style>
+  .plan-wrap{max-width:560px;margin:0 auto;padding:60px 24px 80px;text-align:center}
+  .plan-logo{margin-bottom:40px}
+  .plan-logo img{height:36px}
+  .spinner{width:48px;height:48px;border:3px solid #e0ddd5;border-top-color:#0f0e0c;border-radius:50%;animation:spin 1s linear infinite;margin:0 auto 24px}
+  @keyframes spin{to{transform:rotate(360deg)}}
+  .plan-title{font-size:22px;font-weight:500;color:#0f0e0c;margin-bottom:8px}
+  .plan-sub{font-size:14px;color:#999690;line-height:1.6;margin-bottom:32px}
+  .plan-score-card{background:#f8f6f1;border:0.5px solid #e0ddd5;border-radius:10px;padding:20px;margin-bottom:28px;text-align:left}
+  .plan-score-row{display:flex;align-items:center;gap:16px}
+  .plan-circle{width:60px;height:60px;border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;flex-shrink:0}
+  .plan-circle.low{border:2px solid #1a5c3a}
+  .plan-circle.moderate{border:2px solid #92510a}
+  .plan-circle.high{border:2px solid #8b1f1f}
+  .plan-circle-num{font-size:22px;font-weight:500;line-height:1}
+  .plan-circle-num.low{color:#1a5c3a}
+  .plan-circle-num.moderate{color:#92510a}
+  .plan-circle-num.high{color:#8b1f1f}
+  .plan-circle-lbl{font-size:9px;color:#999690}
+  .plan-verdict{font-size:14px;font-weight:500;color:#0f0e0c;margin-bottom:4px}
+  .plan-verdict-sub{font-size:12px;color:#999690}
+  .plan-btn{display:block;width:100%;padding:16px;background:#0f0e0c;color:#f8f6f1;border:none;border-radius:6px;font-size:16px;font-weight:500;cursor:pointer;margin-bottom:12px;font-family:inherit;transition:opacity .15s}
+  .plan-btn:hover{opacity:.85}
+  .plan-btn:disabled{opacity:.5;cursor:default}
+  .plan-fine{font-size:12px;color:#999690}
+  .plan-done{display:none}
+  .plan-done-icon{font-size:40px;margin-bottom:12px}
+  .plan-done-title{font-size:20px;font-weight:500;color:#0f0e0c;margin-bottom:8px}
+  .plan-done-sub{font-size:13px;color:#999690;line-height:1.6;margin-bottom:24px}
+  .plan-back{font-size:13px;color:#999690;text-decoration:none}
+  .plan-back:hover{color:#0f0e0c}
+  .plan-error{display:none;background:#f9e8e8;border-radius:8px;padding:16px;text-align:left;margin-bottom:20px}
+  .plan-error p{font-size:13px;color:#8b1f1f;margin:0}
+</style>
+</head>
+<body>
+<div class="page-wrapper">
+<div class="plan-wrap">
+
+  <div class="plan-logo">
+    <a href="index.html">
+      <picture>
+        <source srcset="logo.webp?v=9" type="image/webp">
+        <img src="logo.png?v=9" alt="MortgageStressScore.com" height="36">
+      </picture>
+    </a>
+  </div>
+
+  <div id="plan-loading">
+    <div class="spinner"></div>
+    <h1 class="plan-title">Preparing your action plan…</h1>
+    <p class="plan-sub">Reading your score and building your personalized PDF.</p>
+  </div>
+
+  <div id="plan-ready" style="display:none">
+    <div class="plan-error" id="plan-error">
+      <p id="plan-error-msg">Your score data was not found.</p>
+    </div>
+
+    <div class="plan-score-card" id="plan-score-card">
+      <div class="plan-score-row">
+        <div class="plan-circle" id="plan-circle">
+          <div class="plan-circle-num" id="plan-circle-num">—</div>
+          <div class="plan-circle-lbl">/ 100</div>
+        </div>
+        <div>
+          <div class="plan-verdict" id="plan-verdict">Your personalized plan is ready</div>
+          <div class="plan-verdict-sub" id="plan-verdict-sub">20 steps tailored to your situation</div>
+        </div>
+      </div>
+    </div>
+
+    <h1 class="plan-title">Your Premium Action Plan is ready</h1>
+    <p class="plan-sub">Click below to download your personalized PDF. It includes 20 steps, a phone script for your servicer, a hardship letter template, and resources for your state.</p>
+
+    <button class="plan-btn" id="download-btn" onclick="downloadPDF()">
+      Download my action plan PDF →
+    </button>
+    <p class="plan-fine">If the download does not start, <a href="#" onclick="downloadPDF(); return false;" style="color:#0f0e0c">click here to try again</a>.</p>
+  </div>
+
+  <div class="plan-done" id="plan-done">
+    <div class="plan-done-icon">✓</div>
+    <div class="plan-done-title">Your plan has been downloaded</div>
+    <div class="plan-done-sub">Check your Downloads folder for "mortgage-action-plan.pdf". Save it somewhere accessible — you may need it when calling your servicer or meeting with a HUD counselor.</div>
+    <a href="index.html" class="plan-back">← Back to MortgageStressScore</a>
+  </div>
+
+</div>
+</div>
+
+<script>
+// ── Plan content by risk level ────────────────────────────────────────────────
+const CONTENT = {
+  low: {
+    verdict:  'Low risk — build your protection now',
+    sub:      'Good foundation — use this plan to stay protected',
+    color:    [26, 92, 58],
+    steps: [
+      'Calculate your housing-to-income ratio today: total housing cost ÷ gross income. If above 31%, monitor monthly.',
+      'Build a mortgage emergency fund: save 3 months of full PITI payments in a dedicated account.',
+      'Set up automatic payment through your servicer — prevents accidental missed payments and some servicers offer rate discounts.',
+      'Review your homeowners insurance annually. Inadequate coverage can create a financial crisis separate from your mortgage.',
+      'Check your escrow account statement yearly for shortages before they become payment surprises.',
+      'Know your servicer\'s loss-mitigation phone number: it\'s on your monthly statement. Save it in your phone now.',
+      'Review your ARM adjustment schedule if applicable — know your next reset date and maximum possible payment.',
+      'Request your annual mortgage statement and verify the balance, interest rate, and escrow balance are correct.',
+      'If your credit score drops below 680, investigate — it can affect your refinance options later.',
+      'Understand your loan type: FHA, VA, USDA, and conventional loans have different hardship programs.',
+      'Run the 20% income drop test: if your income fell 20%, would your housing ratio exceed 45%? Plan accordingly.',
+      'Know your home equity: current market value minus your loan balance. This affects your options if needed.',
+      'Review your state\'s property tax assessment appeals process — most homeowners never contest overassessments.',
+      'Sign up for CFPB mortgage alerts at consumerfinance.gov — free notifications about servicer issues.',
+      'Identify your nearest HUD-approved housing counselor now, before you need one: hud.gov/housingcounseling.',
+      'Create a document folder with: loan documents, insurance policy, property tax bills, servicer contact info.',
+      'Review your budget for expenses that could be reduced quickly if needed — identify your top 3 flexible categories.',
+      'Understand your reinstatement rights: in most states you can bring a delinquent loan current before the sale.',
+      'Learn the difference between forbearance, repayment plan, deferral, and modification — each serves a different scenario.',
+      'Schedule an annual mortgage review: pull your credit, review your rate vs current market, check equity position.'
+    ],
+    phone_script: 'I am calling to review my account and understand what hardship programs are available for my loan type. I am currently up to date but want to understand my options proactively. Can you tell me what programs apply to [LOAN TYPE] loans?',
+    letter_opening: 'I am writing to proactively review my mortgage account and understand what assistance options may be available. While I am currently meeting my payment obligations, I want to ensure I am fully informed about the programs available to me as a [LOAN TYPE] borrower.'
+  },
+  moderate: {
+    verdict:  'Moderate risk — act before it gets urgent',
+    sub:      'You have time — use it strategically',
+    color:    [146, 81, 10],
+    steps: [
+      'Call your mortgage servicer this week. Ask specifically: "What hardship assistance options are available for my loan type before I miss a payment?" Document the date, representative name, and what was discussed.',
+      'Contact a free HUD-approved housing counselor for an independent review: hud.gov/housingcounseling or call 800-569-4287. This is free and takes 60–90 minutes.',
+      'Gather these documents now: 2 months pay stubs, 2 months bank statements, most recent tax return, and a list of all monthly expenses. You will need these for any modification application.',
+      'Calculate your front-end ratio: total housing cost ÷ gross monthly income. If above 38%, you may qualify for loss-mitigation programs even while current.',
+      'Write your hardship letter this week using the template on page 4 of this PDF. Having it ready saves critical time if your situation becomes urgent.',
+      'Ask your servicer about proactive repayment plan options if you have already missed a payment or are about to.',
+      'Review your loan type and research its specific modification programs: FHA-HAMP, VA HAMP, USDA Rural Development, or conventional HAMP depending on your loan.',
+      'Check if your state has an active HAF or mortgage assistance program. Call 211 or visit your state housing finance agency website.',
+      'Do not stop paying your mortgage without understanding the legal consequences in your state — get HUD counseling first.',
+      'If you have an ARM, request your current interest rate cap schedule and next adjustment date from your servicer in writing.',
+      'Review your monthly expenses with the goal of freeing up $200–400/month before you need it — subscriptions, dining, discretionary spending.',
+      'If you have home equity, understand your options: a HELOC, cash-out refinance, or sale with equity preservation may be alternatives.',
+      'Get your free annual credit report at annualcreditreport.com — late payments can be disputed if reported in error.',
+      'Ask your servicer\'s loss-mitigation department (not regular customer service) specifically about: forbearance, repayment plan, rate reduction modification, and term extension.',
+      'Document every servicer conversation: date, time, representative name, call reference number, and what was said.',
+      'If your servicer is not responding or giving you the runaround, file a complaint with the CFPB at consumerfinance.gov/complaint.',
+      'Review your homeowner\'s insurance for coverage gaps — an unexpected major repair during mortgage stress can create a compounding crisis.',
+      'Understand your state\'s foreclosure timeline — judicial states like NY and NJ give you years; non-judicial states like TX and GA move in weeks.',
+      'If you are behind on property taxes, address this separately and urgently — tax foreclosure moves faster than mortgage foreclosure in most states.',
+      'Create a 90-day financial plan: what changes can you make in 3 months to reduce your housing ratio by 5–10%?'
+    ],
+    phone_script: 'Good morning. My name is [YOUR NAME] and my loan account number is [ACCOUNT NUMBER]. I am experiencing a financial hardship and would like to be evaluated for hardship assistance options before I miss a payment. I would like to speak with someone in the loss-mitigation department. My hardship is [BRIEF DESCRIPTION — income reduction / job loss / medical expenses / other]. What programs are available for my [LOAN TYPE] loan?',
+    letter_opening: 'I am writing to request a review of my mortgage account for available hardship assistance options. I have been a responsible borrower and am committed to staying current, but I am experiencing a financial hardship that is making it increasingly difficult to maintain my current payment. I am requesting an evaluation for all available loss-mitigation options including forbearance, repayment plan, and loan modification.'
+  },
+  high: {
+    verdict:  'High risk — contact HUD counselor today',
+    sub:      'Time-sensitive: the sooner you act, the more options you have',
+    color:    [139, 31, 31],
+    steps: [
+      'Call your mortgage servicer TODAY using the script on page 3. Do not wait. Ask for the loss-mitigation department specifically — not regular customer service.',
+      'Contact a free HUD-approved housing counselor TODAY or tomorrow: hud.gov/housingcounseling or call 800-569-4287. They can negotiate on your behalf and know your servicer\'s specific processes.',
+      'Know your state\'s foreclosure timeline. If you are in a non-judicial state (Texas, Georgia, California, Arizona), the process can move in as few as 30–90 days from the first notice. In judicial states (New York, New Jersey, Florida, Illinois), you typically have 1–4+ years.',
+      'Do NOT ignore any legal notices — a Notice of Default, Notice of Trustee Sale, or Foreclosure Complaint must be responded to. Missing the response deadline can eliminate your legal options.',
+      'Submit a complete loss-mitigation application in writing. Your servicer must evaluate you for all available programs before proceeding with foreclosure under federal regulations (12 CFR 1024.41).',
+      'Gather immediately: 2 months pay stubs, 2 months bank statements, most recent tax return, all monthly expense documentation, and any documentation of your hardship (layoff notice, medical bills, etc.).',
+      'Send your hardship letter via certified mail with return receipt. Keep copies of everything. Date all documents.',
+      'Under federal law (CFPB\'s dual tracking prohibition), your servicer cannot advance a foreclosure while reviewing a complete loss-mitigation application. Get your application in immediately.',
+      'Your loan type determines specific programs available: FHA loans have FHA-HAMP and partial claim options. VA loans have VA HAMP. USDA loans have Rural Development modifications. Ask specifically about the program for your loan type.',
+      'If your servicer refuses to discuss options or advances foreclosure while you have a pending application, file a CFPB complaint immediately: consumerfinance.gov/complaint. This creates a legal record.',
+      'Ask your state\'s housing finance agency about emergency assistance programs — some states have programs that cover arrears up to $50,000–100,000.',
+      'Contact legal aid in your county for free foreclosure defense. Legal aid attorneys can file court responses, challenge servicer violations, and buy significant time.',
+      'If you have received a foreclosure lawsuit, you have a specific number of days to file a written Answer with the court. Missing this deadline gives the lender an automatic judgment. Get legal help immediately.',
+      'Understand the difference between reinstatement (paying all arrears to bring loan current) and payoff (paying full loan balance). Reinstatement rights exist in most states until a specific date before the sale.',
+      'Do not sign any documents transferring ownership of your property without independent legal review. Deed theft and rescue scams specifically target high-risk homeowners.',
+      'If you have equity in your home and foreclosure seems unavoidable, a short sale or deed-in-lieu of foreclosure with equity negotiation may preserve more of your financial position than foreclosure.',
+      'Continue making partial payments if you cannot make the full payment — some servicers will accept partial payments, and it demonstrates good faith. Ask your servicer their policy before sending.',
+      'Document every contact with your servicer: date, time, representative name, call reference number, and exact content of conversation. This documentation is critical if legal action becomes necessary.',
+      'Review your credit report for errors or unauthorized entries. Dispute any inaccurate information — every point matters for future refinancing options after resolution.',
+      'Regardless of the outcome, develop a 6-month housing stability plan: if you keep the home, your budget going forward; if you must sell or transition, your next housing step. Having the plan reduces panic and enables better decisions.'
+    ],
+    phone_script: 'Good morning. My name is [YOUR NAME] and my loan account number is [ACCOUNT NUMBER]. I need to speak with someone in the loss-mitigation department. I have missed [NUMBER] payment(s) and I am experiencing a financial hardship due to [REASON]. I understand I may be eligible for loss-mitigation options and I would like to submit a complete application. What documents do I need to provide? I also want to confirm: once I submit a complete application, can you confirm that foreclosure activity will be paused during review under CFPB regulation 12 CFR 1024.41?',
+    letter_opening: 'I am writing to formally request an immediate review of my mortgage account for all available loss-mitigation options. I am experiencing a significant financial hardship due to [REASON] and have been unable to maintain my mortgage payments as a result. I am committed to resolving this situation and wish to explore all available alternatives to foreclosure, including but not limited to: forbearance, repayment plan, loan modification, rate reduction, term extension, and partial claim.'
+  }
+};
+
+// ── Read data and set up page ─────────────────────────────────────────────────
+const score = parseInt(localStorage.getItem('mss_score') || '0');
+const risk  = (localStorage.getItem('mss_risk') || 'high').toLowerCase();
+const ts    = parseInt(localStorage.getItem('mss_ts') || '0');
+const AGE   = Date.now() - ts;
+const STALE = AGE > 4 * 60 * 60 * 1000; // 4 hours
+
+window.addEventListener('DOMContentLoaded', function() {
+  document.getElementById('plan-loading').style.display = 'none';
+  document.getElementById('plan-ready').style.display  = 'block';
+
+  if (!score || STALE) {
+    const errEl = document.getElementById('plan-error');
+    const msgEl = document.getElementById('plan-error-msg');
+    errEl.style.display = 'block';
+    msgEl.textContent = score && STALE
+      ? 'Your session has expired. Please go back and recalculate your score, then return here.'
+      : 'Score data not found. Please go back, calculate your score, and click the premium plan button again.';
+    document.getElementById('download-btn').disabled = true;
+    return;
+  }
+
+  const level   = ['low','moderate','high'].includes(risk) ? risk : 'high';
+  const content = CONTENT[level];
+
+  // Update score card
+  const circle = document.getElementById('plan-circle');
+  const numEl  = document.getElementById('plan-circle-num');
+  circle.className = 'plan-circle ' + level;
+  numEl.className  = 'plan-circle-num ' + level;
+  numEl.textContent = score;
+  document.getElementById('plan-verdict').textContent     = content.verdict;
+  document.getElementById('plan-verdict-sub').textContent = content.sub;
+
+  // Track purchase view
+  if (typeof gtag === 'function') {
+    gtag('event', 'premium_plan_page_view', { score: score, risk_level: level });
+  }
+});
+
+// ── PDF generation ────────────────────────────────────────────────────────────
+function downloadPDF() {
+  const btn   = document.getElementById('download-btn');
+  btn.disabled = true;
+  btn.textContent = 'Generating your PDF…';
+
+  const level   = ['low','moderate','high'].includes(risk) ? risk : 'high';
+  const content = CONTENT[level];
+  const { jsPDF } = window.jspdf;
+  const doc = new jsPDF({ unit: 'pt', format: 'letter' });
+
+  const W = 612, M = 50, TW = W - M * 2;
+  const INK = [15, 14, 12], CREAM = [248, 246, 241], GREEN = [26, 92, 58],
+        MUTED = [153, 150, 144], RULE = [224, 221, 213],
+        C = content.color;
+
+  // ── PAGE 1: Cover ────────────────────────────────────────────────────────
+  doc.setFillColor(...CREAM); doc.rect(0, 0, W, 792, 'F');
+
+  // Header bar
+  doc.setFillColor(...INK); doc.rect(0, 0, W, 72, 'F');
+  doc.setTextColor(255,255,255);
+  doc.setFont('helvetica','normal'); doc.setFontSize(9);
+  doc.text('mortgagestressscore.com', M, 28);
+  doc.setFont('helvetica','bold'); doc.setFontSize(11);
+  doc.text('Your Premium Mortgage Action Plan', M, 50);
+
+  // Score circle
+  doc.setFillColor(255,255,255); doc.circle(M + 36, 140, 36, 'F');
+  doc.setDrawColor(...C); doc.setLineWidth(2.5); doc.circle(M + 36, 140, 36, 'S');
+  doc.setTextColor(...C); doc.setFont('helvetica','bold'); doc.setFontSize(26);
+  doc.text(String(score), M + 36, 147, { align: 'center' });
+  doc.setFont('helvetica','normal'); doc.setFontSize(9);
+  doc.setTextColor(...MUTED); doc.text('/ 100', M + 36, 163, { align: 'center' });
+
+  // Verdict
+  doc.setTextColor(...INK); doc.setFont('helvetica','bold'); doc.setFontSize(18);
+  doc.text(content.verdict, M + 90, 132);
+  doc.setFont('helvetica','normal'); doc.setFontSize(11);
+  doc.setTextColor(...MUTED);
+  doc.text(content.sub, M + 90, 150);
+
+  // Rule
+  doc.setDrawColor(...RULE); doc.setLineWidth(0.5); doc.line(M, 195, W - M, 195);
+
+  // What's inside
+  doc.setTextColor(...MUTED); doc.setFont('helvetica','bold'); doc.setFontSize(8);
+  doc.text('WHAT\'S IN THIS PLAN', M, 218);
+  doc.setDrawColor(...C); doc.setLineWidth(1); doc.line(M, 222, M + 48, 222);
+
+  const WHAT = [
+    ['20 personalized action steps', 'Tailored to your specific risk level and situation'],
+    ['Servicer phone script',        'Word-for-word language to use when calling your lender'],
+    ['Hardship letter template',     'Pre-structured letter for your loan modification application'],
+    ['State-specific resources',     'Programs, timelines, and contacts for your state'],
+  ];
+
+  let wy = 240;
+  WHAT.forEach(([title, desc]) => {
+    doc.setFillColor(...C); doc.rect(M, wy - 8, 4, 16, 'F');
+    doc.setTextColor(...INK); doc.setFont('helvetica','bold'); doc.setFontSize(11);
+    doc.text(title, M + 14, wy + 2);
+    doc.setFont('helvetica','normal'); doc.setFontSize(9); doc.setTextColor(...MUTED);
+    doc.text(desc, M + 14, wy + 15);
+    wy += 40;
+  });
+
+  // Disclaimer
+  doc.setFillColor(240,238,234); doc.rect(M, 460, TW, 52, 'F');
+  doc.setTextColor(...MUTED); doc.setFont('helvetica','normal'); doc.setFontSize(8);
+  const disc = 'Educational use only. This is not legal, financial, or foreclosure-prevention advice. If you are facing ' +
+               'foreclosure, contact a HUD-approved housing counselor (hud.gov/housingcounseling) and consider legal counsel.';
+  const dLines = doc.splitTextToSize(disc, TW - 24);
+  doc.text(dLines, M + 12, 476);
+
+  // Generated date
+  doc.setTextColor(...MUTED); doc.setFontSize(8);
+  doc.text('Generated: ' + new Date().toLocaleDateString('en-US', {year:'numeric',month:'long',day:'numeric'}),
+           M, 540);
+  doc.text('mortgagestressscore.com', W - M, 540, { align: 'right' });
+
+  // ── PAGE 2: Steps 1–10 ───────────────────────────────────────────────────
+  doc.addPage();
+  doc.setFillColor(...CREAM); doc.rect(0, 0, W, 792, 'F');
+  doc.setFillColor(...INK); doc.rect(0, 0, W, 40, 'F');
+  doc.setTextColor(255,255,255); doc.setFont('helvetica','bold'); doc.setFontSize(10);
+  doc.text('Your 20-Step Action Plan — Steps 1–10', M, 26);
+
+  let y = 68;
+  content.steps.slice(0, 10).forEach((step, i) => {
+    if (y > 720) { doc.addPage(); doc.setFillColor(...CREAM); doc.rect(0,0,W,792,'F'); y = 50; }
+    // Step number badge
+    doc.setFillColor(...C); doc.roundedRect(M, y - 11, 24, 16, 3, 3, 'F');
+    doc.setTextColor(255,255,255); doc.setFont('helvetica','bold'); doc.setFontSize(9);
+    doc.text(String(i + 1).padStart(2,'0'), M + 12, y, { align: 'center' });
+    // Step text
+    doc.setTextColor(...INK); doc.setFont('helvetica','normal'); doc.setFontSize(9.5);
+    const lines = doc.splitTextToSize(step, TW - 36);
+    doc.text(lines, M + 34, y);
+    y += lines.length * 14 + 10;
+    // Rule
+    doc.setDrawColor(...RULE); doc.setLineWidth(0.3); doc.line(M + 34, y - 5, W - M, y - 5);
+    y += 4;
+  });
+
+  // ── PAGE 3: Steps 11–20 + Phone Script ───────────────────────────────────
+  doc.addPage();
+  doc.setFillColor(...CREAM); doc.rect(0, 0, W, 792, 'F');
+  doc.setFillColor(...INK); doc.rect(0, 0, W, 40, 'F');
+  doc.setTextColor(255,255,255); doc.setFont('helvetica','bold'); doc.setFontSize(10);
+  doc.text('Your 20-Step Action Plan — Steps 11–20', M, 26);
+
+  y = 68;
+  content.steps.slice(10, 20).forEach((step, i) => {
+    if (y > 560) { doc.addPage(); doc.setFillColor(...CREAM); doc.rect(0,0,W,792,'F'); y = 50; }
+    doc.setFillColor(...C); doc.roundedRect(M, y - 11, 24, 16, 3, 3, 'F');
+    doc.setTextColor(255,255,255); doc.setFont('helvetica','bold'); doc.setFontSize(9);
+    doc.text(String(i + 11).padStart(2,'0'), M + 12, y, { align: 'center' });
+    doc.setTextColor(...INK); doc.setFont('helvetica','normal'); doc.setFontSize(9.5);
+    const lines = doc.splitTextToSize(step, TW - 36);
+    doc.text(lines, M + 34, y);
+    y += lines.length * 14 + 10;
+    doc.setDrawColor(...RULE); doc.setLineWidth(0.3); doc.line(M + 34, y - 5, W - M, y - 5);
+    y += 4;
+  });
+
+  // Phone script section
+  if (y > 580) { doc.addPage(); doc.setFillColor(...CREAM); doc.rect(0,0,W,792,'F'); y = 50; }
+  else { y += 16; }
+  doc.setFillColor(...C); doc.setTextColor(255,255,255);
+  doc.setFont('helvetica','bold'); doc.setFontSize(9);
+  doc.roundedRect(M, y, TW, 18, 3, 3, 'F');
+  doc.text('SERVICER PHONE SCRIPT — Read this word for word', M + 12, y + 12);
+  y += 28;
+  doc.setFillColor(255,255,255); doc.rect(M, y, TW, 4, 'F');
+  doc.setFillColor(248, 246, 241); doc.rect(M, y + 4, TW, 200, 'F');
+  doc.setTextColor(...INK); doc.setFont('helvetica','normal'); doc.setFontSize(9);
+  const scriptLines = doc.splitTextToSize(content.phone_script, TW - 24);
+  doc.text(scriptLines, M + 12, y + 22);
+  y += scriptLines.length * 13 + 40;
+
+  // ── PAGE 4: Hardship Letter Template ─────────────────────────────────────
+  doc.addPage();
+  doc.setFillColor(...CREAM); doc.rect(0, 0, W, 792, 'F');
+  doc.setFillColor(...INK); doc.rect(0, 0, W, 40, 'F');
+  doc.setTextColor(255,255,255); doc.setFont('helvetica','bold'); doc.setFontSize(10);
+  doc.text('Hardship Letter Template', M, 26);
+
+  y = 68;
+  const instructions = 'Fill in the brackets [ ] with your specific information before sending. Send via certified mail with return receipt to create a documented record.';
+  doc.setTextColor(...MUTED); doc.setFont('helvetica','italic'); doc.setFontSize(9);
+  const instrLines = doc.splitTextToSize(instructions, TW);
+  doc.text(instrLines, M, y); y += instrLines.length * 13 + 16;
+
+  doc.setFillColor(255,255,255); doc.rect(M, y, TW, 650, 'F');
+  doc.setDrawColor(...RULE); doc.setLineWidth(0.5); doc.rect(M, y, TW, 650, 'S');
+
+  const letter = [
+    '[YOUR FULL NAME]\n[YOUR ADDRESS]\n[CITY, STATE, ZIP]\n[DATE]',
+    '',
+    '[SERVICER NAME]\nLoss Mitigation Department\n[SERVICER ADDRESS]',
+    '',
+    'Re: Request for Loss-Mitigation Review\nLoan Number: [YOUR LOAN NUMBER]\nProperty Address: [PROPERTY ADDRESS]',
+    '',
+    'Dear Loss Mitigation Department,',
+    '',
+    content.letter_opening,
+    '',
+    'The nature of my hardship is: [DESCRIBE YOUR HARDSHIP — job loss, reduced income, medical expenses, divorce, death of co-borrower, etc.] This hardship began on approximately [DATE] and has resulted in [DESCRIBE FINANCIAL IMPACT].',
+    '',
+    'I am requesting evaluation for the following programs: (1) Loan forbearance; (2) Repayment plan; (3) Loan modification including rate reduction or term extension; (4) Payment deferral; (5) Any other available hardship assistance for my loan type.',
+    '',
+    'I have enclosed the following documentation: two months of recent pay stubs, two months of recent bank statements, my most recent tax return, and documentation of my hardship.',
+    '',
+    'I am committed to resolving this situation and remaining in my home. Please contact me at [PHONE NUMBER] or [EMAIL] to discuss next steps.',
+    '',
+    'Sincerely,',
+    '[YOUR SIGNATURE]',
+    '[YOUR PRINTED NAME]',
+    '[DATE]',
+  ];
+
+  doc.setTextColor(...INK); doc.setFont('helvetica','normal'); doc.setFontSize(8.5);
+  let ly = y + 18;
+  letter.forEach(para => {
+    if (!para) { ly += 8; return; }
+    const pLines = doc.splitTextToSize(para, TW - 32);
+    if (ly + pLines.length * 12 > y + 640) return;
+    doc.text(pLines, M + 16, ly);
+    ly += pLines.length * 12 + 4;
+  });
+
+  // ── PAGE 5: State Resources ───────────────────────────────────────────────
+  doc.addPage();
+  doc.setFillColor(...CREAM); doc.rect(0, 0, W, 792, 'F');
+  doc.setFillColor(...INK); doc.rect(0, 0, W, 40, 'F');
+  doc.setTextColor(255,255,255); doc.setFont('helvetica','bold'); doc.setFontSize(10);
+  doc.text('Key Resources & Contacts', M, 26);
+
+  const resources = [
+    ['HUD Housing Counseling Hotline', '800-569-4287 | hud.gov/housingcounseling', 'Free HUD-approved counselors nationwide — independent advice, no fees'],
+    ['CFPB Mortgage Help', 'consumerfinance.gov/housing', 'File servicer complaints, access mortgage guides, understand your rights'],
+    ['HOPE NOW Alliance', '888-995-4673 | hopenow.com', '24/7 free counseling and servicer connection for homeowners in crisis'],
+    ['Legal Aid (free attorneys)', '211 or lawhelp.org', 'Free legal representation for income-eligible homeowners facing foreclosure'],
+    ['State programs (your state)', 'mortgagestressscore.com/guides.html', 'State-specific HAF status, mediation programs, and local resources'],
+    ['CFPB Complaint Portal', 'consumerfinance.gov/complaint', 'Submit formal complaints against servicers — creates a legal record'],
+  ];
+
+  y = 65;
+  resources.forEach(([title, contact, desc]) => {
+    doc.setFillColor(255,255,255); doc.rect(M, y, TW, 52, 'F');
+    doc.setDrawColor(...RULE); doc.setLineWidth(0.3); doc.rect(M, y, TW, 52, 'S');
+    doc.setFillColor(...C); doc.rect(M, y, 4, 52, 'F');
+    doc.setTextColor(...INK); doc.setFont('helvetica','bold'); doc.setFontSize(10);
+    doc.text(title, M + 14, y + 16);
+    doc.setFont('helvetica','bold'); doc.setFontSize(9); doc.setTextColor(...C);
+    doc.text(contact, M + 14, y + 30);
+    doc.setFont('helvetica','normal'); doc.setFontSize(8.5); doc.setTextColor(...MUTED);
+    doc.text(desc, M + 14, y + 44);
+    y += 64;
+  });
+
+  // Footer
+  doc.setDrawColor(...RULE); doc.setLineWidth(0.5); doc.line(M, 730, W - M, 730);
+  doc.setTextColor(...MUTED); doc.setFont('helvetica','normal'); doc.setFontSize(8);
+  doc.text('MortgageStressScore.com — Educational tool only. Not legal or financial advice.', M, 748);
+  doc.text('Page 5 of 5', W - M, 748, { align: 'right' });
+
+  // Add page numbers to all pages
+  const totalPages = doc.getNumberOfPages();
+  for (let p = 1; p <= totalPages; p++) {
+    doc.setPage(p);
+    doc.setTextColor(...MUTED); doc.setFont('helvetica','normal'); doc.setFontSize(8);
+    if (p > 1) doc.text('Page ' + p + ' of ' + totalPages, W - M, 780, { align: 'right' });
+  }
+
+  // Save
+  doc.save('mortgage-action-plan.pdf');
+
+  // Track purchase complete
+  if (typeof gtag === 'function') {
+    gtag('event', 'purchase', {
+      transaction_id: 'mss_' + Date.now(),
+      value: 19,
+      currency: 'USD',
+      items: [{ item_name: 'Premium Mortgage Action Plan', price: 19, quantity: 1 }]
+    });
+  }
+
+  // Show done state
+  setTimeout(() => {
+    document.getElementById('plan-ready').style.display = 'none';
+    document.getElementById('plan-done').style.display  = 'block';
+  }, 800);
+}
+</script>
+</body>
+</html>
