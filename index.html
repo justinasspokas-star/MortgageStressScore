@@ -149,8 +149,8 @@
     </div>
     <div class="result-actions">
       <p><strong>Next step:</strong> use this score as a starting point. If you are behind or close to missing a payment, contact your mortgage servicer and consider a HUD-approved housing counselor.</p>
-      <div class="result-cta-row">
-        <button class="btn-primary result-checklist-btn" id="result-checklist-btn" onclick="scrollToActionPlan()" style="display:none">
+      <div class="result-cta-grid" id="result-cta-grid" style="display:none">
+        <button class="btn-primary result-checklist-btn" id="result-checklist-btn" onclick="scrollToActionPlan()">
           Get my free action plan ↓
         </button>
         <div class="result-premium-wrap" id="result-premium-wrap" style="display:none">
@@ -159,9 +159,7 @@
             Get my full plan — $9 →
           </button>
         </div>
-      </div>
-      <div class="result-see-options" id="result-see-options" style="display:none">
-        <a href="#options" class="btn-secondary-sm">See all options</a>
+        <a href="#options" class="result-see-opts" id="result-see-options" style="display:none">See all options</a>
       </div>
     </div>
   </div>
@@ -601,16 +599,16 @@ function showActionPlan() {
   ap.style.display = 'block';
   setTimeout(() => ap.classList.add('action-visible'), 50);
 
-  // Show the action plan button in the score result box
-  const btn = document.getElementById('result-checklist-btn');
-  if (btn) btn.style.display = 'inline-flex';
+  // Show the CTA grid
+  const grid    = document.getElementById('result-cta-grid');
+  const seeOpts = document.getElementById('result-see-options');
+  if (grid)    grid.style.display    = 'grid';
+  if (seeOpts) seeOpts.style.display = 'block';
 
-  // Show premium wrap and see-options link in result area (score >= 35)
-  const premWrap = document.getElementById('result-premium-wrap');
-  const seeOpts  = document.getElementById('result-see-options');
-  if (premWrap && score >= 35) {
-    premWrap.style.display = 'flex';
-    // Update tag by score range
+  // Show premium wrap for moderate + high
+  if (score >= 35) {
+    const premWrap = document.getElementById('result-premium-wrap');
+    if (premWrap) premWrap.style.display = 'flex';
     const tag = document.getElementById('result-premium-tag');
     if (tag) {
       if (score >= 65)      tag.textContent = '🔴 Urgent — recommended for your score';
@@ -618,7 +616,6 @@ function showActionPlan() {
       else                  tag.textContent = '⭐ Suggested for your score';
     }
   }
-  if (seeOpts) seeOpts.style.display = 'block';
 
   // Save score to localStorage for premium PDF
   try {
@@ -660,28 +657,23 @@ function showActionPlan() {
 
 
 function scrollToPremiumBox() {
-  const pb = document.getElementById('premium-box');
+  var pb = document.getElementById('premium-box');
   if (!pb) return;
+  pb.style.display = 'block';
   setTimeout(function() {
-    const navEl = document.querySelector('.site-nav');
-    const navH  = navEl ? navEl.offsetHeight + 12 : 72;
-    const top   = pb.getBoundingClientRect().top + window.pageYOffset - navH;
-    window.scrollTo({ top: Math.max(0, top), behavior: 'smooth' });
-  }, 80);
+    pb.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }, 100);
 }
 
 function scrollToActionPlan() {
-  const ap = document.getElementById('action-plan');
+  var ap = document.getElementById('action-plan');
   if (!ap) return;
-
-  // Wait for browser reflow after display:none → display:block
-  // then scroll accounting for sticky nav height
+  ap.style.display = 'block';
+  // scrollIntoView is the most universally supported method
+  // scroll-margin-top CSS handles the sticky nav offset
   setTimeout(function() {
-    const navEl = document.querySelector('.site-nav');
-    const navH  = navEl ? navEl.offsetHeight + 12 : 72;
-    const apTop = ap.getBoundingClientRect().top + window.pageYOffset - navH;
-    window.scrollTo({ top: Math.max(0, apTop), behavior: 'smooth' });
-  }, 120);
+    ap.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }, 150);
 }
 
 function openPremiumCheckout() {

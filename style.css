@@ -432,6 +432,7 @@ hr { border: none; border-top: 1px solid var(--rule); }
    RESPONSIVE — MOBILE  ≤ 760px
    ═══════════════════════════════════════════════ */
 @media (max-width: 760px) {
+  .result-cta-grid { grid-template-columns: 1fr; }
 
   /* ── NAV: grid layout — row1: logo+CTA, row2: links centred ── */
   .site-nav {
@@ -611,12 +612,49 @@ hr { border: none; border-top: 1px solid var(--rule); }
 .related-guides a:hover { text-decoration: underline; }
 
 /* ── Result CTA row (score box) ─── */
-.result-cta-row {
-  display: flex;
-  gap: 10px;
-  align-items: center;
-  flex-wrap: wrap;
+.result-cta-row { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+
+/* ── Result CTA grid ─── */
+.result-cta-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px 14px;
+  align-items: start;
+  margin-top: 4px;
 }
+.result-see-opts {
+  grid-column: 1 / -1;
+  font-size: 12px;
+  color: var(--muted);
+  text-decoration: none;
+}
+.result-see-opts:hover { color: var(--ink); }
+.result-premium-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.result-premium-tag {
+  font-size: 10px;
+  font-weight: 500;
+  color: var(--green);
+  letter-spacing: .02em;
+}
+.result-premium-inline {
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 500;
+  padding: 11px 14px;
+  border-radius: 6px;
+  background: var(--paper);
+  color: var(--green);
+  border: 1.5px solid var(--green);
+  cursor: pointer;
+  transition: background .15s, color .15s;
+  width: 100%;
+  text-align: center;
+}
+.result-premium-inline:hover { background: var(--green); color: var(--paper); }
 .btn-primary-sm {
   font-family: 'Inter', sans-serif;
   font-size: 14px;
@@ -647,8 +685,6 @@ hr { border: none; border-top: 1px solid var(--rule); }
 }
 
 @media (max-width: 760px) {
-  .result-cta-row { flex-direction: column; align-items: stretch; }
-  .btn-primary-sm { text-align: center; padding: 13px 20px; font-size: 15px; }
 }
 
 /* ── Premium Plan box ──────────────────────────────── */
@@ -768,9 +804,7 @@ hr { border: none; border-top: 1px solid var(--rule); }
 }
 
 /* ── Scroll offset for sticky nav ─── */
-#action-plan {
-  scroll-margin-top: 72px;
-}
+#action-plan, #premium-box { scroll-margin-top: 72px; }
 
 /* ── Inline premium button in score result ─── */
 .result-premium-wrap {
