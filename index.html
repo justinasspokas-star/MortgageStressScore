@@ -45,6 +45,14 @@
 }
 </style>
 
+
+<style>
+.premium-pack-card ul{margin:18px 0 22px;padding-left:20px}
+.premium-pack-card li{margin:8px 0}
+.premium-pack-button{display:inline-block;margin-top:4px}
+.small-note{margin-top:14px;color:#777;font-size:.92rem}
+</style>
+
 </head>
 <body>
 <div class="page-wrapper">
@@ -323,6 +331,12 @@
   <p class="section-eyebrow">Mortgage help guides</p>
   <h2 class="section-title">Plain-English answers for stressful mortgage decisions.</h2>
   <div class="guides-grid">
+    <a class="guide-card" href="how-to-read-a-loan-estimate.html" onclick="mssTrack('click_guide_link',{guide:'how-to-read-a-loan-estimate'})">
+      <h3>How to read a Loan Estimate</h3>
+      <p>Before closing, understand the full payment, escrow, credits and cash to close.</p>
+      <span class="guide-arrow">Read guide →</span>
+    </a>
+
     <a class="guide-card" href="help-with-mortgage-payment.html" onclick="mssTrack('click_guide_link',{g:'help-payment'})">
       <h3>Help with mortgage payment</h3>
       <p>What to do when the payment is becoming hard to manage and which options to compare first.</p>
@@ -412,6 +426,24 @@
     <iframe src="https://docs.google.com/forms/d/e/1FAIpQLScApP0pKmQT1E2V5r8fQWTC3QUHBbYw8MmRCNc68rJ2mtfdwg/viewform?embedded=true" width="100%" height="926" frameborder="0" marginheight="0" marginwidth="0" style="display:block; width:100%; min-height:926px; border:0;">Loading…</iframe>
   </div>
 </section>
+
+<section id="premium-pack" class="guides-section premium-pack-section">
+  <p class="section-eyebrow">Optional paid resource</p>
+  <h2 class="section-title">Want a more organized plan?<br><em>Get the Mortgage Premium Action Pack.</em></h2>
+  <div class="guide-card premium-pack-card">
+    <h3>Mortgage Premium Action Pack — $9</h3>
+    <p>A practical educational pack to help homeowners organize mortgage hardship documents, servicer questions, and next steps. Not legal, financial, or lending advice.</p>
+    <ul>
+      <li>Servicer call prep checklist</li>
+      <li>Hardship document organizer</li>
+      <li>Questions to ask before choosing an option</li>
+      <li>7-day mortgage action plan structure</li>
+    </ul>
+    <a class="site-btn-nav premium-pack-button" href="https://buy.stripe.com/4gM8wI0mG5w4ceO8s9gQE00" target="_blank" rel="noopener sponsored" onclick="mssTrack('click_premium_pack_stripe',{price:'9',currency:'USD',placement:'home'})">Get the premium pack — $9</a>
+    <p class="small-note">The free score and checklist remain free. This optional pack is for extra organization only.</p>
+  </div>
+</section>
+
 
 <footer class="site-footer">
   <a href="index.html" class="site-logo" aria-label="MortgageStressScore home">
