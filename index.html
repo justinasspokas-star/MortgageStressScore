@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MortgageStressScore — Know your risk before it's too late</title>
+<meta name="description" content="Check your Mortgage Stress Score in minutes. Refinance, modification, forbearance, HUD counseling — see which options fit your situation. Free, private.">
+<link rel="canonical" href="https://mortgagestressscore.com/">
+<meta property="og:title" content="MortgageStressScore — Know your risk before it's too late">
+<meta property="og:description" content="Check your Mortgage Stress Score in minutes. Refinance, modification, forbearance, HUD counseling — see which options fit your situation. Free, private.">
+<meta property="og:image" content="https://mortgagestressscore.com/logo.png">
+<meta property="og:url" content="https://mortgagestressscore.com/">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="google-site-verification" content="ufurZHq5oBg5E1-KnDqe1TSm3WyLoYqqsbzfUASfeCc">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css?v=9">
+<script type="application/ld+json">
+[{"@context":"https://schema.org","@type":"WebSite","name":"MortgageStressScore","url":"https://mortgagestressscore.com/","description":"Free browser-based calculator that estimates mortgage payment stress and ranks next steps for homeowners."},
+{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Mortgage Stress Score Calculator","applicationCategory":"FinanceApplication","operatingSystem":"Web","url":"https://mortgagestressscore.com/","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"description":"Estimates mortgage stress risk from 6 inputs. Runs entirely in your browser. No phone number required."}]
+</script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-TJTKS00LW6"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date()); gtag('config', 'G-TJTKS00LW6');
+  function mssTrack(e,p){if(typeof gtag==='function')gtag('event',e,p||{});}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"Is MortgageStressScore a credit score?","acceptedAnswer":{"@type":"Answer","text":"No. It is an educational mortgage stress estimate based on your inputs. It is not a credit score, lending decision, legal advice, or financial advice."}},
+{"@type":"Question","name":"Will lenders call me after I use it?","acceptedAnswer":{"@type":"Answer","text":"No. The calculator does not ask for your phone number and is not designed as a lender marketplace or lead form."}},
+{"@type":"Question","name":"Are my calculator inputs stored?","acceptedAnswer":{"@type":"Answer","text":"The calculator is designed to run in your browser. We use Google Analytics to understand site usage, but we do not sell calculator inputs to lenders."}},
+{"@type":"Question","name":"What if I am already behind on payments?","acceptedAnswer":{"@type":"Answer","text":"If you are behind or close to missing a payment, contact your mortgage servicer and consider speaking with a HUD-approved housing counselor."}}
+]}
+</script>
+
+<style>
+@media (max-width: 700px) {
+  #checklist-form iframe {
+    min-height: 980px;
+  }
+}
+</style>
+
+</head>
+<body>
+<div class="page-wrapper">
+<nav class="site-nav">
+  <a href="index.html" class="site-logo" aria-label="MortgageStressScore home">
+    <picture><source srcset="logo.webp?v=9" type="image/webp"><img src="logo.png?v=9" alt="MortgageStressScore.com" width="480" height="120" loading="eager" fetchpriority="high"></picture>
+  </a>
+  <div class="site-nav-links">
+    <a href="index.html#how" class="site-nav-link">How it works</a>
+    <a href="guides.html" class="site-nav-link">Guides</a>
+    <a href="about.html" class="site-nav-link">About</a>
+  </div>
+  <a href="index.html#calc" class="site-btn-nav" onclick="mssTrack('click_cta_nav',{page:document.title})">Get my score</a>
+</nav>
+
+<section class="hero">
+  <div class="hero-kicker">Free · Private · No lender calls</div>
+  <h1>Your mortgage risk,<br><em>honestly assessed.</em></h1>
+  <p class="hero-sub">Not a rate comparison. Not a lead form. A real score that tells you where you stand — and what to do next.</p>
+  <a href="#calc" class="btn-primary" onclick="mssTrack('click_cta_hero',{})">Check my free score</a>
+  <p class="hero-trust">
+    <span>🔒</span>
+    This calculator runs in your browser. We do not ask for your phone number.
+  </p>
+</section>
+
+<hr>
+
+<section class="calc-section" id="calc">
+  <p class="section-eyebrow">The score</p>
+  <h2 class="section-title">Six inputs.<br><em>One honest number.</em></h2>
+  <div class="form-grid">
+    <div class="field">
+      <label for="f-payment">Monthly mortgage payment ($)</label>
+      <input type="number" id="f-payment" placeholder="e.g. 2400" min="0" inputmode="decimal">
+    </div>
+    <div class="field">
+      <label for="f-income">Gross monthly income ($)</label>
+      <input type="number" id="f-income" placeholder="e.g. 6000" min="0" inputmode="decimal">
+    </div>
+    <div class="field">
+      <label for="f-missed">Missed payments in last 12 months</label>
+      <select id="f-missed">
+        <option value="0">None</option>
+        <option value="1">1 payment</option>
+        <option value="2">2–3 payments</option>
+        <option value="3">4 or more</option>
+      </select>
+    </div>
+    <div class="field">
+      <label for="f-equity">Home equity estimate</label>
+      <select id="f-equity">
+        <option value="1">I'm not sure</option>
+          <option value="0">None or underwater</option>
+        <option value="1">Under 10%</option>
+        <option value="2" selected>10–25%</option>
+        <option value="3">More than 25%</option>
+      </select>
+    </div>
+    <div class="field">
+      <label for="f-loan">Loan type</label>
+      <select id="f-loan">
+        <option value="1">I'm not sure</option>
+        <option value="0">ARM or interest-only</option>
+        <option value="1" selected>Fixed 30-year</option>
+        <option value="2">Fixed 15-year</option>
+        <option value="3">FHA loan</option>
+      </select>
+    </div>
+    <div class="field">
+      <label for="f-urgency">How worried are you right now?</label>
+      <select id="f-urgency">
+        <option value="0">Already behind on payments</option>
+        <option value="1" selected>Worried but not late yet</option>
+        <option value="2">Planning ahead, stable</option>
+      </select>
+    </div>
+  </div>
+  <button class="btn-calc" onclick="mssTrack('click_calculate',{}); calcScore();">Check my free score →</button>
+  <p class="calculator-note">Educational estimate only. This is not a credit score, lending decision, legal advice, financial advice, or foreclosure-prevention service.</p>
+
+  <div class="score-result" id="score-result">
+    <div class="score-top">
+      <div class="score-ring" id="score-ring">
+        <span class="score-num" id="score-num">–</span>
+        <span class="score-lbl">/ 100</span>
+      </div>
+      <div class="score-info">
+        <p class="score-verdict" id="score-verdict">–</p>
+        <p class="score-desc" id="score-desc">–</p>
+      </div>
+    </div>
+    <div class="score-meter"><div class="meter-dot" id="meter-dot" style="left:50%"></div></div>
+    <div class="meter-labels"><span>Low risk</span><span>Moderate</span><span>High risk</span></div>
+    <div class="score-factors">
+      <div class="factor"><span class="factor-name">Payment burden</span><div class="factor-bar"><div class="factor-fill" id="fb-burden"></div></div><span class="factor-val" id="fv-burden">–</span></div>
+      <div class="factor"><span class="factor-name">Income stability</span><div class="factor-bar"><div class="factor-fill" id="fb-income"></div></div><span class="factor-val" id="fv-income">–</span></div>
+      <div class="factor"><span class="factor-name">Home equity</span><div class="factor-bar"><div class="factor-fill" id="fb-equity"></div></div><span class="factor-val" id="fv-equity">–</span></div>
+      <div class="factor"><span class="factor-name">Loan type risk</span><div class="factor-bar"><div class="factor-fill" id="fb-loan"></div></div><span class="factor-val" id="fv-loan">–</span></div>
+      <div class="factor"><span class="factor-name">Missed payments</span><div class="factor-bar"><div class="factor-fill" id="fb-missed"></div></div><span class="factor-val" id="fv-missed">–</span></div>
+      <div class="factor"><span class="factor-name">Urgency level</span><div class="factor-bar"><div class="factor-fill" id="fb-urgency"></div></div><span class="factor-val" id="fv-urgency">–</span></div>
+    </div>
+    <div class="result-actions">
+      <p><strong>Next step:</strong> use this score as a starting point. If you are behind or close to missing a payment, contact your mortgage servicer and consider a HUD-approved housing counselor.</p>
+      <div class="result-cta-grid" id="result-cta-grid" style="display:none">
+        <a href="#action-plan" class="btn-primary result-checklist-btn" id="result-checklist-btn">
+          Get my free action plan ↓
+        </a>
+        <div class="result-premium-wrap" id="result-premium-wrap" style="display:none">
+          <span class="result-premium-tag" id="result-premium-tag">⭐ Recommended for your score</span>
+          <button class="result-premium-inline" id="result-premium-inline" onclick="scrollToPremiumBox()">
+            Get my full plan — $9 →
+          </button>
+        </div>
+        <a href="#options" class="result-see-opts" id="result-see-options" style="display:none">See all options</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ACTION PLAN -->
+<section class="action-section" id="action-plan" style="display:none">
+  <div class="action-header">
+    <p class="section-eyebrow">Your action plan</p>
+    <h2 class="action-title" id="action-title"></h2>
+    <p class="action-subtitle" id="action-subtitle"></p>
+  </div>
+  <ol class="checklist" id="checklist"></ol>
+  <div class="ec-box">
+    <p class="ec-box-title">Get this checklist by email</p>
+    <p class="ec-box-sub">We'll send your personalized plan once — no sequences, no lender calls, no spam.</p>
+    <p class="ec-promise">🔒 Your email is never shared with lenders or servicers.</p>
+    <input type="hidden" id="ec-score">
+    <input type="hidden" id="ec-risk">
+    <div id="ec-cta-area">
+      <button class="ec-btn" onclick="openGoogleForm()">Get my free checklist →</button>
+      <p class="ec-fine">No lender referrals. No phone calls. Unsubscribe anytime.</p>
+    </div>
+    <div class="ec-success" id="ec-success" style="display:none">
+      <p class="ec-success-msg">✓ Form opened — fill it in to receive your checklist.</p>
+      <p class="ec-fine">Didn't see it? <a href="#" id="ec-retry-link">Click here to try again.</a></p>
+    </div>
+  </div>
+  <div class="premium-box" id="premium-box" style="display:none">
+    <div class="premium-badge">Premium — $9</div>
+    <h3 class="premium-title" id="premium-dynamic-title">Get your complete 20-step action plan</h3>
+    <p class="premium-sub" id="premium-dynamic-sub">Tell us your state and loan type and we personalize it for your exact situation:</p>
+    <ul class="premium-list">
+      <li>20 steps specific to your risk level and loan type</li>
+      <li>Word-for-word script to call your servicer</li>
+      <li>Hardship letter template for your situation</li>
+      <li>Your state's exact foreclosure timeline and programs</li>
+      <li>Loan-type modification guide (FHA / VA / Conventional / ARM)</li>
+    </ul>
+    <div class="premium-fields">
+      <div class="premium-field-row">
+        <label class="premium-label" for="prem-state">Your state</label>
+        <select id="prem-state" class="premium-select">
+          <option value="">Select state…</option>
+          <option value="AL">Alabama</option><option value="AK">Alaska</option>
+          <option value="AZ">Arizona</option><option value="AR">Arkansas</option>
+          <option value="CA">California</option><option value="CO">Colorado</option>
+          <option value="CT">Connecticut</option><option value="DE">Delaware</option>
+          <option value="FL">Florida</option><option value="GA">Georgia</option>
+          <option value="HI">Hawaii</option><option value="ID">Idaho</option>
+          <option value="IL">Illinois</option><option value="IN">Indiana</option>
+          <option value="IA">Iowa</option><option value="KS">Kansas</option>
+          <option value="KY">Kentucky</option><option value="LA">Louisiana</option>
+          <option value="ME">Maine</option><option value="MD">Maryland</option>
+          <option value="MA">Massachusetts</option><option value="MI">Michigan</option>
+          <option value="MN">Minnesota</option><option value="MS">Mississippi</option>
+          <option value="MO">Missouri</option><option value="MT">Montana</option>
+          <option value="NE">Nebraska</option><option value="NV">Nevada</option>
+          <option value="NH">New Hampshire</option><option value="NJ">New Jersey</option>
+          <option value="NM">New Mexico</option><option value="NY">New York</option>
+          <option value="NC">North Carolina</option><option value="ND">North Dakota</option>
+          <option value="OH">Ohio</option><option value="OK">Oklahoma</option>
+          <option value="OR">Oregon</option><option value="PA">Pennsylvania</option>
+          <option value="RI">Rhode Island</option><option value="SC">South Carolina</option>
+          <option value="SD">South Dakota</option><option value="TN">Tennessee</option>
+          <option value="TX">Texas</option><option value="UT">Utah</option>
+          <option value="VT">Vermont</option><option value="VA">Virginia</option>
+          <option value="WA">Washington</option><option value="WV">West Virginia</option>
+          <option value="WI">Wisconsin</option><option value="WY">Wyoming</option>
+        </select>
+      </div>
+      <div class="premium-field-row">
+        <label class="premium-label" for="prem-loan">Loan type</label>
+        <select id="prem-loan" class="premium-select">
+          <option value="">Select loan type…</option>
+          <option value="FHA">FHA loan</option>
+          <option value="VA">VA loan</option>
+          <option value="USDA">USDA / Rural Development</option>
+          <option value="Conventional">Conventional loan</option>
+          <option value="ARM">Adjustable-rate (ARM)</option>
+          <option value="Other">Other / Not sure</option>
+        </select>
+      </div>
+    </div>
+    <button class="premium-btn" id="premium-pay-btn" onclick="openPremiumCheckout()">
+      Get my personalized plan — $9 →
+    </button>
+    <p class="premium-fine">One-time $9 payment. PDF downloads immediately. No subscription, no lender calls.</p>
+  </div>
+  <p class="action-see-options"><a href="#options">See all mortgage relief options ↓</a></p>
+</section>
+
+<hr>
+
+<section class="diff-section" id="how">
+  <div class="diff-inner">
+    <p class="section-eyebrow">Why this is different</p>
+    <h2 class="section-title" style="color:var(--paper)">Not a lead form<br><em style="color:#4cde8f">wearing a calculator's clothes.</em></h2>
+    <div class="diff-grid">
+      <div class="diff-col diff-them">
+        <p class="diff-col-title">Most rate comparison sites</p>
+        <div class="diff-item"><span class="dot"></span><span>Rate comparison presented as guidance</span></div>
+        <div class="diff-item"><span class="dot"></span><span>May share your contact details with multiple lenders</span></div>
+        <div class="diff-item"><span class="dot"></span><span>No risk assessment, same page for everyone</span></div>
+        <div class="diff-item"><span class="dot"></span><span>Refinance push regardless of your situation</span></div>
+        <div class="diff-item"><span class="dot"></span><span>HUD resources buried or absent</span></div>
+        <div class="diff-item"><span class="dot"></span><span>Revenue model often depends on lead referrals</span></div>
+      </div>
+      <div class="diff-col diff-us">
+        <p class="diff-col-title">MortgageStressScore</p>
+        <div class="diff-item"><span class="dot"></span><span>Risk score first, options second, lenders last</span></div>
+        <div class="diff-item"><span class="dot"></span><span>Calculator runs in your browser</span></div>
+        <div class="diff-item"><span class="dot"></span><span>Personalized to your inputs, not a template</span></div>
+        <div class="diff-item"><span class="dot"></span><span>Shows all 7 options — including the free ones</span></div>
+        <div class="diff-item"><span class="dot"></span><span>HUD-approved counselor resources shown for high-risk situations</span></div>
+        <div class="diff-item"><span class="dot"></span><span>Revenue model: software and optional user-controlled next steps</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="options-section" id="options">
+  <div class="options-inner">
+    <p class="section-eyebrow">The full picture</p>
+    <h2 class="section-title">Every option.<br><em>Ranked for your situation.</em></h2>
+    <div class="options-row">
+      <div class="option-card"><div class="option-icon">🔁</div><p class="option-name">Refinance</p><span class="option-tag tag-rec">Top pick</span></div>
+      <div class="option-card"><div class="option-icon">📝</div><p class="option-name">Loan modification</p><span class="option-tag tag-free">No credit req.</span></div>
+      <div class="option-card"><div class="option-icon">⏸</div><p class="option-name">Forbearance</p><span class="option-tag tag-free">Free to request</span></div>
+      <div class="option-card"><div class="option-icon">🏛</div><p class="option-name">HUD counselor</p><span class="option-tag tag-free">Always free</span></div>
+      <div class="option-card"><div class="option-icon">🗓</div><p class="option-name">Repayment plan</p><span class="option-tag tag-free">Ask servicer</span></div>
+      <div class="option-card"><div class="option-icon">🏠</div><p class="option-name">Sell or rent out</p><span class="option-tag tag-last">Last resort</span></div>
+      <div class="option-card" style="border-color:#b8d9c4;background:#f0f8f3"><div class="option-icon">🏦</div><p class="option-name">State assistance programs</p><span class="option-tag tag-free">State aid</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="principles-section">
+  <p class="section-eyebrow">Our commitments</p>
+  <h2 class="section-title">Built around you,<br><em>not around leads.</em></h2>
+  <div class="principles-grid">
+    <div>
+      <div class="principle-num">01</div>
+      <p class="principle-title">Privacy is not a feature</p>
+      <p class="principle-body">Your inputs are processed entirely in your browser. Nothing is stored, transmitted, or sold. There is no account, no cookie wall, and no phone number field.</p>
+    </div>
+    <div>
+      <div class="principle-num">02</div>
+      <p class="principle-title">Official resources before monetization</p>
+      <p class="principle-body">If your score is high, we point you toward your mortgage servicer and HUD-approved housing counseling resources before any paid option.</p>
+    </div>
+    <div>
+      <div class="principle-num">03</div>
+      <p class="principle-title">All options, not just refinance</p>
+      <p class="principle-body">Forbearance, loan modification, state assistance programs, and a call to your servicer are sometimes better. We show you all seven paths ranked by your score.</p>
+    </div>
+  </div>
+</section>
+
+<section class="guides-section" id="guides">
+  <p class="section-eyebrow">Mortgage help guides</p>
+  <h2 class="section-title">Plain-English answers for stressful mortgage decisions.</h2>
+  <div class="guides-grid">
+    <a class="guide-card" href="help-with-mortgage-payment.html" onclick="mssTrack('click_guide_link',{g:'help-payment'})">
+      <h3>Help with mortgage payment</h3>
+      <p>What to do when the payment is becoming hard to manage and which options to compare first.</p>
+      <span class="guide-arrow">Read guide →</span>
+    </a>
+    <a class="guide-card" href="cant-afford-mortgage.html" onclick="mssTrack('click_guide_link',{g:'cant-afford'})">
+      <h3>Can't afford your mortgage?</h3>
+      <p>A calm checklist for homeowners worried about falling behind or already under pressure.</p>
+      <span class="guide-arrow">Read guide →</span>
+    </a>
+    <a class="guide-card" href="missed-mortgage-payment.html" onclick="mssTrack('click_guide_link',{g:'missed-payment'})">
+      <h3>Missed a mortgage payment?</h3>
+      <p>What happens day by day — late fees, credit impact, servicer rules — and the steps to take.</p>
+      <span class="guide-arrow">Read guide →</span>
+    </a>
+    <a class="guide-card" href="refinance-vs-loan-modification.html" onclick="mssTrack('click_guide_link',{g:'refinance-vs-mod'})">
+      <h3>Refinance vs loan modification</h3>
+      <p>Understand the difference between replacing your loan and asking your servicer to change it.</p>
+      <span class="guide-arrow">Read guide →</span>
+    </a>
+    <a class="guide-card" href="mortgage-forbearance-vs-loan-modification.html" onclick="mssTrack('click_guide_link',{g:'forbearance-vs-mod'})">
+      <h3>Forbearance vs loan modification</h3>
+      <p>Compare temporary payment relief with longer-term mortgage changes.</p>
+      <span class="guide-arrow">Read guide →</span>
+    </a>
+    <a class="guide-card full" href="what-happens-stop-paying-mortgage.html" onclick="mssTrack('click_guide_link',{g:'stop-paying'})">
+      <h3>What happens if you stop paying your mortgage?</h3>
+      <p>The complete timeline from day one to foreclosure — and options at every stage.</p>
+      <span class="guide-arrow">Read guide →</span>
+    </a>
+      <a class="guide-card" href="mortgage-relief-options.html" onclick="mssTrack('click_guide_link',{guide:'mortgage-relief-options'})">
+      <h3>Mortgage relief options</h3>
+      <p>Compare repayment plans, forbearance, deferral, modification, refinance and counseling.</p>
+      <span class="guide-arrow">Read guide →</span>
+    </a>
+    <a class="guide-card" href="mortgage-payment-too-high.html" onclick="mssTrack('click_guide_link',{guide:'mortgage-payment-too-high'})">
+      <h3>Mortgage payment too high?</h3>
+      <p>Review practical steps when your monthly payment no longer fits your budget.</p>
+      <span class="guide-arrow">Read guide →</span>
+    </a>
+    <a class="guide-card" href="behind-on-mortgage-payments.html" onclick="mssTrack('click_guide_link',{guide:'behind-on-mortgage-payments'})">
+      <h3>Behind on mortgage payments?</h3>
+      <p>Missed a payment? Learn what to ask your servicer and what options may exist.</p>
+      <span class="guide-arrow">Read guide →</span>
+    </a>
+    <a class="guide-card" href="fha-loan-modification-options.html" onclick="mssTrack('click_guide_link',{guide:'fha-loan-modification-options'})">
+      <h3>FHA loan modification options</h3>
+      <p>FHA loan? Learn what to ask your servicer about hardship and modification review.</p>
+      <span class="guide-arrow">Read guide →</span>
+    </a>
+</div>
+</section>
+
+
+<section class="guides-section" id="faq" style="padding-top:56px">
+  <p class="section-eyebrow">FAQ</p>
+  <h2 class="section-title">Questions homeowners ask<br><em>before using the score.</em></h2>
+  <div class="guides-grid">
+    <a class="guide-card" href="disclaimer.html" onclick="mssTrack('click_faq_card',{faq:'credit-score'})">
+      <h3>Is MortgageStressScore a credit score?</h3>
+      <p>No. It is an educational mortgage stress estimate based on your inputs. It is not a credit score, lending decision, legal advice, or financial advice.</p>
+      <span class="guide-arrow">Read disclaimer →</span>
+    </a>
+    <a class="guide-card" href="privacy.html" onclick="mssTrack('click_faq_card',{faq:'lenders-call'})">
+      <h3>Will lenders call me after I use it?</h3>
+      <p>No. The calculator does not ask for your phone number and is not designed as a lender marketplace or lead form.</p>
+      <span class="guide-arrow">Read privacy promise →</span>
+    </a>
+    <a class="guide-card" href="privacy.html" onclick="mssTrack('click_faq_card',{faq:'inputs-stored'})">
+      <h3>Are my calculator inputs stored?</h3>
+      <p>The calculator is designed to run in your browser. We use Google Analytics to understand site usage, but we do not sell calculator inputs to lenders.</p>
+      <span class="guide-arrow">Read privacy policy →</span>
+    </a>
+    <a class="guide-card" href="behind-on-mortgage-payments.html" onclick="mssTrack('click_faq_card',{faq:'already-behind'})">
+      <h3>What if I am already behind?</h3>
+      <p>If you are behind or close to missing a payment, contact your mortgage servicer and consider speaking with a HUD-approved housing counselor.</p>
+      <span class="guide-arrow">Read next steps →</span>
+    </a>
+  </div>
+</section>
+
+
+<section id="checklist-form" class="guides-section" style="display:none; padding-top:40px;">
+  <p class="section-eyebrow">Free checklist</p>
+  <h2 class="section-title">Get your Mortgage Action Checklist<br><em>by email.</em></h2>
+  <div class="guide-card" style="padding:0; overflow:hidden;">
+    <iframe src="https://docs.google.com/forms/d/e/1FAIpQLScApP0pKmQT1E2V5r8fQWTC3QUHBbYw8MmRCNc68rJ2mtfdwg/viewform?embedded=true" width="100%" height="926" frameborder="0" marginheight="0" marginwidth="0" style="display:block; width:100%; min-height:926px; border:0;">Loading…</iframe>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <a href="index.html" class="site-logo" aria-label="MortgageStressScore home">
+    <picture><source srcset="logo.webp?v=9" type="image/webp"><img src="logo.png?v=9" alt="MortgageStressScore.com" width="480" height="120" loading="lazy"></picture>
+  </a>
+  <p class="footer-tagline">No surprise lender calls. No data sales. You stay in control.</p>
+  <div class="footer-links">
+    <a href="privacy.html">Privacy</a> ·
+    <a href="disclaimer.html">Disclaimer</a> ·
+    <a href="terms.html">Terms</a>
+  </div>
+</footer>
+</div>
+<script>
+function calcScore() {
+  const payment = parseFloat(document.getElementById('f-payment').value) || 0;
+  const income  = parseFloat(document.getElementById('f-income').value)  || 1;
+  const missed  = parseInt(document.getElementById('f-missed').value);
+  const equity  = parseInt(document.getElementById('f-equity').value);
+  const loan    = parseInt(document.getElementById('f-loan').value);
+  const urgency = parseInt(document.getElementById('f-urgency').value);
+
+  if (!payment || !income) { alert('Please enter your monthly payment and income to calculate your score.'); return; }
+
+  const ratio    = Math.min(payment / income, 1);
+  const burden   = Math.round(ratio * 45);          // max 45 — payment pressure
+  const incomeR  = Math.round(ratio * 0.8 * 12);   // max 10 — income risk (high ratio = less buffer)
+  const incomeS  = Math.round(Math.max(0, (1 - ratio * 0.8) * 20)); // display only (inverse — stability)
+  const equityS  = Math.round((3 - equity) * 9);   // max 27
+  const loanS    = Math.round((3 - loan) * 7);     // max 21
+  const missedS  = Math.round(missed * 11);         // max 33
+  const urgencyS = Math.round((2 - urgency) * 9);  // max 18
+
+  // raw max: 45+10+27+21+33+18 = 154 → capped at 100
+  // incomeS is shown in breakdown display but incomeR is what counts in score
+  const raw = burden + incomeR + missedS + equityS + loanS + urgencyS;
+  const score = Math.min(100, Math.max(0, Math.round(raw)));
+
+  let color, verdict, desc;
+  if (score < 35) {
+    color = '#1a5c3a'; verdict = 'Low stress — stay prepared';
+    desc = 'Your mortgage burden is manageable. Review your options annually and build a 3-month payment buffer if possible.';
+  } else if (score < 65) {
+    color = '#92510a'; verdict = 'Moderate pressure — act before it escalates';
+    desc = 'Your payment-to-income ratio or loan type is creating financial pressure. Explore modification or refinance options now, while you still have time.';
+  } else {
+    color = '#8b1f1f'; verdict = 'High risk — contact HUD counselor today';
+    desc = 'Your situation needs immediate attention. Consider contacting your mortgage servicer and a free HUD-approved housing counselor as soon as possible. Time matters.';
+  }
+
+  const ring = document.getElementById('score-ring');
+  ring.style.borderColor = color;
+  document.getElementById('score-num').style.color = color;
+  document.getElementById('score-num').textContent = score;
+  document.getElementById('score-verdict').style.color = color;
+  document.getElementById('score-verdict').textContent = verdict;
+  document.getElementById('score-desc').textContent = desc;
+  document.getElementById('meter-dot').style.left = score + '%';
+
+  function setFactor(id, val, max, color) {
+    const pct = Math.round(Math.min(100, (val / max) * 100));
+    document.getElementById('fb-' + id).style.width = pct + '%';
+    document.getElementById('fb-' + id).style.background = color;
+    document.getElementById('fv-' + id).textContent = val;
+    document.getElementById('fv-' + id).style.color = color;
+  }
+
+  const fColor = (v, max) => v / max < .4 ? '#1a5c3a' : v / max < .7 ? '#92510a' : '#8b1f1f';
+  setFactor('burden',  burden,  45, fColor(burden, 45));
+  setFactor('income',  incomeS, 20, fColor(20-incomeS, 20));
+  setFactor('equity',  equityS, 27, fColor(equityS, 27));
+  setFactor('loan',    loanS,   21, fColor(loanS, 21));
+  setFactor('missed',  missedS, 33, fColor(missedS, 33));
+  setFactor('urgency', urgencyS,18, fColor(urgencyS, 18));
+
+  const result = document.getElementById('score-result');
+  result.classList.add('visible');
+
+  // ── Mobile scroll: show score result automatically ───────────────────────
+  // Only on mobile (screen width <= 900px) — desktop user can already see it
+  if (window.innerWidth <= 900) {
+    setTimeout(function() {
+      // Walk up the DOM to get true document offset (works with overflow:clip)
+      var el = result;
+      var top = 0;
+      while (el) { top += el.offsetTop; el = el.offsetParent; }
+      var navH = document.querySelector('.site-nav')
+                 ? document.querySelector('.site-nav').offsetHeight + 8
+                 : 60;
+      var target = Math.max(0, top - navH);
+      // Triple method — covers iOS Safari, Chrome Android, Firefox
+      document.body.scrollTop          = target;
+      document.documentElement.scrollTop = target;
+      try { window.scrollTo({ top: target, behavior: 'smooth' }); } catch(e) {}
+    }, 80);
+  }
+}
+</script>
+<script>
+
+// ── Google Forms integration ─────────────────────────────────────────────────
+// SETUP: Replace the 4 constants below with your Google Form values.
+// How to get entry IDs: form editor → ⋮ → "Get pre-filled link" → fill dummy values → copy URL
+const GOOGLE_FORM_ID  = '1FAIpQLScApP0pKmQT1E2V5r8fQWTC3QUHBbYw8MmRCNc68rJ2mtfdwg';
+  // ── Replace with your real Stripe Payment Link URL ──────────────────────
+  const STRIPE_LINK     = 'https://buy.stripe.com/4gM8wI0mG5w4ceO8s9gQE00';
+const ENTRY_SCORE     = 'entry.1805484768';
+const ENTRY_RISK      = 'entry.904975798';
+
+const PLANS = {
+  low: {
+    title: "You're in good shape — stay that way.",
+    subtitle: "Your risk is low right now. These steps keep it that way.",
+    accent: '#1a5c3a',
+    items: [
+      "Save your mortgage servicer's direct phone number today, before you ever need it in a rush.",
+      "Build a 3-month mortgage payment reserve in a separate savings account.",
+      "Review your loan terms once a year — check if a refinance could lower your payment.",
+      "Know your current home equity. Call your servicer or check your latest statement.",
+      "If you have an ARM, find out exactly when your next rate reset is and plan ahead."
+    ]
+  },
+  moderate: {
+    title: "Act this month — options are still open.",
+    subtitle: "You're under pressure but have time. These steps protect your position.",
+    accent: '#92510a',
+    items: [
+      'Call your servicer this month and ask: "What hardship options are available for my loan type?"',
+      "Find a HUD-approved housing counselor near you — the consultation is usually free.",
+      "Pull your last 2 pay stubs and bank statements. You'll need these if you request help.",
+      "If you're current on payments, compare refinance options now while you still qualify.",
+      "Calculate your exact payment-to-income ratio. Above 38% is a servicer warning level.",
+      "If you have an ARM, ask your servicer about converting to a fixed rate."
+    ]
+  },
+  high: {
+    title: "Act this week — time is the variable.",
+    subtitle: "Your risk level is high. The steps below are in order of urgency.",
+    accent: '#8b1f1f',
+    items: [
+      'Call your mortgage servicer today and say: "I am experiencing a financial hardship — what assistance options do I have?"',
+      "Contact a HUD-approved housing counselor at hud.gov/housingcounseling — this service is free.",
+      "Do NOT ignore any letters from your servicer. Every letter has a response deadline.",
+      "Write down your hardship reason in one clear sentence before you call. Keep it factual.",
+      "Ask for everything in writing: available options, required documents, and timelines.",
+      "Avoid anyone who charges upfront fees to stop foreclosure — it's almost always a scam."
+    ]
+  }
+};
+
+function openGoogleForm() {
+  const score = document.getElementById('ec-score').value;
+  const risk  = document.getElementById('ec-risk').value;
+
+  // Map risk level → form multiple-choice option
+  const situationMap = {
+    low:      'I am current but worried',
+    moderate: 'I am current but worried',
+    high:     'I missed 1 payment'
+  };
+  const situation = situationMap[risk] || 'I just want the checklist';
+
+  const base = `https://docs.google.com/forms/d/e/${GOOGLE_FORM_ID}/viewform`;
+  const url  = `${base}?usp=pp_url`
+             + `&${ENTRY_SCORE}=${encodeURIComponent(score)}`
+             + `&${ENTRY_RISK}=${encodeURIComponent(situation)}`;
+
+  window.open(url, '_blank');
+  document.getElementById('ec-cta-area').style.display = 'none';
+  document.getElementById('ec-success').style.display  = 'block';
+  document.getElementById('ec-retry-link').onclick = function(e) {
+    e.preventDefault(); window.open(url, '_blank');
+  };
+  if (typeof gtag === 'function') gtag('event','checklist_form_opened',{risk_level:risk,score:parseInt(score)});
+}
+
+// ── Action plan ──────────────────────────────────────────────────────────────
+const _origCalc = calcScore;
+// Patch calcScore to also show action plan
+const _origCalcScore = calcScore;
+document.addEventListener('DOMContentLoaded', function() {
+  const origBtn = document.querySelector('.btn-calc');
+  if (origBtn) origBtn.onclick = function() {
+    mssTrack('click_calculate',{});
+    calcScore();
+    setTimeout(showActionPlan, 700);
+  };
+});
+
+function showActionPlan() {
+  const scoreEl = document.getElementById('score-num');
+  const score = parseInt(scoreEl.textContent) || 0;
+  const level = score < 35 ? 'low' : score < 65 ? 'moderate' : 'high';
+  const plan  = PLANS[level];
+  document.getElementById('action-title').textContent    = plan.title;
+  document.getElementById('action-subtitle').textContent = plan.subtitle;
+  document.getElementById('ec-score').value = score;
+  document.getElementById('ec-risk').value  = level;
+  const ol = document.getElementById('checklist');
+  ol.innerHTML = plan.items.map((item,i) =>
+    `<li class="cl-item"><span class="cl-num" style="color:${plan.accent}">${String(i+1).padStart(2,'0')}</span><span class="cl-text">${item}</span></li>`
+  ).join('');
+  const ap = document.getElementById('action-plan');
+  ap.style.display = 'block';
+  setTimeout(() => ap.classList.add('action-visible'), 50);
+
+  // Show the CTA grid
+  const grid    = document.getElementById('result-cta-grid');
+  const seeOpts = document.getElementById('result-see-options');
+  if (grid)    grid.style.display    = 'grid';
+  if (seeOpts) seeOpts.style.display = 'block';
+
+  // Show premium wrap for moderate + high
+  if (score >= 35) {
+    const premWrap = document.getElementById('result-premium-wrap');
+    if (premWrap) premWrap.style.display = 'flex';
+    const tag = document.getElementById('result-premium-tag');
+    if (tag) {
+      if (score >= 65)      tag.textContent = '🔴 Urgent — recommended for your score';
+      else if (score >= 45) tag.textContent = '⚠️ Recommended for your score';
+      else                  tag.textContent = '⭐ Suggested for your score';
+    }
+  }
+
+  // Save score to localStorage for premium PDF
+  try {
+    localStorage.setItem('mss_score', score);
+    localStorage.setItem('mss_risk',  level);
+    localStorage.setItem('mss_ts',    Date.now());
+  } catch(e) {}
+
+  // Show premium box with differentiated message by score range
+  const pb = document.getElementById('premium-box');
+  if (pb && score >= 35) {
+    pb.style.display = 'block';
+    pb.dataset.score = score;
+    pb.dataset.risk  = level;
+
+    // Differentiated title + CTA by score range
+    const ptitle = document.getElementById('premium-dynamic-title');
+    const psub   = document.getElementById('premium-dynamic-sub');
+    const pbtn   = document.getElementById('premium-pay-btn');
+
+    if (score >= 65) {
+      // HIGH — urgency
+      if (ptitle) ptitle.textContent = 'Get your urgent 20-step action plan';
+      if (psub)   psub.textContent   = 'Your score is high. This plan gives you the exact steps, scripts, and resources for your state and loan type — personalized for your situation:';
+      if (pbtn)   pbtn.textContent   = 'Get my urgent plan — $9 →';
+    } else if (score >= 45) {
+      // MODERATE high — escalation warning
+      if (ptitle) ptitle.textContent = 'Get your action plan before this escalates';
+      if (psub)   psub.textContent   = 'Your score shows real pressure. Act now while you still have all your options open — personalized for your state and loan type:';
+      if (pbtn)   pbtn.textContent   = 'Get my action plan — $9 →';
+    } else {
+      // MODERATE low (35–44) — prevention
+      if (ptitle) ptitle.textContent = 'Build your mortgage protection plan';
+      if (psub)   psub.textContent   = 'Your score is in the moderate range. A protection plan keeps you prepared — personalized for your state and loan type:';
+      if (pbtn)   pbtn.textContent   = 'Get my protection plan — $9 →';
+    }
+  }
+}
+
+
+function scrollToPremiumBox() {
+  var pb = document.getElementById('premium-box');
+  if (!pb) return;
+  pb.style.display = 'block';
+  setTimeout(function() {
+    var el = pb;
+    var offsetTop = 0;
+    while (el) { offsetTop += el.offsetTop; el = el.offsetParent; }
+    var target = Math.max(0, offsetTop - 68);
+    document.documentElement.scrollTop = target;
+    document.body.scrollTop = target;
+    try { window.scrollTo({ top: target, behavior: 'smooth' }); } catch(e) {}
+  }, 150);
+}
+
+// scrollToActionPlan replaced by native anchor href='#action-plan'
+
+function openPremiumCheckout() {
+  const state = document.getElementById('prem-state').value;
+  const loan  = document.getElementById('prem-loan').value;
+
+  if (!state || !loan) {
+    const btn = document.getElementById('premium-pay-btn');
+    btn.textContent = 'Please select your state and loan type first';
+    btn.style.background = '#92510a';
+    setTimeout(() => {
+      btn.textContent = 'Get my personalized plan — $9 →';
+      btn.style.background = '';
+    }, 2500);
+    return;
+  }
+
+  const score = localStorage.getItem('mss_score') || '0';
+  const risk  = localStorage.getItem('mss_risk')  || 'unknown';
+
+  try {
+    localStorage.setItem('mss_state', state);
+    localStorage.setItem('mss_loan',  loan);
+  } catch(e) {}
+
+  if (typeof gtag === 'function') {
+    gtag('event', 'premium_checkout_click', {
+      score: parseInt(score), risk_level: risk, state: state, loan_type: loan
+    });
+  }
+  window.location.href = STRIPE_LINK;
+}
+</script>
+</body>
+</html>

@@ -107,7 +107,7 @@ const STATES = {
 const STATE_DEFAULT = {type:'Varies',timeline:'Verify with your state housing agency',key_law:'Contact a HUD-approved counselor for state-specific rights.',program:'Call 211 or visit hud.gov/housingcounseling',hud:'National HUD: (800) 569-4287 · hud.gov/housingcounseling',urgent:'Contact a HUD counselor immediately for state-specific guidance.'};
 
 const LOANS = {
-  FHA:{name:'FHA loan',dept:'FHA Loss Mitigation Department',phrase:'I have an FHA-insured loan and I am requesting evaluation for FHA-HAMP modification and partial claim under Mortgagee Letter ML 2023-06.',programs:'FHA-HAMP Loan Modification · FHA Partial Claim · FHA Forbearance',key:'FHA loans often have specific loss-mitigation protections and review requirements. Ask your servicer whether they are required to review you for applicable FHA options before foreclosure continues. If you believe required steps are not being followed, contact a HUD counselor or file a CFPB complaint.'},
+  FHA:{name:'FHA loan',dept:'FHA Loss Mitigation Department',phrase:'I have an FHA-insured loan and I am requesting evaluation for FHA-HAMP modification and partial claim under Mortgagee Letter ML 2023-06.',programs:'FHA-HAMP Loan Modification · FHA Partial Claim · FHA Forbearance',key:'FHA has the STRONGEST borrower protections of any loan type. Servicer MUST evaluate you for FHA-HAMP before foreclosure.'},
   VA:{name:'VA loan',dept:'VA Loan Guaranty Service',phrase:'I have a VA-guaranteed loan and I am requesting evaluation for VA loss-mitigation options. Please contact the VA Regional Loan Center on my behalf.',programs:'VA HAMP Modification · VA Refunding · VA Repayment Plan',key:'Call the VA Regional Loan Center: (877) 827-3702. They can intervene with your servicer directly.'},
   USDA:{name:'USDA / Rural Development',dept:'USDA Rural Development Loss Mitigation',phrase:'I have a USDA Rural Development loan and I am requesting evaluation for all available loss-mitigation options under USDA guidelines.',programs:'USDA Loan Modification · USDA Moratorium · Special Forbearance',key:'Contact your local USDA Rural Development office for additional support beyond your servicer.'},
   Conventional:{name:'Conventional loan',dept:'Loss Mitigation Department',phrase:'I have a conventional mortgage and I am requesting evaluation for Flex Modification if my loan is owned by Fannie Mae or Freddie Mac, plus all other available loss-mitigation options.',programs:'Flex Modification · Payment Deferral · Repayment Plan',key:'Look up your loan: fanniemae.com/loanlookup or freddiemac.com/loanlookup — Flex Mod can reduce payments by up to 20%.'},
@@ -122,21 +122,6 @@ const PLANS = {
     first3:['Set up automatic mortgage payment through your servicer to prevent accidental missed payments.',
             'Build a 3-month mortgage payment emergency fund — set aside your full PITI amount monthly until you reach 3 payments.',
             'Review your escrow statement for potential increases in taxes or insurance that could raise your payment.'],
-    donts:['Ignore escrow adjustment notices — they signal upcoming payment increases.',
-             'Assume you are protected just because you are current — review your ARM reset schedule.',
-             'Pay upfront fees to anyone promising to lower your rate without servicer involvement.',
-             'Skip your annual mortgage review — rates, equity, and programs change.',
-             'Wait until you miss a payment to contact your servicer — proactive contact is always better.'],
-    donts:['Ignore escrow adjustment notices — they signal upcoming payment increases.',
-             'Assume you are protected just because you are currently up to date.',
-             'Pay upfront fees to anyone promising to lower your rate without servicer contact.',
-             'Skip your annual mortgage review — programs and rates change.',
-             'Wait until you miss a payment to contact your servicer — proactive contact is better.'],
-    donts:['Ignore escrow adjustment notices — they signal upcoming payment increases.',
-             'Assume you are fully protected just because you are currently up to date.',
-             'Pay upfront fees to anyone promising to lower your rate without servicer contact.',
-             'Skip your annual mortgage review — programs and rates change over time.',
-             'Wait until you miss a payment to contact your servicer — proactive contact is always better.'],
     days:[
       {day:'Day 1',action:'Review your finances',task:'Calculate your housing ratio: total PITI ÷ gross monthly income. If above 31%, monitor monthly. Write the number here: ____%'},
       {day:'Day 2',action:'Verify your loan details',task:'Call your servicer and confirm: your current rate, next adjustment date (if ARM), and escrow balance. Log the reference number: ____'},
@@ -167,7 +152,7 @@ const PLANS = {
     verdict:'High risk — start TODAY, not tomorrow',
     color:[139,31,31],
     first3:['Call your servicer\'s LOSS-MITIGATION department RIGHT NOW using the script on page 4. Do not use regular customer service.',
-            'Contact a free HUD-approved housing counselor TODAY — they can help you understand options, prepare documents, and communicate with your servicer: (800) 569-4287 or hud.gov/housingcounseling.',
+            'Contact a HUD-approved housing counselor TODAY — they can attend court hearings and negotiate on your behalf: (800) 569-4287.',
             'Do NOT ignore any legal notices. A foreclosure complaint requires a written Answer within your state\'s deadline or you lose all defenses.'],
     days:[
       {day:'Day 1',action:'URGENT: Call servicer NOW',task:'Loss-mitigation dept only. Reference #: ____ · Rep: ____ · Forbearance/mod requested: □Yes □No · Follow-up date: ____'},
@@ -359,7 +344,7 @@ function downloadPDF() {
   doc.setTextColor(...RED); doc.setFont('helvetica','bold'); doc.setFontSize(8);
   doc.text('⚠ YOUR STATE: ' + stateInfo.name.toUpperCase() + ' (' + stateInfo.type.toUpperCase() + ')', M+12, y2+14);
   doc.setFont('helvetica','normal'); doc.setFontSize(8); doc.setTextColor(...INK);
-  const urgLines = doc.splitTextToSize(stateInfo.urgent + (state === 'TX' ? ' If you received a Notice of Sale or foreclosure notice, contact a Texas attorney immediately.' : '') + ' Timeline: ' + stateInfo.timeline, TW-24);
+  const urgLines = doc.splitTextToSize(stateInfo.urgent + ' Timeline: ' + stateInfo.timeline, TW-24);
   doc.text(urgLines, M+12, y2+26);
   y2 += 64;
 
@@ -388,22 +373,6 @@ function downloadPDF() {
   let y3 = 100;
   plan.days.forEach(({day, action, task}) => {
     y3 = dayBox(doc, y3, day, action, task, C, CL);
-  });
-
-  // "What not to do" section
-  if (y3 > 560) { doc.addPage(); doc.setFillColor(...CREAM); doc.rect(0,0,W,792,'F'); y3=55; }
-  else { y3 += 14; }
-  doc.setFillColor(...RED); doc.roundedRect(M, y3, TW, 18, 3, 3, 'F');
-  doc.setTextColor(255,255,255); doc.setFont('helvetica','bold'); doc.setFontSize(9);
-  doc.text('WHAT NOT TO DO — Common mistakes that eliminate your options', M+10, y3+12);
-  y3 += 22;
-  doc.setFillColor(255,255,255); doc.rect(M, y3, TW, plan.donts.length * 18 + 10, 'F');
-  doc.setDrawColor(...RULE); doc.setLineWidth(0.3); doc.rect(M, y3, TW, plan.donts.length * 18 + 10, 'S');
-  plan.donts.forEach((dont, i) => {
-    doc.setTextColor(...RED); doc.setFont('helvetica','bold'); doc.setFontSize(9);
-    doc.text('✗', M+10, y3 + 14 + i*18);
-    doc.setTextColor(...INK); doc.setFont('helvetica','normal'); doc.setFontSize(8.5);
-    doc.text(dont, M+24, y3 + 14 + i*18);
   });
 
   // ── PAGE 4: PHONE SCRIPT ───────────────────────────────────────────────────
