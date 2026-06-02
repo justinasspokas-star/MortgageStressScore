@@ -489,6 +489,25 @@ function calcScore() {
 
   const result = document.getElementById('score-result');
   result.classList.add('visible');
+
+  // ── Mobile scroll: show score result automatically ───────────────────────
+  // Only on mobile (screen width <= 900px) — desktop user can already see it
+  if (window.innerWidth <= 900) {
+    setTimeout(function() {
+      // Walk up the DOM to get true document offset (works with overflow:clip)
+      var el = result;
+      var top = 0;
+      while (el) { top += el.offsetTop; el = el.offsetParent; }
+      var navH = document.querySelector('.site-nav')
+                 ? document.querySelector('.site-nav').offsetHeight + 8
+                 : 60;
+      var target = Math.max(0, top - navH);
+      // Triple method — covers iOS Safari, Chrome Android, Firefox
+      document.body.scrollTop          = target;
+      document.documentElement.scrollTop = target;
+      try { window.scrollTo({ top: target, behavior: 'smooth' }); } catch(e) {}
+    }, 80);
+  }
 }
 </script>
 <script>
