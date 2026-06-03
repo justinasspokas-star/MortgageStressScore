@@ -857,3 +857,41 @@ hr { border: none; border-top: 1px solid var(--rule); }
   .result-premium-wrap { width: 100%; }
   .result-premium-inline { width: 100%; padding: 13px; font-size: 15px; }
 }
+
+/* ── Trust signals under premium button ─── */
+.trust-row {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 8px 0 4px;
+}
+.trust-item {
+  font-size: 11px;
+  color: var(--green);
+  font-weight: 500;
+}
+.trust-social {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 7px 10px;
+  background: var(--paper);
+  border: .5px solid var(--rule);
+  border-radius: 6px;
+  margin-top: 6px;
+}
+.trust-helped {
+  font-size: 11px;
+  color: var(--muted);
+  font-style: italic;
+}
+.trust-secure {
+  font-size: 11px;
+  color: var(--muted);
+}
+@media (max-width: 480px) {
+  .trust-row { gap: 8px; }
+  .trust-item { font-size: 10px; }
+  .trust-social { flex-direction: column; gap: 3px; text-align: center; }
+}

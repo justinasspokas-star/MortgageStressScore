@@ -247,7 +247,15 @@
     <button class="premium-btn" id="premium-pay-btn" onclick="openPremiumCheckout()">
       Get my personalized plan — $9 →
     </button>
-    <p class="premium-fine">One-time $9 payment. PDF downloads immediately. No subscription, no lender calls.</p>
+    <div class="trust-row">
+      <span class="trust-item">✓ One-time payment</span>
+      <span class="trust-item">✓ PDF downloads instantly</span>
+      <span class="trust-item">✓ No lender calls</span>
+    </div>
+    <div class="trust-social" id="trust-social">
+      <span class="trust-helped" id="trust-helped">Helping homeowners in your state</span>
+      <span class="trust-secure">🔒 Secure checkout via Stripe</span>
+    </div>
   </div>
   <p class="action-see-options"><a href="#options">See all mortgage relief options ↓</a></p>
 </section>
@@ -691,6 +699,22 @@ function scrollToPremiumBox() {
 }
 
 // scrollToActionPlan replaced by native anchor href='#action-plan'
+
+// Update trust signal when state changes
+document.addEventListener('DOMContentLoaded', function() {
+  const stateEl = document.getElementById('prem-state');
+  if (stateEl) {
+    stateEl.addEventListener('change', function() {
+      const helped = document.getElementById('trust-helped');
+      if (helped && this.value) {
+        const stateNames = {CA:'California',TX:'Texas',FL:'Florida',NY:'New York',
+          NJ:'New Jersey',IL:'Illinois',OH:'Ohio',GA:'Georgia',PA:'Pennsylvania'};
+        const name = stateNames[this.value] || 'your state';
+        helped.textContent = 'Helping homeowners in ' + name;
+      }
+    });
+  }
+});
 
 function openPremiumCheckout() {
   const state = document.getElementById('prem-state').value;
