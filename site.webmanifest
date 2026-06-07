@@ -1,6 +1,6 @@
 {
   "name": "MortgageStressScore",
-  "short_name": "MortgageScore",
+  "short_name": "Mortga",
   "icons": [
     {
       "src": "/android-chrome-192x192.png",
@@ -8,12 +8,17 @@
       "type": "image/png"
     },
     {
-      "src": "/favicon-512x512.png",
+      "src": "/android-chrome-512x512.png",
       "sizes": "512x512",
+      "type": "image/png"
+    },
+    {
+      "src": "/apple-touch-icon.png",
+      "sizes": "180x180",
       "type": "image/png"
     }
   ],
-  "theme_color": "#f8f8f4",
-  "background_color": "#f8f8f4",
+  "theme_color": "#0b6bff",
+  "background_color": "#ffffff",
   "display": "standalone"
 }
