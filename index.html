@@ -45,6 +45,21 @@
 }
 </style>
 
+
+<style>
+.premium-pack-card ul{margin:18px 0 22px;padding-left:20px}
+.premium-pack-card li{margin:8px 0}
+.premium-pack-button{display:inline-block;margin-top:4px}
+.small-note{margin-top:14px;color:#777;font-size:.92rem}
+</style>
+
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<meta name="theme-color" content="#f8f8f4">
 </head>
 <body>
 <div class="page-wrapper">
@@ -247,15 +262,7 @@
     <button class="premium-btn" id="premium-pay-btn" onclick="openPremiumCheckout()">
       Get my personalized plan — $9 →
     </button>
-    <div class="trust-row">
-      <span class="trust-item">✓ One-time payment</span>
-      <span class="trust-item">✓ PDF downloads instantly</span>
-      <span class="trust-item">✓ No lender calls</span>
-    </div>
-    <div class="trust-social" id="trust-social">
-      <span class="trust-helped" id="trust-helped">Helping homeowners in your state</span>
-      <span class="trust-secure">🔒 Secure checkout via Stripe</span>
-    </div>
+    <p class="premium-fine">One-time $9 payment. PDF downloads immediately. No subscription, no lender calls.</p>
   </div>
   <p class="action-see-options"><a href="#options">See all mortgage relief options ↓</a></p>
 </section>
@@ -331,6 +338,12 @@
   <p class="section-eyebrow">Mortgage help guides</p>
   <h2 class="section-title">Plain-English answers for stressful mortgage decisions.</h2>
   <div class="guides-grid">
+    <a class="guide-card" href="how-to-read-a-loan-estimate.html" onclick="mssTrack('click_guide_link',{guide:'how-to-read-a-loan-estimate'})">
+      <h3>How to read a Loan Estimate</h3>
+      <p>Before closing, understand the full payment, escrow, credits and cash to close.</p>
+      <span class="guide-arrow">Read guide →</span>
+    </a>
+
     <a class="guide-card" href="help-with-mortgage-payment.html" onclick="mssTrack('click_guide_link',{g:'help-payment'})">
       <h3>Help with mortgage payment</h3>
       <p>What to do when the payment is becoming hard to manage and which options to compare first.</p>
@@ -421,6 +434,24 @@
   </div>
 </section>
 
+<section id="premium-pack" class="guides-section premium-pack-section">
+  <p class="section-eyebrow">Optional paid resource</p>
+  <h2 class="section-title">Want a more organized plan?<br><em>Get the Mortgage Premium Action Pack.</em></h2>
+  <div class="guide-card premium-pack-card">
+    <h3>Mortgage Premium Action Pack — $9</h3>
+    <p>A practical educational pack to help homeowners organize mortgage hardship documents, servicer questions, and next steps. Not legal, financial, or lending advice.</p>
+    <ul>
+      <li>Servicer call prep checklist</li>
+      <li>Hardship document organizer</li>
+      <li>Questions to ask before choosing an option</li>
+      <li>7-day mortgage action plan structure</li>
+    </ul>
+    <a class="site-btn-nav premium-pack-button" href="https://buy.stripe.com/4gM8wI0mG5w4ceO8s9gQE00" target="_blank" rel="noopener sponsored" onclick="mssTrack('click_premium_pack_stripe',{price:'9',currency:'USD',placement:'home'})">Get the premium pack — $9</a>
+    <p class="small-note">The free score and checklist remain free. This optional pack is for extra organization only.</p>
+  </div>
+</section>
+
+
 <footer class="site-footer">
   <a href="index.html" class="site-logo" aria-label="MortgageStressScore home">
     <picture><source srcset="logo.webp?v=9" type="image/webp"><img src="logo.png?v=9" alt="MortgageStressScore.com" width="480" height="120" loading="lazy"></picture>
@@ -497,25 +528,6 @@ function calcScore() {
 
   const result = document.getElementById('score-result');
   result.classList.add('visible');
-
-  // ── Mobile scroll: show score result automatically ───────────────────────
-  // Only on mobile (screen width <= 900px) — desktop user can already see it
-  if (window.innerWidth <= 900) {
-    setTimeout(function() {
-      // Walk up the DOM to get true document offset (works with overflow:clip)
-      var el = result;
-      var top = 0;
-      while (el) { top += el.offsetTop; el = el.offsetParent; }
-      var navH = document.querySelector('.site-nav')
-                 ? document.querySelector('.site-nav').offsetHeight + 8
-                 : 60;
-      var target = Math.max(0, top - navH);
-      // Triple method — covers iOS Safari, Chrome Android, Firefox
-      document.body.scrollTop          = target;
-      document.documentElement.scrollTop = target;
-      try { window.scrollTo({ top: target, behavior: 'smooth' }); } catch(e) {}
-    }, 80);
-  }
 }
 </script>
 <script>
@@ -699,22 +711,6 @@ function scrollToPremiumBox() {
 }
 
 // scrollToActionPlan replaced by native anchor href='#action-plan'
-
-// Update trust signal when state changes
-document.addEventListener('DOMContentLoaded', function() {
-  const stateEl = document.getElementById('prem-state');
-  if (stateEl) {
-    stateEl.addEventListener('change', function() {
-      const helped = document.getElementById('trust-helped');
-      if (helped && this.value) {
-        const stateNames = {CA:'California',TX:'Texas',FL:'Florida',NY:'New York',
-          NJ:'New Jersey',IL:'Illinois',OH:'Ohio',GA:'Georgia',PA:'Pennsylvania'};
-        const name = stateNames[this.value] || 'your state';
-        helped.textContent = 'Helping homeowners in ' + name;
-      }
-    });
-  }
-});
 
 function openPremiumCheckout() {
   const state = document.getElementById('prem-state').value;
