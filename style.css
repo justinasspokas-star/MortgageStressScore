@@ -353,6 +353,10 @@ hr { border: none; border-top: 1px solid var(--rule); }
 .article-cta p  { font-size: 14px; color: #5a5852; margin-bottom: 18px; }
 .article-cta a  { display: inline-block; background: var(--ink); color: var(--paper); text-decoration: none; padding: 13px 28px; border-radius: 6px; font-weight: 500; font-size: 14px; transition: opacity .15s; }
 .article-cta a:hover { opacity: .85; }
+.article-cta-top { margin: 28px 0 36px; background: #fffdfa; }
+.article-cta .cta-kicker { margin: 0 0 8px; color: var(--muted); text-transform: uppercase; letter-spacing: .08em; font-size: 11px; font-weight: 700; }
+.article-cta .cta-trust-line { margin: 14px 0 0; color: #6f6b62; font-size: 12px; }
+
 .sources-block { border-top: 1px solid var(--rule); margin-top: 48px; padding-top: 22px; }
 .sources-title { font-size: 11px; font-weight: 500; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); margin-bottom: 12px; }
 .sources-block ul { padding-left: 0; list-style: none; margin: 0; }
@@ -856,4 +860,44 @@ hr { border: none; border-top: 1px solid var(--rule); }
   .result-cta-row { flex-direction: column; gap: 8px; }
   .result-premium-wrap { width: 100%; }
   .result-premium-inline { width: 100%; padding: 13px; font-size: 15px; }
+}
+
+/* Score explanation: why this score + next 3 steps */
+.score-explain {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+  border-top: 3px solid var(--ink);
+  background: #fff;
+}
+.score-explain-card {
+  padding: 22px 28px 24px;
+  border-right: 1px solid var(--rule);
+  background: #fffdf8;
+}
+.score-explain-card:last-child { border-right: none; background: #fbfcfb; }
+.score-explain-kicker {
+  margin: 0 0 12px;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: .12em;
+  color: #5a5852;
+  font-weight: 700;
+}
+.score-why-list, .score-next-list {
+  margin: 0;
+  padding-left: 18px;
+  color: #27241f;
+}
+.score-why-list li, .score-next-list li {
+  margin: 0 0 10px;
+  font-size: 14px;
+  line-height: 1.55;
+}
+.score-why-list li:last-child, .score-next-list li:last-child { margin-bottom: 0; }
+.score-why-list strong, .score-next-list strong { color: #111; }
+@media (max-width: 760px) {
+  .score-explain { grid-template-columns: 1fr; }
+  .score-explain-card { border-right: none; border-bottom: 1px solid var(--rule); padding: 20px; }
+  .score-explain-card:last-child { border-bottom: none; }
 }

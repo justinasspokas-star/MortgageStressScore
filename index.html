@@ -161,8 +161,18 @@
       <div class="factor"><span class="factor-name">Missed payments</span><div class="factor-bar"><div class="factor-fill" id="fb-missed"></div></div><span class="factor-val" id="fv-missed">–</span></div>
       <div class="factor"><span class="factor-name">Urgency level</span><div class="factor-bar"><div class="factor-fill" id="fb-urgency"></div></div><span class="factor-val" id="fv-urgency">–</span></div>
     </div>
+    <div class="score-explain" id="score-explain" style="display:none" aria-live="polite">
+      <div class="score-explain-card">
+        <p class="score-explain-kicker">Why this score</p>
+        <ul class="score-why-list" id="score-why-list"></ul>
+      </div>
+      <div class="score-explain-card score-next-card">
+        <p class="score-explain-kicker">Your next 3 steps</p>
+        <ol class="score-next-list" id="score-next-list"></ol>
+      </div>
+    </div>
     <div class="result-actions">
-      <p><strong>Next step:</strong> use this score as a starting point. If you are behind or close to missing a payment, contact your mortgage servicer and consider a HUD-approved housing counselor.</p>
+      <p id="score-next-summary"><strong>Next step:</strong> use this score as a starting point. If you are behind or close to missing a payment, contact your mortgage servicer and consider a HUD-approved housing counselor.</p>
       <div class="result-cta-grid" id="result-cta-grid" style="display:none">
         <a href="#action-plan" class="btn-primary result-checklist-btn" id="result-checklist-btn">
           Get my free action plan ↓
@@ -527,6 +537,109 @@ function calcScore() {
 
   const result = document.getElementById('score-result');
   result.classList.add('visible');
+
+  renderScoreExplanation({
+    score, payment, income, ratio, missed, equity, loan, urgency, color
+  });
+}
+
+function mortgageRatioLabel(ratio) {
+  return Math.round(ratio * 100) + '%';
+}
+
+function setListItems(id, items) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  el.innerHTML = items.map(item => `<li>${item}</li>`).join('');
+}
+
+function renderScoreExplanation(data) {
+  const { score, payment, income, ratio, missed, equity, loan, urgency, color } = data;
+  const level = score < 35 ? 'low' : score < 65 ? 'moderate' : 'high';
+  const ratioText = mortgageRatioLabel(ratio);
+  const why = [];
+
+  if (ratio >= 0.50) {
+    why.push(`Your mortgage payment is about <strong>${ratioText}</strong> of gross monthly income, which leaves limited room for taxes, insurance, repairs, debt, and emergencies.`);
+  } else if (ratio >= 0.38) {
+    why.push(`Your payment is about <strong>${ratioText}</strong> of gross monthly income, a pressure zone where one income or escrow shock can matter.`);
+  } else if (ratio >= 0.28) {
+    why.push(`Your payment is about <strong>${ratioText}</strong> of gross monthly income, which is manageable for some households but still worth stress-testing.`);
+  } else {
+    why.push(`Your payment is about <strong>${ratioText}</strong> of gross monthly income, so payment burden is not the main warning sign right now.`);
+  }
+
+  if (missed >= 3) {
+    why.push('You selected <strong>4 or more missed payments</strong>, so deadlines and written servicer communication become urgent.');
+  } else if (missed >= 2) {
+    why.push('You selected <strong>2–3 missed payments</strong>, which usually means you should ask the servicer about loss-mitigation options quickly.');
+  } else if (missed === 1) {
+    why.push('You selected <strong>1 missed payment</strong>, which is often the best time to contact the servicer before the situation escalates.');
+  }
+
+  if (equity === 0) {
+    why.push('You selected <strong>none or underwater equity</strong>, which can reduce flexibility if selling or refinancing becomes necessary.');
+  } else if (equity === 1) {
+    why.push('You selected <strong>low or uncertain equity</strong>, so refinance/sale options may be more limited than they appear.');
+  }
+
+  if (loan === 0) {
+    why.push('An <strong>ARM or interest-only loan</strong> can add payment-shock risk if the rate or payment resets.');
+  } else if (loan === 1) {
+    why.push('A <strong>fixed 30-year loan</strong> is more stable, but the score still depends on payment burden, missed payments, and urgency.');
+  } else if (loan === 3) {
+    why.push('An <strong>FHA loan</strong> may have specific loss-mitigation paths to ask about, but timing and documentation still matter.');
+  }
+
+  if (urgency === 0) {
+    why.push('You selected <strong>already behind</strong>, so the next step should be direct servicer contact and free HUD-approved counseling.');
+  } else if (urgency === 1) {
+    why.push('You selected <strong>worried but not late</strong>, which is the best window to prepare documents and ask about options before missing payments.');
+  }
+
+  const topWhy = why.slice(0, 4);
+
+  let steps;
+  let summary;
+  if (level === 'high' || missed >= 2 || urgency === 0) {
+    steps = [
+      '<strong>Call your mortgage servicer today</strong> and ask for the loss-mitigation department. Request options and document deadlines in writing.',
+      '<strong>Contact a HUD-approved housing counselor</strong> for free help understanding options before paying anyone for assistance.',
+      '<strong>Prepare your document packet</strong>: mortgage statement, income proof, bank statements, hardship reason, and a call log.'
+    ];
+    summary = '<strong>Next step:</strong> this score suggests urgency. Contact your servicer and a HUD-approved housing counselor before deadlines get tighter.';
+  } else if (level === 'moderate') {
+    steps = [
+      '<strong>Stress test the next 90 days</strong>: taxes, insurance, repairs, income drop, and any debt payments.',
+      '<strong>Call before you fall behind</strong> and ask what hardship, forbearance, repayment, or modification options exist for your loan type.',
+      '<strong>Gather documents now</strong> so you are not rushing if the servicer asks for proof later.'
+    ];
+    summary = '<strong>Next step:</strong> you still have time. Use this week to prepare, document your numbers, and ask about options before the pressure escalates.';
+  } else {
+    steps = [
+      '<strong>Build a mortgage buffer</strong>: aim for at least 3 months of payments or a smaller emergency reserve if that is more realistic.',
+      '<strong>Run one bad-case scenario</strong>: higher insurance/taxes, one repair, or one month of reduced income.',
+      '<strong>Save your servicer contact info</strong> and review your loan terms once a year, especially if taxes, insurance, or income change.'
+    ];
+    summary = '<strong>Next step:</strong> your score looks manageable. Keep it that way by building a buffer and reviewing the loan before a problem appears.';
+  }
+
+  setListItems('score-why-list', topWhy);
+  setListItems('score-next-list', steps);
+
+  const explain = document.getElementById('score-explain');
+  if (explain) {
+    explain.style.display = 'grid';
+    explain.style.borderTopColor = color;
+  }
+
+  const summaryEl = document.getElementById('score-next-summary');
+  if (summaryEl) summaryEl.innerHTML = summary;
+
+  try {
+    localStorage.setItem('mss_score_reasons', JSON.stringify(topWhy.map(x => x.replace(/<[^>]*>/g, ''))));
+    localStorage.setItem('mss_next_steps', JSON.stringify(steps.map(x => x.replace(/<[^>]*>/g, ''))));
+  } catch(e) {}
 }
 </script>
 <script>
