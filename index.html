@@ -27,6 +27,13 @@
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date()); gtag('config', 'G-TJTKS00LW6');
   function mssTrack(e,p){if(typeof gtag==='function')gtag('event',e,p||{});}
+  function mssSendLeadConversion(params){
+    if (window.mssConversionSent) return;
+    window.mssConversionSent = true;
+    if (typeof gtag === 'function') {
+      gtag('event', 'conversion_event_submit_lead_form', params || {});
+    }
+  }
 </script>
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
@@ -774,6 +781,15 @@ function showActionPlan() {
     localStorage.setItem('mss_risk',  level);
     localStorage.setItem('mss_ts',    Date.now());
   } catch(e) {}
+
+  // Google Ads / GA4 conversion: score completed.
+  // This fires only after the calculator result and action plan are shown.
+  mssSendLeadConversion({
+    score: score,
+    risk_level: level,
+    event_category: 'lead',
+    event_label: 'mortgage_stress_score_completed'
+  });
 
   // Show premium box with differentiated message by score range
   const pb = document.getElementById('premium-box');
