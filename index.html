@@ -3,11 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MortgageStressScore — Know your risk before it's too late</title>
-<meta name="description" content="Check your Mortgage Stress Score in minutes. Refinance, modification, forbearance, HUD counseling — see which options fit your situation. Free, private.">
+<title>Behind on Mortgage Payments? Free Mortgage Stress Score</title>
+<meta name="description" content="Behind on your mortgage, missed a payment, or worried you cannot afford next month? Check your free private Mortgage Stress Score in 60 seconds. No phone number. No lender calls.">
 <link rel="canonical" href="https://mortgagestressscore.com/">
-<meta property="og:title" content="MortgageStressScore — Know your risk before it's too late">
-<meta property="og:description" content="Check your Mortgage Stress Score in minutes. Refinance, modification, forbearance, HUD counseling — see which options fit your situation. Free, private.">
+<meta property="og:title" content="Behind on Mortgage Payments? Free Mortgage Stress Score">
+<meta property="og:description" content="Behind on your mortgage, missed a payment, or worried you cannot afford next month? Check your free private Mortgage Stress Score in 60 seconds. No phone number. No lender calls.">
 <meta property="og:image" content="https://mortgagestressscore.com/logo.png">
 <meta property="og:url" content="https://mortgagestressscore.com/">
 <meta property="og:type" content="website">
@@ -18,8 +18,8 @@
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css?v=9">
 <script type="application/ld+json">
-[{"@context":"https://schema.org","@type":"WebSite","name":"MortgageStressScore","url":"https://mortgagestressscore.com/","description":"Free browser-based calculator that estimates mortgage payment stress and ranks next steps for homeowners."},
-{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Mortgage Stress Score Calculator","applicationCategory":"FinanceApplication","operatingSystem":"Web","url":"https://mortgagestressscore.com/","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"description":"Estimates mortgage stress risk from 6 inputs. Runs entirely in your browser. No phone number required."}]
+[{"@context":"https://schema.org","@type":"WebSite","name":"MortgageStressScore","url":"https://mortgagestressscore.com/","description":"Free browser-based calculator for homeowners who missed a mortgage payment, are behind on payments, or are worried they cannot afford next month. Estimates mortgage stress and ranks next steps."},
+{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Mortgage Stress Score Calculator","applicationCategory":"FinanceApplication","operatingSystem":"Web","url":"https://mortgagestressscore.com/","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"description":"Estimates mortgage stress risk from 6 inputs and gives next steps for missed payments, affordability pressure, FHA modification questions, forbearance, and loan modification. Runs in your browser. No phone number required."}]
 </script>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-TJTKS00LW6"></script>
 <script>
@@ -59,6 +59,40 @@
 .premium-pack-button{display:inline-block;margin-top:4px}
 .small-note{margin-top:14px;color:#777;font-size:.92rem}
 .footer-links a{white-space:nowrap}
+.hero-urgent{padding-bottom:58px}
+.hero-urgent .hero-sub{max-width:780px}
+.urgent-chip-row{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin:22px auto 24px;max-width:920px}
+.urgent-chip{border:1px solid rgba(22,45,33,.18);background:#fffdf7;border-radius:999px;padding:9px 14px;font-size:.92rem;color:#324036}
+.hero-actions{display:flex;justify-content:center;gap:14px;flex-wrap:wrap;margin-top:10px}
+.btn-secondary-urgent{display:inline-flex;align-items:center;justify-content:center;border:1px solid rgba(22,45,33,.22);border-radius:999px;padding:13px 20px;text-decoration:none;color:#162d21;background:#fff;font-weight:500;box-shadow:0 6px 18px rgba(22,45,33,.06)}
+.hero-proof-list{display:flex;justify-content:center;gap:18px;flex-wrap:wrap;list-style:none;padding:0;margin:22px auto 0;color:#556058;font-size:.95rem}
+.hero-proof-list li{display:flex;gap:7px;align-items:center}
+.urgent-routing-panel{margin:34px auto 0;max-width:980px;background:#fff;border:1px solid rgba(22,45,33,.12);border-radius:28px;box-shadow:0 18px 55px rgba(22,45,33,.08);padding:26px;text-align:left}
+.urgent-routing-eyebrow{margin:0 0 6px;color:#8b1f1f;font-size:.8rem;text-transform:uppercase;letter-spacing:.12em;font-weight:700}
+.urgent-routing-title{margin:0 0 18px;font-size:clamp(1.55rem,3vw,2.2rem);line-height:1.05;color:#162d21}
+.urgent-routing-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.urgent-route-card{display:block;padding:16px;border-radius:18px;border:1px solid rgba(22,45,33,.12);background:#fbf8ef;text-decoration:none;color:#162d21;transition:transform .18s ease, box-shadow .18s ease, border-color .18s ease}
+.urgent-route-card:hover{transform:translateY(-2px);box-shadow:0 12px 28px rgba(22,45,33,.09);border-color:rgba(139,31,31,.35)}
+.urgent-route-card strong{display:block;font-size:1.02rem;margin-bottom:6px}
+.urgent-route-card span{display:block;font-size:.9rem;color:#5e675f;line-height:1.42}
+.quick-path-section{padding:58px 0 36px}
+.quick-path-inner{max-width:1080px;margin:0 auto}
+.quick-path-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:24px}
+.quick-path-card{border:1px solid rgba(22,45,33,.12);background:#fff;border-radius:24px;padding:22px;text-decoration:none;color:#162d21;box-shadow:0 10px 28px rgba(22,45,33,.05)}
+.quick-path-card h3{margin:0 0 10px;font-size:1.15rem;line-height:1.18}
+.quick-path-card p{margin:0 0 16px;color:#606861;line-height:1.5;font-size:.95rem}
+.quick-path-card span{font-weight:600;color:#1a5c3a}
+.calc-intent-note{margin:16px auto 0;max-width:720px;color:#5f675f;font-size:.96rem;text-align:center;line-height:1.55}
+@media (max-width: 900px){
+  .urgent-routing-grid,.quick-path-grid{grid-template-columns:1fr 1fr}
+}
+@media (max-width: 620px){
+  .hero-actions{align-items:stretch}
+  .hero-actions a{width:100%;box-sizing:border-box}
+  .urgent-routing-panel{border-radius:22px;padding:20px}
+  .urgent-routing-grid,.quick-path-grid{grid-template-columns:1fr}
+  .quick-path-section{padding-top:36px}
+}
 </style>
 
   <link rel="icon" href="/favicon.ico" sizes="any">
@@ -77,27 +111,90 @@
   <div class="site-nav-links">
     <a href="index.html#how" class="site-nav-link">How it works</a>
     <a href="guides.html" class="site-nav-link">Guides</a>
+    <a href="methodology.html" class="site-nav-link">Methodology</a>
     <a href="about.html" class="site-nav-link">About</a>
   </div>
   <a href="index.html#calc" class="site-btn-nav" onclick="mssTrack('click_cta_nav',{page:document.title})">Get my score</a>
 </nav>
 
-<section class="hero">
-  <div class="hero-kicker">Free · Private · No lender calls</div>
-  <h1>Your mortgage risk,<br><em>honestly assessed.</em></h1>
-  <p class="hero-sub">Not a rate comparison. Not a lead form. A real score that tells you where you stand — and what to do next.</p>
-  <a href="#calc" class="btn-primary" onclick="mssTrack('click_cta_hero',{})">Check my free score</a>
-  <p class="hero-trust">
-    <span>🔒</span>
-    This calculator runs in your browser. We do not ask for your phone number.
-  </p>
+<section class="hero hero-urgent">
+  <div class="hero-kicker">Behind on payments? Worried about next month?</div>
+  <h1>Get your Mortgage Stress Score<br><em>before the situation escalates.</em></h1>
+  <p class="hero-sub">Answer six private questions and see whether your mortgage situation looks low, moderate, or high risk — plus the next steps to compare before you call your servicer.</p>
+  <div class="urgent-chip-row" aria-label="Common mortgage situations">
+    <span class="urgent-chip">Missed mortgage payment</span>
+    <span class="urgent-chip">Payment too high</span>
+    <span class="urgent-chip">Behind on mortgage</span>
+    <span class="urgent-chip">FHA modification questions</span>
+  </div>
+  <div class="hero-actions">
+    <a href="#calc" class="btn-primary" onclick="mssTrack('click_cta_hero_urgent',{intent:'score_now'})">Check my mortgage risk now →</a>
+    <a href="missed-mortgage-payment.html" class="btn-secondary-urgent" onclick="mssTrack('click_urgent_hero_secondary',{intent:'missed_payment'})">I already missed a payment</a>
+  </div>
+  <ul class="hero-proof-list">
+    <li>🔒 No phone number required</li>
+    <li>⚡ About 60 seconds</li>
+    <li>🧭 Options before lender calls</li>
+  </ul>
+  <div class="urgent-routing-panel" id="urgent-start">
+    <p class="urgent-routing-eyebrow">Start here</p>
+    <h2 class="urgent-routing-title">Choose the situation that feels closest to yours.</h2>
+    <div class="urgent-routing-grid">
+      <a href="#calc" class="urgent-route-card" onclick="setUrgencyAndScroll(0);mssTrack('click_urgent_route',{route:'already_behind'});">
+        <strong>Already behind</strong>
+        <span>Preselects the urgent score path and shows your next steps.</span>
+      </a>
+      <a href="#calc" class="urgent-route-card" onclick="setUrgencyAndScroll(1);mssTrack('click_urgent_route',{route:'worried_not_late'});">
+        <strong>Worried, not late yet</strong>
+        <span>Check pressure before one missed payment becomes a bigger problem.</span>
+      </a>
+      <a href="fha-loan-modification-options.html" class="urgent-route-card" onclick="mssTrack('click_urgent_route',{route:'fha_modification'});">
+        <strong>FHA loan questions</strong>
+        <span>Review FHA modification and loss-mitigation options to ask about.</span>
+      </a>
+      <a href="mortgage-relief-options.html" class="urgent-route-card" onclick="mssTrack('click_urgent_route',{route:'relief_options'});">
+        <strong>Compare relief options</strong>
+        <span>See forbearance, modification, repayment plans, counseling, and more.</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="quick-path-section" aria-labelledby="quick-path-title">
+  <div class="quick-path-inner">
+    <p class="section-eyebrow">Urgent mortgage help</p>
+    <h2 class="section-title" id="quick-path-title">Find the guide that matches<br><em>what is happening today.</em></h2>
+    <div class="quick-path-grid">
+      <a class="quick-path-card" href="missed-mortgage-payment.html" onclick="mssTrack('click_home_urgent_guide',{guide:'missed-mortgage-payment'})">
+        <h3>Missed a mortgage payment?</h3>
+        <p>What to do next, what to ask your servicer, and which deadlines to document.</p>
+        <span>Read the missed-payment guide →</span>
+      </a>
+      <a class="quick-path-card" href="cant-afford-mortgage.html" onclick="mssTrack('click_home_urgent_guide',{guide:'cant-afford-mortgage'})">
+        <h3>Can’t afford next month?</h3>
+        <p>A practical triage path before the pressure turns into late payments.</p>
+        <span>Compare your next steps →</span>
+      </a>
+      <a class="quick-path-card" href="mortgage-forbearance-vs-loan-modification.html" onclick="mssTrack('click_home_urgent_guide',{guide:'forbearance-vs-modification'})">
+        <h3>Forbearance or modification?</h3>
+        <p>Understand temporary relief versus longer-term changes before you choose.</p>
+        <span>Compare both options →</span>
+      </a>
+      <a class="quick-path-card" href="fha-loan-modification-options.html" onclick="mssTrack('click_home_urgent_guide',{guide:'fha-loan-modification-options'})">
+        <h3>Have an FHA loan?</h3>
+        <p>Learn what to ask about FHA hardship, modification, and review options.</p>
+        <span>See FHA options →</span>
+      </a>
+    </div>
+  </div>
 </section>
 
 <hr>
 
 <section class="calc-section" id="calc">
-  <p class="section-eyebrow">The score</p>
-  <h2 class="section-title">Six inputs.<br><em>One honest number.</em></h2>
+  <p class="section-eyebrow">Free private score</p>
+  <h2 class="section-title">Check your mortgage risk<br><em>in about 60 seconds.</em></h2>
+  <p class="calc-intent-note">Use this if you are behind on payments, worried about missing next month, comparing forbearance vs loan modification, or trying to understand which option to ask your servicer about first.</p>
   <div class="form-grid">
     <div class="field">
       <label for="f-payment">Monthly mortgage payment ($)</label>
@@ -145,7 +242,7 @@
       </select>
     </div>
   </div>
-  <button class="btn-calc" onclick="mssTrack('click_calculate',{}); calcScore();">Check my free score →</button>
+  <button class="btn-calc" onclick="mssTrack('click_calculate',{}); calcScore();">Show my risk level and next steps →</button>
   <p class="calculator-note">Educational estimate only. This is not a credit score, lending decision, legal advice, financial advice, or foreclosure-prevention service. <a href="methodology.html" onclick="mssTrack('click_methodology_from_calculator',{})">See how the score works</a>.</p>
 
   <div class="score-result" id="score-result">
@@ -825,6 +922,17 @@ function showActionPlan() {
   }
 }
 
+
+
+function setUrgencyAndScroll(urgencyValue) {
+  const urgency = document.getElementById('f-urgency');
+  if (urgency) urgency.value = String(urgencyValue);
+  const calc = document.getElementById('calc');
+  if (calc) {
+    try { calc.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+    catch(e) { window.location.hash = 'calc'; }
+  }
+}
 
 function scrollToPremiumBox() {
   var pb = document.getElementById('premium-box');
