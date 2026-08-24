@@ -35,7 +35,8 @@
 .guide-breadcrumb{font-size:.92rem;color:#6f6f67;margin-bottom:28px}.guide-breadcrumb a{color:inherit;text-decoration:none}.guide-breadcrumb a:hover{text-decoration:underline}
 .guide-hero{padding:28px 0 36px}.guide-hero h1{font-family:'Instrument Serif',serif;font-size:clamp(44px,7vw,82px);line-height:.94;letter-spacing:-.035em;margin:0 0 18px;color:#171714}.guide-hero h1 em{color:#1a5c3a;font-style:italic}.guide-deck{font-size:1.22rem;line-height:1.65;max-width:780px;color:#3b3b36}.guide-meta{display:flex;gap:14px;flex-wrap:wrap;color:#777166;font-size:.94rem;margin-top:18px}.guide-pill{border:1px solid #e1ddd2;background:#fbfaf6;border-radius:999px;padding:8px 12px}.guide-grid{display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:42px;align-items:start}.guide-content{font-size:1.05rem;line-height:1.78;color:#2e2e2a}.guide-content h2{font-family:'Instrument Serif',serif;font-size:clamp(34px,4.5vw,54px);line-height:1;margin:56px 0 18px;letter-spacing:-.025em;color:#171714}.guide-content h3{font-size:1.32rem;margin:34px 0 10px;color:#171714}.guide-content p{margin:0 0 18px}.guide-content ul,.guide-content ol{padding-left:24px;margin:0 0 22px}.guide-content li{margin:9px 0}.toc-card,.cta-card,.source-card,.warning-card,.quick-card{border:1px solid #e1ddd2;background:#fbfaf6;border-radius:22px;padding:22px;margin-bottom:22px}.toc-card{position:sticky;top:20px}.toc-card strong,.cta-card strong,.source-card strong,.warning-card strong,.quick-card strong{display:block;color:#171714;margin-bottom:12px}.toc-card a{display:block;color:#3d6650;text-decoration:none;margin:10px 0;font-size:.95rem}.toc-card a:hover{text-decoration:underline}.cta-card{background:#f0f8f3;border-color:#b8d9c4}.cta-card .btn-primary{margin-top:8px}.source-card{font-size:.95rem;color:#555}.source-card a{color:#315b43}.warning-card{background:#fff7ed;border-color:#edd5b4}.quick-card{background:#f8fbff;border-color:#d5e2f3}.table-wrap{overflow-x:auto;margin:24px 0}.seo-table{width:100%;border-collapse:collapse;font-size:.98rem}.seo-table th,.seo-table td{border:1px solid #e1ddd2;padding:12px;text-align:left;vertical-align:top}.seo-table th{background:#f4f1e8;color:#171714}.answer-box{border-left:4px solid #1a5c3a;background:#f4faf6;padding:18px 20px;border-radius:14px;margin:22px 0}.related-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin-top:20px}.related-card{border:1px solid #e1ddd2;border-radius:18px;padding:18px;text-decoration:none;color:#171714;background:#fff}.related-card span{display:block;color:#4c765e;margin-top:8px}.source-list a{word-break:break-word}.mini-note{font-size:.93rem;color:#6f6f67}.callout-title{font-weight:600;color:#171714}
 @media(max-width:860px){.guide-grid{grid-template-columns:1fr}.toc-card{position:static}.related-grid{grid-template-columns:1fr}.guide-wrap{padding-top:32px}.guide-hero h1{font-size:46px}}
-.footer-links a{white-space:nowrap}
+
+@media(max-width:860px){.seo-table{border:0;background:transparent}.seo-table thead{display:none}.seo-table tbody,.seo-table tr,.seo-table td{display:block;width:100%}.seo-table tr{border:1px solid #e1ddd2;border-radius:18px;overflow:hidden;margin:0 0 14px;background:#fff}.seo-table td{box-sizing:border-box;border:0;border-bottom:1px solid #eee8dd;padding:12px 14px}.seo-table td:last-child{border-bottom:0}.seo-table td::before{content:attr(data-label);display:block;margin-bottom:5px;font-size:.74rem;line-height:1.2;text-transform:uppercase;letter-spacing:.045em;color:#716a60;font-weight:700}.site-nav-links{display:none}.site-logo img{max-width:132px!important;height:auto}.site-btn-nav{padding:10px 12px;font-size:.86rem}}
 </style>
 <script type="application/ld+json">
 [
@@ -149,11 +150,11 @@
 
 <h2 id="timeline">Typical missed mortgage payment timeline</h2>
 <div class="table-wrap"><table class="seo-table"><thead><tr><th>Stage</th><th>What may happen</th><th>Best action</th></tr></thead><tbody>
-<tr><td>1–15 days late</td><td>Your payment may be in a grace period, depending on your note. Late fees may not apply until after the grace period.</td><td>Pay if you can. If not, call the servicer before the next due date.</td></tr>
-<tr><td>16–30 days late</td><td>A late fee may be charged. The servicer may call or send notices.</td><td>Ask whether a repayment plan, hardship review, or short-term forbearance is available.</td></tr>
-<tr><td>30+ days late</td><td>The account may be reported as delinquent to credit bureaus. More formal outreach may begin.</td><td>Request loss-mitigation options in writing and keep a call log.</td></tr>
-<tr><td>60–90 days late</td><td>Risk rises. The servicer may send stronger default notices and request a complete assistance package.</td><td>Submit documents quickly and confirm receipt.</td></tr>
-<tr><td>120+ days late</td><td>In most cases, federal rules prevent the first foreclosure notice or filing until you are more than 120 days delinquent.</td><td>Contact a HUD-approved housing counselor and complete a loss-mitigation application as early as possible.</td></tr>
+<tr><td data-label="Stage">1–15 days late</td><td data-label="What may happen">Your payment may be in a grace period, depending on your note. Late fees may not apply until after the grace period.</td><td data-label="Best action">Pay if you can. If not, call the servicer before the next due date.</td></tr>
+<tr><td data-label="Stage">16–30 days late</td><td data-label="What may happen">A late fee may be charged. The servicer may call or send notices.</td><td data-label="Best action">Ask whether a repayment plan, hardship review, or short-term forbearance is available.</td></tr>
+<tr><td data-label="Stage">30+ days late</td><td data-label="What may happen">The account may be reported as delinquent to credit bureaus. More formal outreach may begin.</td><td data-label="Best action">Request loss-mitigation options in writing and keep a call log.</td></tr>
+<tr><td data-label="Stage">60–90 days late</td><td data-label="What may happen">Risk rises. The servicer may send stronger default notices and request a complete assistance package.</td><td data-label="Best action">Submit documents quickly and confirm receipt.</td></tr>
+<tr><td data-label="Stage">120+ days late</td><td data-label="What may happen">In most cases, federal rules prevent the first foreclosure notice or filing until you are more than 120 days delinquent.</td><td data-label="Best action">Contact a HUD-approved housing counselor and complete a loss-mitigation application as early as possible.</td></tr>
 </tbody></table></div>
 <p>The 120-day point matters because federal mortgage servicing rules generally give borrowers time to explore loss-mitigation before the first foreclosure notice or filing. Do not use that as permission to wait. Some documents take time to gather, and incomplete applications can delay review.</p>
 
@@ -189,9 +190,12 @@
 <p>It can. Mortgage delinquency is serious because payment history is a major part of credit scoring. But credit reporting is not the only concern. The faster you engage, the more likely you are to avoid multiple missed payments, collection escalation, and foreclosure filing risk.</p>
 <p>If you believe the servicer reported something incorrectly, save your evidence, ask the servicer to investigate, and consider submitting a complaint to the CFPB. Keep all written responses.</p>
 <p>Most importantly, do not let embarrassment create a second missed payment. One missed payment is a problem. Two or three missed payments can become a crisis. The best window to ask for help is before the account is deeply delinquent.</p>
+
+      <h2 id="credit-score-next">Missed mortgage payment and credit score</h2>
+      <div class="quick-card"><strong>Credit-reporting note</strong><p>A mortgage payment that becomes about 30 days past due may be reported as late and may affect your credit score. If credit reporting is your main concern, read the dedicated guide before the next payment is due.</p><a href="missed-mortgage-payment-credit-score.html" class="btn-primary" onclick="mssTrack('click_missed_to_credit_score',{guide:'missed-mortgage-payment'})">Read credit score guide →</a></div>
       <h2 id="faq">FAQ</h2><h3>Can I be foreclosed after one missed mortgage payment?</h3><p>Usually the legal foreclosure process cannot start after just one missed payment. Federal rules generally prevent the first foreclosure notice or filing until a borrower is more than 120 days delinquent, but you should contact your servicer immediately.</p><h3>Should I call my servicer if I can pay next month but missed this month?</h3><p>Yes. Ask if you can cure the missed payment, set up a repayment plan, or document a temporary hardship before fees and notices escalate.</p><h3>Is a HUD-approved housing counselor free?</h3><p>Foreclosure prevention counseling through HUD-approved housing counseling agencies is generally free to homeowners.</p>
       <h2 id="related">Related guides</h2>
-      <div class="related-grid">
+      <div class="related-grid"><a class="related-card" href="missed-mortgage-payment-credit-score.html" onclick="mssTrack('click_related_guide',{from:'missed-payment',to:'credit-score'})">Missed mortgage payment and credit score <span>When credit reporting may happen and what to do.</span></a>
         <a class="related-card" href="missed-mortgage-payment.html">Missed mortgage payment <span>What happens next and what to say</span></a>
         <a class="related-card" href="cant-afford-mortgage.html">Can’t afford mortgage <span>Options before and after you fall behind</span></a>
         <a class="related-card" href="mortgage-relief-options.html">Mortgage relief options <span>Compare all major paths</span></a>
@@ -199,7 +203,7 @@
       </div>
     </article>
     <aside>
-      <div class="toc-card"><strong>On this page</strong><a href="#first">What happens after the first missed payment</a><a href="#timeline">Typical timeline</a><a href="#call">What to say to your servicer</a><a href="#avoid">What not to do</a><a href="#documents">Documents to gather</a><a href="#credit">Credit and reporting</a><a href="#faq">FAQ</a><a href="#related">Related guides</a></div>
+      <div class="toc-card"><strong>On this page</strong><a href="#first">What happens after the first missed payment</a><a href="#timeline">Typical timeline</a><a href="#call">What to say to your servicer</a><a href="#avoid">What not to do</a><a href="#documents">Documents to gather</a><a href="#credit">Credit and reporting</a><a href="#credit-score-next">Credit score guide</a><a href="#faq">FAQ</a><a href="#related">Related guides</a></div>
       <div class="source-card"><strong>Official sources used</strong><ul class="source-list"><li><a href="https://www.consumerfinance.gov/ask-cfpb/how-long-will-it-take-before-ill-face-foreclosure-if-i-cant-make-my-mortgage-payments-what-is-the-foreclosure-timeline-en-1849/" target="_blank" rel="noopener">CFPB — foreclosure timeline and 120-day rule</a></li>
 <li><a href="https://www.consumerfinance.gov/consumer-tools/mortgages/how-to-avoid-foreclosure/" target="_blank" rel="noopener">CFPB — how to avoid foreclosure</a></li>
 <li><a href="https://www.consumerfinance.gov/ask-cfpb/if-i-cant-pay-my-mortgage-loan-what-are-my-options-en-268/" target="_blank" rel="noopener">CFPB — options if you can’t pay your mortgage</a></li>
@@ -215,8 +219,6 @@
   </a>
   <p class="footer-tagline">No surprise lender calls. No data sales. You stay in control.</p>
   <div class="footer-links">
-    <a href="methodology.html">Methodology</a> ·
-    <a href="editorial-policy.html">Editorial Policy</a> ·
     <a href="privacy.html">Privacy</a> ·
     <a href="disclaimer.html">Disclaimer</a> ·
     <a href="terms.html">Terms</a>
