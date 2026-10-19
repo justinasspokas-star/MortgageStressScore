@@ -27,12 +27,12 @@
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date()); gtag('config', 'G-TJTKS00LW6');
   function mssTrack(e,p){if(typeof gtag==='function')gtag('event',e,p||{});}
-  function mssSendLeadConversion(params){
-    if (window.mssConversionSent) return;
-    window.mssConversionSent = true;
-    if (typeof gtag === 'function') {
-      gtag('event', 'conversion_event_submit_lead_form', params || {});
-    }
+  // Events intentionally contain no user-entered amounts, score, risk level or loan details.
+  // A successful Stripe payment cannot be verified from this static page alone.
+  function mssTrackScoreStart(){
+    if(window.mssScoreStarted) return;
+    window.mssScoreStarted = true;
+    mssTrack('score_start',{tool:'mortgage_stress_score'});
   }
 </script>
 <script type="application/ld+json">
@@ -560,7 +560,7 @@
       <li>Questions to ask before choosing an option</li>
       <li>7-day mortgage action plan structure</li>
     </ul>
-    <a class="site-btn-nav premium-pack-button" href="https://buy.stripe.com/4gM8wI0mG5w4ceO8s9gQE00" target="_blank" rel="noopener sponsored" onclick="mssTrack('click_premium_pack_stripe',{price:'9',currency:'USD',placement:'home'})">Get the premium pack — $9</a>
+    <a class="site-btn-nav premium-pack-button" href="https://buy.stripe.com/4gM8wI0mG5w4ceO8s9gQE00" target="_blank" rel="noopener sponsored" onclick="mssTrack('premium_click',{placement:'home_pack',value:9,currency:'USD'});mssTrack('click_premium_pack_stripe',{placement:'home'})">Get the premium pack — $9</a>
     <p class="small-note">The free score and checklist remain free. This optional pack is for extra organization only.</p>
   </div>
 </section>
@@ -583,13 +583,13 @@
 <script>
 function calcScore() {
   const payment = parseFloat(document.getElementById('f-payment').value) || 0;
-  const income  = parseFloat(document.getElementById('f-income').value)  || 1;
+  const income  = parseFloat(document.getElementById('f-income').value)  || 0;
   const missed  = parseInt(document.getElementById('f-missed').value);
   const equity  = parseInt(document.getElementById('f-equity').value);
   const loan    = parseInt(document.getElementById('f-loan').value);
   const urgency = parseInt(document.getElementById('f-urgency').value);
 
-  if (!payment || !income) { alert('Please enter your monthly payment and income to calculate your score.'); return; }
+  if (!Number.isFinite(payment) || !Number.isFinite(income) || payment <= 0 || income <= 0) { alert('Please enter a valid positive monthly payment and gross monthly income.'); return false; }
 
   const ratio    = Math.min(payment / income, 1);
   const burden   = Math.round(ratio * 45);          // max 45 — payment pressure
@@ -648,6 +648,7 @@ function calcScore() {
   renderScoreExplanation({
     score, payment, income, ratio, missed, equity, loan, urgency, color
   });
+  return true;
 }
 
 function mortgageRatioLabel(ratio) {
@@ -824,7 +825,7 @@ function openGoogleForm() {
   document.getElementById('ec-retry-link').onclick = function(e) {
     e.preventDefault(); window.open(url, '_blank');
   };
-  if (typeof gtag === 'function') gtag('event','checklist_form_opened',{risk_level:risk,score:parseInt(score)});
+  mssTrack('checklist_form_opened',{placement:'action_plan'});
 }
 
 // ── Action plan ──────────────────────────────────────────────────────────────
@@ -832,11 +833,16 @@ const _origCalc = calcScore;
 // Patch calcScore to also show action plan
 const _origCalcScore = calcScore;
 document.addEventListener('DOMContentLoaded', function() {
+  const fields = document.querySelectorAll('#calc input, #calc select');
+  fields.forEach(function(field){
+    field.addEventListener('focus',mssTrackScoreStart,{once:true});
+    field.addEventListener('change',mssTrackScoreStart,{once:true});
+  });
   const origBtn = document.querySelector('.btn-calc');
   if (origBtn) origBtn.onclick = function() {
+    mssTrackScoreStart();
     mssTrack('click_calculate',{});
-    calcScore();
-    setTimeout(showActionPlan, 700);
+    if(calcScore() === true) showActionPlan();
   };
 });
 
@@ -882,14 +888,12 @@ function showActionPlan() {
     localStorage.setItem('mss_ts',    Date.now());
   } catch(e) {}
 
-  // Google Ads / GA4 conversion: score completed.
-  // This fires only after the calculator result and action plan are shown.
-  mssSendLeadConversion({
-    score: score,
-    risk_level: level,
-    event_category: 'lead',
-    event_label: 'mortgage_stress_score_completed'
-  });
+  // Track completion only when a valid result and action plan are shown.
+  // Never send the score, mortgage amounts or risk category to GA4.
+  if(!window.mssScoreCompletedSent){
+    window.mssScoreCompletedSent = true;
+    mssTrack('score_complete',{tool:'mortgage_stress_score'});
+  }
 
   // Show premium box with differentiated message by score range
   const pb = document.getElementById('premium-box');
@@ -966,19 +970,12 @@ function openPremiumCheckout() {
     return;
   }
 
-  const score = localStorage.getItem('mss_score') || '0';
-  const risk  = localStorage.getItem('mss_risk')  || 'unknown';
-
+  // Keep selected state/loan type in this browser only; do not send to Analytics.
   try {
     localStorage.setItem('mss_state', state);
-    localStorage.setItem('mss_loan',  loan);
+    localStorage.setItem('mss_loan', loan);
   } catch(e) {}
-
-  if (typeof gtag === 'function') {
-    gtag('event', 'premium_checkout_click', {
-      score: parseInt(score), risk_level: risk, state: state, loan_type: loan
-    });
-  }
+  mssTrack('premium_click',{placement:'calculator_checkout',value:9,currency:'USD'});
   window.location.href = STRIPE_LINK;
 }
 </script>

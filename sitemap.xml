@@ -2,13 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://mortgagestressscore.com/</loc>
-    <lastmod>2026-06-01</lastmod>
+    <lastmod>2026-10-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://mortgagestressscore.com/guides.html</loc>
-    <lastmod>2026-06-01</lastmod>
+    <lastmod>2026-10-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -44,7 +44,7 @@
   </url>
   <url>
     <loc>https://mortgagestressscore.com/behind-on-mortgage-payments.html</loc>
-    <lastmod>2026-06-01</lastmod>
+    <lastmod>2026-10-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -68,13 +68,13 @@
   </url>
   <url>
     <loc>https://mortgagestressscore.com/fha-loan-modification-options.html</loc>
-    <lastmod>2026-06-01</lastmod>
+    <lastmod>2026-10-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://mortgagestressscore.com/fha-loan-modification.html</loc>
-    <lastmod>2026-06-01</lastmod>
+    <lastmod>2026-10-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -92,7 +92,7 @@
   </url>
   <url>
     <loc>https://mortgagestressscore.com/help-with-mortgage-payment.html</loc>
-    <lastmod>2026-06-01</lastmod>
+    <lastmod>2026-10-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -122,7 +122,7 @@
   </url>
   <url>
     <loc>https://mortgagestressscore.com/mortgage-forbearance-vs-loan-modification.html</loc>
-    <lastmod>2026-06-01</lastmod>
+    <lastmod>2026-10-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -146,7 +146,7 @@
   </url>
   <url>
     <loc>https://mortgagestressscore.com/new-jersey-mortgage-assistance.html</loc>
-    <lastmod>2026-06-01</lastmod>
+    <lastmod>2026-10-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -198,4 +198,5 @@
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
+  <url><loc>https://mortgagestressscore.com/editorial-policy.html</loc><lastmod>2026-10-19</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
 </urlset>
