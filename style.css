@@ -940,3 +940,6 @@ hr { border: none; border-top: 1px solid var(--rule); }
 .workbook-template{white-space:pre-line;overflow-wrap:anywhere;background:#f6f7f4;border:1px solid #dde3dc;padding:18px;border-radius:12px;line-height:1.7;font-size:14px}
 @media(max-width:680px){.workbook-toolbar{flex-direction:column;align-items:stretch;padding:16px}.workbook-print{width:100%}.workbook-shortcuts{gap:6px}.workbook-shortcuts a{font-size:12px}}
 @media print{html,body{background:white!important;color:#111!important}.site-nav,.site-footer,.workbook-toolbar,.workbook-shortcuts{display:none!important}.page-wrapper,.workbook{max-width:100%!important;overflow:visible!important}.workbook{padding:0!important;margin:0!important;font-size:11pt!important}.workbook h1{font-size:23pt!important}.workbook-group{page-break-before:auto;break-inside:auto}.workbook-steps li,.workbook-template{break-inside:avoid-page}.workbook-template,.box,.workbook-personal{background:white!important;border:1px solid #aaa!important}a{color:#111!important;text-decoration:underline!important}a[href^="http"]:after{content:" (" attr(href) ")";font-size:8pt}}
+
+/* Mobile input accessibility: prevents involuntary iOS zoom while keeping touch targets usable. */
+@media(max-width:640px){.field input,.field select,.premium-select{font-size:16px!important;min-height:48px}}
