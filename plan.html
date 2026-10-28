@@ -3,22 +3,22 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Mortgage Premium Action Pack | MortgageStressScore</title>
-<meta name="description" content="Thank you for purchasing the Mortgage Premium Action Pack. Use this page to organize your next mortgage hardship steps and documents.">
+<title>20-Step Mortgage Preparation Workbook | MortgageStressScore</title>
+<meta name="description" content="A printable educational mortgage hardship workbook: 20 preparation steps, a servicer phone script, document checklist and hardship letter template.">
 <meta name="robots" content="noindex,follow">
 <link rel="canonical" href="https://mortgagestressscore.com/plan.html">
 <meta name="google-site-verification" content="ufurZHq5oBg5E1-KnDqe1TSm3WyLoYqqsbzfUASfeCc">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=7">
+<link rel="stylesheet" href="style.css?v=10">
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-TJTKS00LW6"></script>
 <script>
 window.dataLayer=window.dataLayer||[];
 function gtag(){dataLayer.push(arguments);}
 gtag('js',new Date());
 gtag('config','G-TJTKS00LW6');
-gtag('event','premium_pack_success_page_view',{product:'Mortgage Premium Action Pack',price:'9',currency:'USD'});
+// A page view is not proof of a Stripe payment. Only a verified Stripe event should record a purchase.
 </script>
   <link rel="icon" href="/favicon.ico" sizes="any">
   <link rel="icon" type="image/svg+xml" href="/favicon.svg">
@@ -30,7 +30,7 @@ gtag('event','premium_pack_success_page_view',{product:'Mortgage Premium Action 
 <body>
 <div class="page-wrapper">
 <nav class="site-nav">
-  <a href="index.html" class="site-logo" aria-label="MortgageStressScore home"><img src="logo.png?v=7" alt="MortgageStressScore.com"></a>
+  <a href="index.html" class="site-logo" aria-label="MortgageStressScore home"><img src="logo.png?v=7" alt="MortgageStressScore.com" width="480" height="120" decoding="async"></a>
   <div class="site-nav-links">
     <a href="index.html#how" class="site-nav-link">How it works</a>
     <a href="guides.html" class="site-nav-link">Guides</a>
@@ -38,35 +38,95 @@ gtag('event','premium_pack_success_page_view',{product:'Mortgage Premium Action 
   </div>
   <a href="index.html#calc" class="site-btn-nav">Get my score</a>
 </nav>
-<main class="article">
-  <span class="eyebrow">Mortgage Premium Action Pack</span>
-  <h1>Thank you — your action pack starts here</h1>
-  <div class="box good"><strong>Important:</strong> This page is educational only. It is not legal, financial, tax, lending, foreclosure-prevention, or housing counseling advice. If you are behind or close to missing a payment, contact your mortgage servicer and consider speaking with a HUD-approved housing counselor.</div>
-  <p class="lead">Use the steps below to organize your next conversation with your mortgage servicer and keep your documents in one place.</p>
-  <h2>1. Write your hardship reason in one sentence</h2>
-  <p>Keep it factual and short: income reduced, medical expenses, temporary job loss, insurance/tax increase, divorce, death in household, ARM reset, or unexpected repair costs.</p>
-  <h2>2. Gather your basic documents</h2>
-  <ul>
-    <li>Most recent mortgage statement</li><li>Recent pay stubs or income documentation</li><li>Bank statements</li><li>Tax return or W-2/1099 documents if requested</li><li>Hardship explanation</li><li>Monthly budget snapshot</li><li>Any letters from your servicer</li>
-  </ul>
-  <h2>3. Ask your servicer these questions</h2>
-  <ul>
-    <li>What hardship options are available for my loan?</li><li>What documents do you need from me?</li><li>What is the deadline to respond?</li><li>Will this option affect my credit reporting?</li><li>What happens after a temporary plan ends?</li><li>Can you send the available options in writing?</li>
-  </ul>
-  <h2>4. Compare options carefully</h2>
-  <p>Do not only ask, “Can I lower the payment?” Ask what happens later. Some options defer payments, some change terms, and some may create a larger balance or future payment change.</p>
-  <h2>5. Avoid urgent-fee scams</h2>
-  <p>Be careful with anyone who guarantees foreclosure rescue, asks for large upfront fees, tells you to stop communicating with your servicer, or pressures you to sign documents quickly.</p>
-  <h2>6. Free official help</h2>
-  <p>You can look for a HUD-approved housing counselor through HUD’s official resources. Counseling may be free or low-cost.</p>
-  <div class="article-cta">
-    <h2>Need to review your risk again?</h2>
-    <p>Return to the free Mortgage Stress Score calculator anytime.</p>
-    <a href="index.html#calc">Check my score again →</a>
+<main class="article workbook" id="workbook">
+  <p class="eyebrow">Mortgage Preparation Workbook · Printable edition</p>
+  <h1>Your 20-step mortgage action workbook</h1>
+  <p class="lead">A practical educational checklist to help you prepare, ask better questions, and track your next steps. Your mortgage servicer decides which relief options may be available for your loan.</p>
+  <div class="box good"><strong>Important:</strong> This workbook is not legal or financial advice, a certified counseling service, or proof of payment. A paid Stripe checkout should be verified by the merchant's order records; simply opening this page does not confirm a purchase. If you have court papers or a sale date, seek legal aid or a qualified local attorney immediately.</div>
+  <div class="workbook-toolbar">
+    <div><strong>Printable workbook</strong><p>Choose Print / Save as PDF in your browser. Nothing is uploaded to create the PDF.</p></div>
+    <button type="button" class="workbook-print" onclick="window.print(); if(typeof gtag==='function')gtag('event','workbook_print_clicked',{product:'mortgage_workbook'});">Print / Save as PDF</button>
   </div>
+  <div class="workbook-personal" id="workbook-personal" hidden>
+    <strong>Reading suggestions based on your selection</strong>
+    <p id="workbook-selection"></p>
+    <p id="workbook-links"></p>
+    <p class="workbook-note">Suggestions are not legal deadlines, individual eligibility findings or a customized loan offer.</p>
+  </div>
+  <nav class="workbook-shortcuts" aria-label="Workbook sections"><a href="#first-day">First actions</a><a href="#documents">Documents</a><a href="#servicer">Servicer call</a><a href="#evaluate">Compare and follow up</a><a href="#templates">Scripts and templates</a></nav>
+  <section id="first-day" class="workbook-group"><h2>Part 1 — Understand your situation</h2>
+    <ol class="workbook-steps">
+      <li><strong>Find your servicer.</strong> Use your latest mortgage statement and find the official customer-service number, not a phone number from an advertisement.</li>
+      <li><strong>Confirm your loan status.</strong> Record whether you are current, how many installments are missed, and what the servicer says is past due.</li>
+      <li><strong>Identify deadlines.</strong> Save every notice and date, especially any court response, loss-mitigation or foreclosure sale deadlines.</li>
+      <li><strong>Make a realistic budget.</strong> Write monthly income and essential expenses, including taxes, insurance and HOA dues. Avoid guessing.</li>
+      <li><strong>Calculate the shortfall.</strong> Compare your regular mortgage payment with what you can actually pay now; separate a temporary gap from a persistent affordability problem.</li>
+    </ol>
+  </section>
+  <section id="documents" class="workbook-group"><h2>Part 2 — Prepare your documents</h2>
+    <ol class="workbook-steps" start="6">
+      <li><strong>Write your hardship timeline.</strong> Note when a job loss, income reduction, illness or increased expense started and whether you expect it to end.</li>
+      <li><strong>Gather income evidence.</strong> Save recent pay stubs, benefit statements, tax returns or self-employment records that the servicer requests.</li>
+      <li><strong>Gather mortgage records.</strong> Keep your most recent statement, notices, escrow statement and payment confirmations together.</li>
+      <li><strong>Record your monthly expenses.</strong> Include food, utilities, transport, childcare, medical expenses and other essential bills.</li>
+      <li><strong>Create a document log.</strong> Track file names, submission dates, confirmation numbers and any missing items identified by the servicer.</li>
+    </ol>
+  </section>
+  <section id="servicer" class="workbook-group"><h2>Part 3 — Ask for help</h2>
+    <ol class="workbook-steps" start="11">
+      <li><strong>Contact your mortgage servicer.</strong> Ask for available loss-mitigation options and how to start a complete application.</li>
+      <li><strong>Request a written checklist.</strong> Ask which documents, signatures and deadlines apply to your particular mortgage.</li>
+      <li><strong>Check free housing counseling.</strong> A HUD-approved foreclosure-prevention counselor can help explain options and paperwork, at no charge.</li>
+      <li><strong>Ask about your loan type.</strong> FHA, VA, USDA and conventional loans may follow different rules and investor requirements.</li>
+      <li><strong>Get the response in writing.</strong> Record what the servicer says about eligibility, trial payments, appeal or escalation processes.</li>
+    </ol>
+  </section>
+  <section id="evaluate" class="workbook-group"><h2>Part 4 — Compare and follow up</h2>
+    <ol class="workbook-steps" start="16">
+      <li><strong>Compare complete payment terms.</strong> Include escrow, interest rate, repayment term, fees and any deferred or partial-claim balance.</li>
+      <li><strong>Ask about the end of forbearance.</strong> A payment pause usually does not erase the missed balance. Get the exit terms in writing.</li>
+      <li><strong>Review affordability over time.</strong> A smaller monthly payment can mean a longer loan or a higher total amount paid.</li>
+      <li><strong>Protect yourself from scams.</strong> Do not sign over your deed or pay a company promising guaranteed foreclosure rescue.</li>
+      <li><strong>Schedule follow-up.</strong> Record who you spoke to, when the next response is due, and whom to contact if nothing arrives. Seek legal help quickly if court deadlines apply.</li>
+    </ol>
+  </section>
+  <section id="templates" class="workbook-group"><h2>Scripts and templates you can use</h2>
+    <h3>Servicer call script</h3>
+    <div class="workbook-template">“Hello, I’m contacting you about my mortgage because [brief reason]. I want to understand all loss-mitigation options available for my loan type. Please tell me what documents are required, the deadlines, whether my application is complete, and how I will receive a written decision. Can I have a reference number for this call?”</div>
+    <h3>Hardship letter outline</h3>
+    <div class="workbook-template">Date: [date]\nTo: [servicer name]\nAccount reference: [last four digits only]\n\nI am requesting a review of available mortgage assistance options because [factual hardship] began on [date]. My current income situation is [short explanation], and I expect [temporary / ongoing / unknown] difficulty making payments.\n\nPlease provide the loss-mitigation options for my loan and a list of the documents required. I can be reached through the secure communication method already on file.\n\nSincerely,\n[name]</div>
+    <h3>Questions before accepting any option</h3>
+    <ul><li>What will my complete payment be, including escrow?</li><li>What will I owe at sale, refinance or payoff?</li><li>Does it change my loan term or interest rate?</li><li>Is there a trial plan? What happens if I cannot complete it?</li><li>How does this affect credit reporting, and where are the written terms?</li></ul>
+  </section>
+  <section class="workbook-group"><h2>Official help and further reading</h2>
+    <ul><li><a href="https://www.consumerfinance.gov/mortgagehelp/" target="_blank" rel="noopener noreferrer">CFPB — Mortgage Help</a></li><li><a href="https://www.hud.gov/hud-partners/single-family-about-housing-counseling" target="_blank" rel="noopener noreferrer">HUD — Housing counseling</a></li><li><a href="https://www.hud.gov/helping-americans/fha-loss-mitigation" target="_blank" rel="noopener noreferrer">HUD — FHA loss mitigation</a></li><li><a href="https://consumer.ftc.gov/articles/mortgage-relief-scams" target="_blank" rel="noopener noreferrer">FTC — Mortgage relief scams</a></li></ul>
+    <p><a href="mortgage-relief-options.html">Compare relief options</a> · <a href="guides.html">All mortgage guides</a> · <a href="editorial-policy.html">Editorial policy</a></p>
+    <p class="workbook-note">Publisher: MortgageStressScore editorial team. Last substantive content review: October 28, 2026. No licensed professional review is claimed. <a href="mailto:hello@mortgagestressscore.com">Report a correction</a>.</p>
+  </section>
 </main>
+<script>
+(function () {
+  var map={CA:'california-mortgage-assistance.html',FL:'florida-mortgage-assistance.html',TX:'texas-mortgage-assistance.html',NY:'new-york-mortgage-assistance.html',NJ:'new-jersey-mortgage-assistance.html',OH:'ohio-mortgage-assistance.html',IL:'illinois-mortgage-assistance.html',GA:'georgia-mortgage-assistance.html'};
+  var loanNames=['FHA','VA','USDA','Conventional','ARM','Other'];
+  try {
+    var state=localStorage.getItem('mss_state')||'', loan=localStorage.getItem('mss_loan')||'';
+    if(!/^[A-Z]{2}$/.test(state)) state='';
+    if(!loanNames.includes(loan))loan='';
+    if(!state&&!loan)return;
+    document.getElementById('workbook-personal').hidden=false;
+    var x=[];
+    if(state)x.push('State selected: '+state);
+    if(loan)x.push('Loan type selected: '+loan);
+    document.getElementById('workbook-selection').textContent=x.join(' · ');
+    var links=document.getElementById('workbook-links');
+    if(map[state]){var a=document.createElement('a');a.href=map[state];a.textContent='Read the '+state+' mortgage assistance guide';links.appendChild(a);}
+    if(loan==='FHA'){if(map[state])links.appendChild(document.createTextNode(' · '));var b=document.createElement('a');b.href='fha-loan-modification-options.html';b.textContent='FHA loss-mitigation guide';links.appendChild(b);}
+    if(!links.textContent)links.textContent='For programs in your state and for other loan types, contact your servicer or a HUD-approved counselor.';
+  }catch(e){}
+})();
+</script>
 <footer class="site-footer">
-  <a href="index.html"><img src="logo.png?v=7" alt="MortgageStressScore.com"></a>
+  <a href="index.html"><img src="logo.png?v=7" alt="MortgageStressScore.com" loading="lazy" decoding="async"></a>
   <p class="footer-tagline">No surprise lender calls. No data sales. You stay in control.</p>
   <div class="footer-links"><a href="privacy.html">Privacy</a> · <a href="disclaimer.html">Disclaimer</a> · <a href="terms.html">Terms</a></div>
 </footer>

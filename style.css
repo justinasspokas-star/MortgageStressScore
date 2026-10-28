@@ -920,3 +920,23 @@ hr { border: none; border-top: 1px solid var(--rule); }
 .seo-action-table th,.seo-action-table td{border:1px solid #e1ddd2;padding:12px 14px;text-align:left;vertical-align:top}
 .seo-action-table th{background:#edf4ed;color:#17261c}.seo-action-table a{color:#1a5c3a}
 @media(max-width:680px){.seo-step-grid{grid-template-columns:minmax(0,1fr)}.seo-start-here{padding:16px;border-radius:14px}.policy-update{padding:15px;border-radius:12px}.seo-action-table table,.seo-action-table tbody,.seo-action-table tr,.seo-action-table td{display:block;width:100%}.seo-action-table thead{display:none}.seo-action-table tr{border:1px solid #dfe5dc;border-radius:12px;overflow:hidden;margin-bottom:12px}.seo-action-table td{border:0;border-bottom:1px solid #ecefe9;overflow-wrap:anywhere}.seo-action-table td:last-child{border:0}.seo-action-table td:before{content:attr(data-label);display:block;font-size:11px;text-transform:uppercase;letter-spacing:.05em;font-weight:700;color:#546d59;margin-bottom:5px}}
+
+/* Printable digital mortgage workbook — accessible mobile and print layouts. */
+.workbook{max-width:940px}.workbook .lead{max-width:760px}
+.workbook-toolbar{display:flex;align-items:center;justify-content:space-between;gap:16px;margin:24px 0;padding:20px;border:1px solid #d4e3d5;border-radius:14px;background:#f4faf5}
+.workbook-toolbar p{margin:4px 0 0;font-size:14px;color:#4d5b50}
+.workbook-print{background:#173d2b;color:white;border:0;border-radius:9px;min-height:46px;padding:12px 18px;cursor:pointer;font:600 14px Inter,system-ui,sans-serif}
+.workbook-print:focus-visible{outline:3px solid #74a987;outline-offset:2px}
+.workbook-personal{background:#fffaf0;border:1px solid #e5dbbe;border-radius:12px;padding:18px;margin-bottom:20px}
+.workbook-personal[hidden]{display:none}.workbook-personal p{margin:8px 0}.workbook-personal a{color:#165638}
+.workbook-note{font-size:13px;color:#5f625e;line-height:1.6}
+.workbook-shortcuts{display:flex;gap:9px;flex-wrap:wrap;margin:18px 0 34px}
+.workbook-shortcuts a{border:1px solid #d8e3d9;border-radius:99px;padding:8px 12px;color:#175738;font-size:13px;text-decoration:none}
+.workbook-group{margin:35px 0 40px;break-inside:avoid-page}
+.workbook-group h2{font-size:clamp(25px,4vw,36px);line-height:1.17;margin-bottom:16px}
+.workbook-group h3{margin:22px 0 9px;font-size:19px}
+.workbook-steps{padding-left:25px;line-height:1.65}
+.workbook-steps li{padding:7px 0 7px 6px;break-inside:avoid}
+.workbook-template{white-space:pre-line;overflow-wrap:anywhere;background:#f6f7f4;border:1px solid #dde3dc;padding:18px;border-radius:12px;line-height:1.7;font-size:14px}
+@media(max-width:680px){.workbook-toolbar{flex-direction:column;align-items:stretch;padding:16px}.workbook-print{width:100%}.workbook-shortcuts{gap:6px}.workbook-shortcuts a{font-size:12px}}
+@media print{html,body{background:white!important;color:#111!important}.site-nav,.site-footer,.workbook-toolbar,.workbook-shortcuts{display:none!important}.page-wrapper,.workbook{max-width:100%!important;overflow:visible!important}.workbook{padding:0!important;margin:0!important;font-size:11pt!important}.workbook h1{font-size:23pt!important}.workbook-group{page-break-before:auto;break-inside:auto}.workbook-steps li,.workbook-template{break-inside:avoid-page}.workbook-template,.box,.workbook-personal{background:white!important;border:1px solid #aaa!important}a{color:#111!important;text-decoration:underline!important}a[href^="http"]:after{content:" (" attr(href) ")";font-size:8pt}}

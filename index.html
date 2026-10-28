@@ -319,14 +319,14 @@
   </div>
   <div class="premium-box" id="premium-box" style="display:none">
     <div class="premium-badge">Premium — $9</div>
-    <h3 class="premium-title" id="premium-dynamic-title">Get your complete 20-step action plan</h3>
-    <p class="premium-sub" id="premium-dynamic-sub">Tell us your state and loan type and we personalize it for your exact situation:</p>
+    <h3 class="premium-title" id="premium-dynamic-title">20-step mortgage preparation workbook</h3>
+    <p class="premium-sub" id="premium-dynamic-sub">Select a state and loan type to see relevant reading suggestions in the workbook. It is educational and does not calculate your legal rights or eligibility:</p>
     <ul class="premium-list">
-      <li>20 steps specific to your risk level and loan type</li>
-      <li>Word-for-word script to call your servicer</li>
-      <li>Hardship letter template for your situation</li>
-      <li>Your state's exact foreclosure timeline and programs</li>
-      <li>Loan-type modification guide (FHA / VA / Conventional / ARM)</li>
+      <li>20 practical preparation steps and a printable checklist</li>
+      <li>Servicer call script and questions to document</li>
+      <li>Fill-in hardship letter template</li>
+      <li>Links to official national and available state resources</li>
+      <li>Simple loan-type guidance, with eligibility checked by your servicer</li>
     </ul>
     <div class="premium-fields">
       <div class="premium-field-row">
@@ -374,9 +374,9 @@
       </div>
     </div>
     <button class="premium-btn" id="premium-pay-btn" onclick="openPremiumCheckout()">
-      Get my personalized plan — $9 →
+      Continue to secure checkout — $9 →
     </button>
-    <p class="premium-fine">One-time $9 payment. PDF downloads immediately. No subscription, no lender calls.</p>
+    <p class="premium-fine">One-time $9 through Stripe. A printable educational workbook; use your browser to save it as PDF. No subscription or lender referrals.</p>
   </div>
   <p class="action-see-options"><a href="#options">See all mortgage relief options ↓</a></p>
 </section>
@@ -552,23 +552,23 @@
   <p class="section-eyebrow">Optional paid resource</p>
   <h2 class="section-title">Want a more organized plan?<br><em>Get the Mortgage Premium Action Pack.</em></h2>
   <div class="guide-card premium-pack-card">
-    <h3>Mortgage Premium Action Pack — $9</h3>
-    <p>A practical educational pack to help homeowners organize mortgage hardship documents, servicer questions, and next steps. Not legal, financial, or lending advice.</p>
+    <h3>Mortgage Preparation Workbook — $9</h3>
+    <p>A 20-step printable educational workbook with document checklists, a servicer call script, a hardship letter template and official resource links. Not legal, financial or lending advice.</p>
     <ul>
       <li>Servicer call prep checklist</li>
       <li>Hardship document organizer</li>
       <li>Questions to ask before choosing an option</li>
-      <li>7-day mortgage action plan structure</li>
+      <li>20 steps and a print-to-PDF version</li>
     </ul>
-    <a class="site-btn-nav premium-pack-button" href="https://buy.stripe.com/4gM8wI0mG5w4ceO8s9gQE00" target="_blank" rel="noopener sponsored" onclick="mssTrack('premium_click',{placement:'home_pack',value:9,currency:'USD'});mssTrack('click_premium_pack_stripe',{placement:'home'})">Get the premium pack — $9</a>
-    <p class="small-note">The free score and checklist remain free. This optional pack is for extra organization only.</p>
+    <a class="site-btn-nav premium-pack-button" href="https://buy.stripe.com/4gM8wI0mG5w4ceO8s9gQE00" target="_blank" rel="noopener sponsored" onclick="mssTrack('begin_checkout',{placement:'home_pack',currency:'USD',value:9})">Continue to Stripe — $9</a>
+    <p class="small-note">The free score and basic checklist remain free. This optional workbook is for extra organization, not guaranteed individual advice.</p>
   </div>
 </section>
 
 
 <footer class="site-footer">
   <a href="index.html" class="site-logo" aria-label="MortgageStressScore home">
-    <picture><source srcset="logo.webp?v=9" type="image/webp"><img src="logo.png?v=9" alt="MortgageStressScore.com" width="480" height="120" loading="lazy"></picture>
+    <picture><source srcset="logo.webp?v=9" type="image/webp"><img src="logo.png?v=9" alt="MortgageStressScore.com" width="480" height="120" loading="lazy" decoding="async"></picture>
   </a>
   <p class="footer-tagline">No surprise lender calls. No data sales. You stay in control.</p>
   <div class="footer-links">
@@ -902,27 +902,13 @@ function showActionPlan() {
     pb.dataset.score = score;
     pb.dataset.risk  = level;
 
-    // Differentiated title + CTA by score range
+    // Keep the offer accurate for every score level; no unverified state deadlines or tailored outcome claims.
     const ptitle = document.getElementById('premium-dynamic-title');
-    const psub   = document.getElementById('premium-dynamic-sub');
-    const pbtn   = document.getElementById('premium-pay-btn');
-
-    if (score >= 65) {
-      // HIGH — urgency
-      if (ptitle) ptitle.textContent = 'Get your urgent 20-step action plan';
-      if (psub)   psub.textContent   = 'Your score is high. This plan gives you the exact steps, scripts, and resources for your state and loan type — personalized for your situation:';
-      if (pbtn)   pbtn.textContent   = 'Get my urgent plan — $9 →';
-    } else if (score >= 45) {
-      // MODERATE high — escalation warning
-      if (ptitle) ptitle.textContent = 'Get your action plan before this escalates';
-      if (psub)   psub.textContent   = 'Your score shows real pressure. Act now while you still have all your options open — personalized for your state and loan type:';
-      if (pbtn)   pbtn.textContent   = 'Get my action plan — $9 →';
-    } else {
-      // MODERATE low (35–44) — prevention
-      if (ptitle) ptitle.textContent = 'Build your mortgage protection plan';
-      if (psub)   psub.textContent   = 'Your score is in the moderate range. A protection plan keeps you prepared — personalized for your state and loan type:';
-      if (pbtn)   pbtn.textContent   = 'Get my protection plan — $9 →';
-    }
+    const psub = document.getElementById('premium-dynamic-sub');
+    const pbtn = document.getElementById('premium-pay-btn');
+    if (ptitle) ptitle.textContent = '20-step mortgage preparation workbook';
+    if (psub) psub.textContent = 'Includes scripts, a fill-in hardship letter, checklists and links to relevant official resources. Confirm your actual options with your servicer.';
+    if (pbtn) pbtn.textContent = 'Continue to secure checkout — $9 →';
   }
 }
 
@@ -964,7 +950,7 @@ function openPremiumCheckout() {
     btn.textContent = 'Please select your state and loan type first';
     btn.style.background = '#92510a';
     setTimeout(() => {
-      btn.textContent = 'Get my personalized plan — $9 →';
+      btn.textContent = 'Continue to secure checkout — $9 →';
       btn.style.background = '';
     }, 2500);
     return;
@@ -975,7 +961,7 @@ function openPremiumCheckout() {
     localStorage.setItem('mss_state', state);
     localStorage.setItem('mss_loan', loan);
   } catch(e) {}
-  mssTrack('premium_click',{placement:'calculator_checkout',value:9,currency:'USD'});
+  mssTrack('begin_checkout',{placement:'calculator_checkout',currency:'USD',value:9});
   window.location.href = STRIPE_LINK;
 }
 </script>
